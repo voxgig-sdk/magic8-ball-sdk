@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "random_fortune": {
+      "RANDOM_FORTUNE00": {},
+      "RANDOM_FORTUNE01": {},
+      "RANDOM_FORTUNE02": {}
+    }
+  },
+  "new": {
+    "random_fortune": {
+      "random_fortune_ref01": {}
+    }
+  }
+}

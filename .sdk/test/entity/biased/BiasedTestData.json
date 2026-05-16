@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "biased": {
+      "BIASED00": {
+        "locale": "s32",
+        "lucky": false,
+        "question": "s34",
+        "reading": "s35",
+        "sentiment": {},
+        "id": "BIASED00"
+      },
+      "BIASED01": {
+        "locale": "s64",
+        "lucky": false,
+        "question": "s66",
+        "reading": "s67",
+        "sentiment": {},
+        "id": "BIASED01"
+      },
+      "BIASED02": {
+        "locale": "s96",
+        "lucky": false,
+        "question": "s98",
+        "reading": "s99",
+        "sentiment": {},
+        "id": "BIASED02"
+      }
+    }
+  },
+  "new": {
+    "biased": {
+      "biased_ref01": {
+        "locale": "sc8",
+        "lucky": false,
+        "question": "sca",
+        "reading": "scb",
+        "sentiment": {}
+      }
+    }
+  }
+}

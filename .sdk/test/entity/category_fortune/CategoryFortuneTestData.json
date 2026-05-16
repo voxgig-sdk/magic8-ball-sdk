@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "category_fortune": {
+      "CATEGORY_FORTUNE00": {
+        "category": "s1e",
+        "locale": "s1f",
+        "reading": "s20",
+        "id": "CATEGORY_FORTUNE00"
+      },
+      "CATEGORY_FORTUNE01": {
+        "category": "s3c",
+        "locale": "s3d",
+        "reading": "s3e",
+        "id": "CATEGORY_FORTUNE01"
+      },
+      "CATEGORY_FORTUNE02": {
+        "category": "s5a",
+        "locale": "s5b",
+        "reading": "s5c",
+        "id": "CATEGORY_FORTUNE02"
+      }
+    }
+  },
+  "new": {
+    "category_fortune": {
+      "category_fortune_ref01": {
+        "category": "s78",
+        "locale": "s79",
+        "reading": "s7a"
+      }
+    }
+  }
+}

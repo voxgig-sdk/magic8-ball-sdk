@@ -1,0 +1,9 @@
+# BasicRandomFortuneFlow
+
+main: kit: flow: BasicRandomFortuneFlow:
+{
+  entity: "random_fortune",
+  kind: "basic",
+  name: "BasicRandomFortuneFlow",
+  "key$": "BasicRandomFortuneFlow"
+}

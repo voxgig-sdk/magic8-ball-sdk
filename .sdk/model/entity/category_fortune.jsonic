@@ -1,0 +1,117 @@
+# Entity: category_fortune
+
+main: kit: entity: category_fortune: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "category"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "locale"
+      op: {
+        load: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "reading"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "category_fortune"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "category"
+                orig: "category"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                example: "en"
+                kind: "query"
+                name: "locale"
+                orig: "locale"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/{category}"
+          parts: [
+            "api"
+            "{category}"
+          ]
+          select: {
+            exist: [
+              "category"
+              "locale"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                example: "en"
+                kind: "query"
+                name: "locale"
+                orig: "locale"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api"
+          parts: [
+            "api"
+          ]
+          select: {
+            exist: [
+              "locale"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "api"
+      ]
+    ]
+  }
+
+
+
+}

@@ -1,0 +1,70 @@
+# Entity: category
+
+main: kit: entity: category: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "locale"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "negative"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "neutral"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "positive"
+      req: true
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "category"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "en"
+                kind: "query"
+                name: "locale"
+                orig: "locale"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/categories"
+          parts: [
+            "api"
+            "categories"
+          ]
+          select: {
+            exist: [
+              "locale"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

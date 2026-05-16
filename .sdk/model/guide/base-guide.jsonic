@@ -1,0 +1,33 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 4
+  metrics: count: method: 5
+
+  entity: biased: {
+    path: "/api/biased": {
+      op: create: method: *POST
+      op: load: method: *GET
+    }
+  }
+
+  entity: category: {
+    path: "/api/categories": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: category_fortune: {
+    path: "/api": {
+      op: load: method: *GET
+    }
+    path: "/api/{category}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: random_fortune: {
+  }
+
+}

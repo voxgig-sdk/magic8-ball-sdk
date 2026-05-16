@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "category": {
+      "CATEGORY00": {
+        "locale": "s28",
+        "negative": [],
+        "neutral": [],
+        "positive": []
+      },
+      "CATEGORY01": {
+        "locale": "s50",
+        "negative": [],
+        "neutral": [],
+        "positive": []
+      },
+      "CATEGORY02": {
+        "locale": "s78",
+        "negative": [],
+        "neutral": [],
+        "positive": []
+      }
+    }
+  },
+  "new": {
+    "category": {
+      "category_ref01": {
+        "locale": "sa0",
+        "negative": [],
+        "neutral": [],
+        "positive": []
+      }
+    }
+  }
+}

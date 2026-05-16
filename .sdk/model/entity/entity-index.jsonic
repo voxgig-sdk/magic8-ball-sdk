@@ -1,0 +1,6 @@
+# Entity Models
+
+@"biased.jsonic"
+@"category.jsonic"
+@"category_fortune.jsonic"
+@"random_fortune.jsonic"

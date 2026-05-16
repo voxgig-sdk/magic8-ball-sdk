@@ -1,0 +1,27 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "API Support"
+        url: "https://www.eightballapi.com/docs"
+      }
+      description: "The Magic 8-Ball API provides mystical yes/no responses to user questions through a simple, RESTful interface. It allows developers to integrate fortune-telling features into their applications easily, including Discord bots and games, with both random responses and categorized fortunes available."
+      license: {
+        name: "Free for everyone"
+      }
+      servers: [
+        {
+          description: "Production server"
+          url: "https://eightballapi.com"
+        }
+      ]
+      title: "Magic 8-Ball API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

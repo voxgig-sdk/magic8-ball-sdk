@@ -1,0 +1,734 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Magic 8-Ball API",
+    "description": "The Magic 8-Ball API provides mystical yes/no responses to user questions through a simple, RESTful interface. It allows developers to integrate fortune-telling features into their applications easily, including Discord bots and games, with both random responses and categorized fortunes available.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support",
+      "url": "https://www.eightballapi.com/docs"
+    },
+    "license": {
+      "name": "Free for everyone"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://eightballapi.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api": {
+      "get": {
+        "summary": "Get Random Fortune",
+        "description": "Returns a random Magic 8 Ball response",
+        "operationId": "getRandomFortune",
+        "tags": [
+          "Fortune"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "The language code for response localization",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "hi",
+                "ru"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with a random fortune",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RandomFortuneResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "reading": "Outlook good"
+                    }
+                  },
+                  "localized": {
+                    "value": {
+                      "reading": "Las perspectivas son buenas",
+                      "locale": "es"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded (100 requests per minute per IP)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "summary": "Get Categories",
+        "description": "Returns all responses grouped by category (positive, negative, neutral)",
+        "operationId": "getCategories",
+        "tags": [
+          "Categories"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "The language code for response localization",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "hi",
+                "ru"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with categorized fortunes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriesResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "positive": [
+                        "It is Certain.",
+                        "It is decidedly so."
+                      ],
+                      "neutral": [
+                        "Reply hazy, try again.",
+                        "Ask again later."
+                      ],
+                      "negative": [
+                        "Don't count on it.",
+                        "My reply is no."
+                      ],
+                      "locale": "en"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{category}": {
+      "get": {
+        "summary": "Get Specific Category",
+        "description": "Returns a random response from a specific category (positive, negative, or neutral)",
+        "operationId": "getSpecificCategory",
+        "tags": [
+          "Categories"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "description": "The category of response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "positive",
+                "negative",
+                "neutral"
+              ]
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "The language code for response localization",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "hi",
+                "ru"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with a fortune from the specified category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryFortuneResponse"
+                },
+                "examples": {
+                  "positive": {
+                    "value": {
+                      "reading": "It is Certain.",
+                      "category": "positive",
+                      "locale": "en"
+                    }
+                  },
+                  "negative": {
+                    "value": {
+                      "reading": "Don't count on it.",
+                      "category": "negative",
+                      "locale": "en"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid category specified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/biased": {
+      "get": {
+        "summary": "Get Biased Fortune (GET)",
+        "description": "Returns a biased Magic 8 Ball response based on the sentiment of your question",
+        "operationId": "getBiasedFortuneGet",
+        "tags": [
+          "Biased Fortune"
+        ],
+        "parameters": [
+          {
+            "name": "question",
+            "in": "query",
+            "description": "The question to analyze for sentiment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Will I win the lottery?"
+          },
+          {
+            "name": "lucky",
+            "in": "query",
+            "description": "Whether to give a lucky response",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "The language code for response localization",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "hi",
+                "ru"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with a biased fortune based on sentiment analysis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BiasedFortuneResponse"
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "reading": "My reply is no.",
+                      "question": "Will I win the lottery?",
+                      "sentiment": {
+                        "score": 4,
+                        "comparative": 0.8,
+                        "calculation": [
+                          {
+                            "win": 4
+                          }
+                        ],
+                        "tokens": [
+                          "Will",
+                          "I",
+                          "win",
+                          "the",
+                          "lottery?"
+                        ],
+                        "words": [
+                          "Win"
+                        ],
+                        "positive": [
+                          "Win"
+                        ],
+                        "negative": []
+                      },
+                      "locale": "en",
+                      "lucky": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required question parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Get Biased Fortune (POST)",
+        "description": "Alternative method to get a biased response by sending parameters in the request body",
+        "operationId": "getBiasedFortunePost",
+        "tags": [
+          "Biased Fortune"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BiasedFortuneRequest"
+              },
+              "examples": {
+                "default": {
+                  "value": {
+                    "question": "Will I succeed?",
+                    "lucky": true,
+                    "locale": "fr"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response with a biased fortune based on sentiment analysis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BiasedFortuneResponse"
+                },
+                "examples": {
+                  "localized": {
+                    "value": {
+                      "reading": "Ma réponse est non.",
+                      "question": "Will I succeed?",
+                      "sentiment": {
+                        "score": 2,
+                        "comparative": 0.6667,
+                        "calculation": [
+                          {
+                            "succeed": 2
+                          }
+                        ],
+                        "tokens": [
+                          "Will",
+                          "I",
+                          "succeed?"
+                        ],
+                        "words": [
+                          "succeed"
+                        ],
+                        "positive": [
+                          "succeed"
+                        ],
+                        "negative": []
+                      },
+                      "locale": "fr",
+                      "lucky": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body or missing required question parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RandomFortuneResponse": {
+        "type": "object",
+        "properties": {
+          "reading": {
+            "type": "string",
+            "description": "The Magic 8 Ball response",
+            "example": "Outlook good"
+          },
+          "locale": {
+            "type": "string",
+            "description": "The language code (only included for non-default locale)",
+            "example": "en"
+          }
+        },
+        "required": [
+          "reading"
+        ]
+      },
+      "CategoriesResponse": {
+        "type": "object",
+        "properties": {
+          "positive": {
+            "type": "array",
+            "description": "List of positive responses",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "It is Certain.",
+              "It is decidedly so."
+            ]
+          },
+          "neutral": {
+            "type": "array",
+            "description": "List of neutral responses",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Reply hazy, try again.",
+              "Ask again later."
+            ]
+          },
+          "negative": {
+            "type": "array",
+            "description": "List of negative responses",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Don't count on it.",
+              "My reply is no."
+            ]
+          },
+          "locale": {
+            "type": "string",
+            "description": "The language code",
+            "example": "en"
+          }
+        },
+        "required": [
+          "positive",
+          "neutral",
+          "negative",
+          "locale"
+        ]
+      },
+      "CategoryFortuneResponse": {
+        "type": "object",
+        "properties": {
+          "reading": {
+            "type": "string",
+            "description": "The Magic 8 Ball response from the specified category",
+            "example": "It is Certain."
+          },
+          "category": {
+            "type": "string",
+            "description": "The category of the response",
+            "enum": [
+              "positive",
+              "negative",
+              "neutral"
+            ],
+            "example": "positive"
+          },
+          "locale": {
+            "type": "string",
+            "description": "The language code",
+            "example": "en"
+          }
+        },
+        "required": [
+          "reading",
+          "category",
+          "locale"
+        ]
+      },
+      "BiasedFortuneRequest": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "The question to analyze for sentiment",
+            "example": "Will I succeed?"
+          },
+          "lucky": {
+            "type": "boolean",
+            "description": "Whether to give a lucky response",
+            "default": false,
+            "example": true
+          },
+          "locale": {
+            "type": "string",
+            "description": "The language code for response localization",
+            "enum": [
+              "en",
+              "es",
+              "fr",
+              "de",
+              "hi",
+              "ru"
+            ],
+            "default": "en",
+            "example": "fr"
+          }
+        },
+        "required": [
+          "question"
+        ]
+      },
+      "BiasedFortuneResponse": {
+        "type": "object",
+        "properties": {
+          "reading": {
+            "type": "string",
+            "description": "The Magic 8 Ball response based on sentiment",
+            "example": "My reply is no."
+          },
+          "question": {
+            "type": "string",
+            "description": "The original question submitted",
+            "example": "Will I win the lottery?"
+          },
+          "sentiment": {
+            "type": "object",
+            "description": "Sentiment analysis details",
+            "properties": {
+              "score": {
+                "type": "number",
+                "description": "The sentiment score",
+                "example": 4
+              },
+              "comparative": {
+                "type": "number",
+                "description": "The comparative sentiment value",
+                "example": 0.8
+              },
+              "calculation": {
+                "type": "array",
+                "description": "Calculation breakdown for sentiment",
+                "items": {
+                  "type": "object"
+                },
+                "example": [
+                  {
+                    "win": 4
+                  }
+                ]
+              },
+              "tokens": {
+                "type": "array",
+                "description": "Tokenized words from the question",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "Will",
+                  "I",
+                  "win",
+                  "the",
+                  "lottery?"
+                ]
+              },
+              "words": {
+                "type": "array",
+                "description": "Sentiment-bearing words",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "Win"
+                ]
+              },
+              "positive": {
+                "type": "array",
+                "description": "Positive sentiment words",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "Win"
+                ]
+              },
+              "negative": {
+                "type": "array",
+                "description": "Negative sentiment words",
+                "items": {
+                  "type": "string"
+                },
+                "example": []
+              }
+            },
+            "required": [
+              "score",
+              "comparative",
+              "calculation",
+              "tokens",
+              "words",
+              "positive",
+              "negative"
+            ]
+          },
+          "locale": {
+            "type": "string",
+            "description": "The language code",
+            "example": "en"
+          },
+          "lucky": {
+            "type": "boolean",
+            "description": "Whether the lucky mode was enabled",
+            "example": false
+          }
+        },
+        "required": [
+          "reading",
+          "question",
+          "sentiment",
+          "locale",
+          "lucky"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message",
+            "example": "Rate limit exceeded"
+          },
+          "message": {
+            "type": "string",
+            "description": "Detailed error description",
+            "example": "You have exceeded the rate limit of 100 requests per minute"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Fortune",
+      "description": "Get random Magic 8 Ball fortunes"
+    },
+    {
+      "name": "Categories",
+      "description": "Get categorized fortunes (positive, negative, neutral)"
+    },
+    {
+      "name": "Biased Fortune",
+      "description": "Get sentiment-based biased fortunes"
+    }
+  ],
+  "externalDocs": {
+    "description": "Official API Documentation",
+    "url": "https://www.eightballapi.com/docs"
+  }
+}

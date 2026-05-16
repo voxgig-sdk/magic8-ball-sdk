@@ -1,0 +1,10 @@
+# Entity: random_fortune
+
+main: kit: entity: random_fortune: {
+
+  alias: field: {}
+
+  name: "random_fortune"
+
+
+}

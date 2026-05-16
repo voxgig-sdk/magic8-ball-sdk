@@ -1,0 +1,36 @@
+# BasicBiasedFlow
+
+main: kit: flow: BasicBiasedFlow:
+{
+  entity: "biased",
+  kind: "basic",
+  name: "BasicBiasedFlow",
+  step: [
+    {
+      input: {
+        ref: "biased_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "biased_ref01",
+        srcdatavar: "biased_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-biased_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicBiasedFlow"
+}
