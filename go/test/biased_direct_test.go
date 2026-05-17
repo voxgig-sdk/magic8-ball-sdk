@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/magic8-ball-sdk"
-	"github.com/voxgig-sdk/magic8-ball-sdk/core"
+	sdk "github.com/voxgig-sdk/magic8-ball-sdk/go"
+	"github.com/voxgig-sdk/magic8-ball-sdk/go/core"
 )
 
 func TestBiasedDirect(t *testing.T) {

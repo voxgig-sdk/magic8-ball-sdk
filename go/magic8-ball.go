@@ -1,10 +1,10 @@
 package voxgigmagic8ballsdk
 
 import (
-	"github.com/voxgig-sdk/magic8-ball-sdk/core"
-	"github.com/voxgig-sdk/magic8-ball-sdk/entity"
-	"github.com/voxgig-sdk/magic8-ball-sdk/feature"
-	_ "github.com/voxgig-sdk/magic8-ball-sdk/utility"
+	"github.com/voxgig-sdk/magic8-ball-sdk/go/core"
+	"github.com/voxgig-sdk/magic8-ball-sdk/go/entity"
+	"github.com/voxgig-sdk/magic8-ball-sdk/go/feature"
+	_ "github.com/voxgig-sdk/magic8-ball-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

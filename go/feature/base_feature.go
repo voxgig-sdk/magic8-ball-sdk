@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/magic8-ball-sdk/core"
+	"github.com/voxgig-sdk/magic8-ball-sdk/go/core"
 )
 
 type BaseFeature struct {

@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/magic8-ball-sdk"
+	sdk "github.com/voxgig-sdk/magic8-ball-sdk/go"
 )
 
 func TestExists(t *testing.T) {
