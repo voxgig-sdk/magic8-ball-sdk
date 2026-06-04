@@ -23,12 +23,9 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from magic8ball_sdk import Magic8BallSDK
 
-client = Magic8BallSDK({
-    "apikey": os.environ.get("MAGIC8-BALL_APIKEY"),
-})
+client = Magic8BallSDK({})
 ```
 
 ### 3. Load a biased
@@ -125,7 +122,6 @@ Create a `.env.local` file at the project root:
 
 ```
 MAGIC8-BALL_TEST_LIVE=TRUE
-MAGIC8-BALL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -149,7 +145,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

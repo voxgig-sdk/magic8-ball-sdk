@@ -20,9 +20,7 @@ loading a specific record.
 <?php
 require_once 'magic8ball_sdk.php';
 
-$client = new Magic8BallSDK([
-    "apikey" => getenv("MAGIC8-BALL_APIKEY"),
-]);
+$client = new Magic8BallSDK([]);
 ```
 
 ### 3. Load a biased
@@ -121,7 +119,6 @@ Create a `.env.local` file at the project root:
 
 ```
 MAGIC8-BALL_TEST_LIVE=TRUE
-MAGIC8-BALL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +141,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

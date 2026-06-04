@@ -68,14 +68,12 @@ function category_direct_setup($mockres)
     $env = Runner::env_override([
         "MAGIC_BALL_TEST_CATEGORY_ENTID" => [],
         "MAGIC_BALL_TEST_LIVE" => "FALSE",
-        "MAGIC_BALL_APIKEY" => "NONE",
     ]);
 
     $live = $env["MAGIC_BALL_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["MAGIC_BALL_APIKEY"],
         ];
         $client = new Magic8BallSDK($merged_opts);
         return [

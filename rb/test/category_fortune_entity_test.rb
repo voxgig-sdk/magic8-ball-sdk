@@ -82,7 +82,6 @@ def category_fortune_basic_setup(extra)
     "MAGIC_BALL_TEST_CATEGORY_FORTUNE_ENTID" => idmap,
     "MAGIC_BALL_TEST_LIVE" => "FALSE",
     "MAGIC_BALL_TEST_EXPLAIN" => "FALSE",
-    "MAGIC_BALL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +93,6 @@ def category_fortune_basic_setup(extra)
   if env["MAGIC_BALL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["MAGIC_BALL_APIKEY"],
       },
       extra || {},
     ])

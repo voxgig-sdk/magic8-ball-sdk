@@ -20,7 +20,20 @@
           }
         ],
         "title": "Magic 8-Ball API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Ask a yes/no question and get a mystical Magic 8-Ball fortune in return",
+        "homepage": "https://eightballapi.com",
+        "docs_url": "https://eightballapi.com",
+        "license_short": "Free for everyone, no API key required",
+        "license_md": "- Free to use for everyone, with no authentication required\n- No API key needed to call any endpoint\n- Operated by the maintainers of eightballapi.com; please use responsibly\n- Rate limits are not publicly documented",
+        "about_md": "The Magic 8-Ball API is a small, free fortune-telling service hosted at [eightballapi.com](https://eightballapi.com). It mimics the classic Magic 8-Ball toy, returning random or sentiment-aware yes/no/maybe-style readings to questions you send it.\n\nWhat you get from the API:\n\n- A random Magic 8-Ball reading from `GET /api`\n- A sentiment-biased reading via `POST /api/biased`, which analyses the wording of your `question` and chooses a fortune that matches its tone (positive, negative or neutral)\n- All available fortunes grouped by category from `GET /api/categories`\n- Optional `locale` parameter for non-English readings (for example `locale=fr`)\n- Optional `lucky` flag on the biased endpoint\n\nResponses are JSON and include the `reading`, the original `question`, a `sentiment` breakdown (score, comparative value, tokens, word categorisation), `locale` and `lucky` fields. No authentication is required and CORS / rate-limit details are not explicitly published.",
+        "entity_desc": {
+          "biased": "Sentiment-aware fortune endpoint that picks a reading based on the tone of the submitted question, served from `POST /api/biased`.",
+          "category": "Grouping of all possible Magic 8-Ball responses by sentiment category (positive, negative, neutral), exposed via `GET /api/categories`.",
+          "category_fortune": "An individual fortune string belonging to one of the sentiment categories returned by `GET /api/categories`.",
+          "random_fortune": "A single random Magic 8-Ball reading with no question analysis, returned by `GET /api`."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -28,7 +41,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "biased": {

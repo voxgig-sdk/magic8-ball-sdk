@@ -61,14 +61,12 @@ def _category_direct_setup(mockres):
     env = runner.env_override({
         "MAGIC_BALL_TEST_CATEGORY_ENTID": {},
         "MAGIC_BALL_TEST_LIVE": "FALSE",
-        "MAGIC_BALL_APIKEY": "NONE",
     })
 
     live = env.get("MAGIC_BALL_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("MAGIC_BALL_APIKEY"),
         }
         client = Magic8BallSDK(merged_opts)
         return {

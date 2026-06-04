@@ -31,9 +31,7 @@ loading a specific record.
 ```ruby
 require_relative "Magic8Ball_sdk"
 
-client = Magic8BallSDK.new({
-  "apikey" => ENV["MAGIC8-BALL_APIKEY"],
-})
+client = Magic8BallSDK.new({})
 ```
 
 ### 3. Load a biased
@@ -129,7 +127,6 @@ Create a `.env.local` file at the project root:
 
 ```
 MAGIC8-BALL_TEST_LIVE=TRUE
-MAGIC8-BALL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -152,7 +149,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |
