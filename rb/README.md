@@ -1,6 +1,11 @@
 # Magic8Ball Ruby SDK
 
-The Ruby SDK for the Magic8Ball API. Provides an entity-oriented interface using idiomatic Ruby conventions.
+
+
+The Ruby SDK for the Magic8Ball API — an entity-oriented client using idiomatic Ruby conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -31,13 +36,15 @@ loading a specific record.
 ```ruby
 require_relative "Magic8Ball_sdk"
 
-client = Magic8BallSDK.new({})
+client = Magic8BallSDK.new({
+  "apikey" => ENV["MAGIC8-BALL_APIKEY"],
+})
 ```
 
 ### 3. Load a biased
 
 ```ruby
-result, err = client.Biased(nil).load({ "id" => "example_id" }, nil)
+result, err = client.Biased().load({ "id" => "example_id" })
 raise err if err
 puts result
 ```
@@ -46,7 +53,7 @@ puts result
 
 ```ruby
 # Create
-created, _ = client.Biased(nil).create({ "name" => "Example" }, nil)
+created, _ = client.Biased().create({ "name" => "Example" })
 
 ```
 
@@ -91,11 +98,9 @@ puts fetchdef["headers"]
 Create a mock client for unit testing — no server required:
 
 ```ruby
-client = Magic8BallSDK.test(nil, nil)
+client = Magic8BallSDK.test
 
-result, err = client.Magic8Ball(nil).load(
-  { "id" => "test01" }, nil
-)
+result, err = client.Magic8Ball().load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -127,6 +132,7 @@ Create a `.env.local` file at the project root:
 
 ```
 MAGIC8-BALL_TEST_LIVE=TRUE
+MAGIC8-BALL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -149,6 +155,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

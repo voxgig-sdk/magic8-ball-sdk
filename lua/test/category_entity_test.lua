@@ -92,6 +92,7 @@ function category_basic_setup(extra)
     ["MAGIC_BALL_TEST_CATEGORY_ENTID"] = idmap,
     ["MAGIC_BALL_TEST_LIVE"] = "FALSE",
     ["MAGIC_BALL_TEST_EXPLAIN"] = "FALSE",
+    ["MAGIC_BALL_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,6 +104,7 @@ function category_basic_setup(extra)
   if env["MAGIC_BALL_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["MAGIC_BALL_APIKEY"],
       },
       extra or {},
     })

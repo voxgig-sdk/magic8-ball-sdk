@@ -1,6 +1,11 @@
 # Magic8Ball Python SDK
 
-The Python SDK for the Magic8Ball API. Provides an entity-oriented interface following Pythonic conventions.
+
+
+The Python SDK for the Magic8Ball API — an entity-oriented client following Pythonic conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -23,15 +28,18 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
+import os
 from magic8ball_sdk import Magic8BallSDK
 
-client = Magic8BallSDK({})
+client = Magic8BallSDK({
+    "apikey": os.environ.get("MAGIC8-BALL_APIKEY"),
+})
 ```
 
 ### 3. Load a biased
 
 ```python
-result, err = client.Biased(None).load({"id": "example_id"}, None)
+result, err = client.Biased().load({"id": "example_id"})
 if err:
     raise Exception(err)
 print(result)
@@ -41,7 +49,7 @@ print(result)
 
 ```python
 # Create
-created, _ = client.Biased(None).create({"name": "Example"}, None)
+created, _ = client.Biased().create({"name": "Example"})
 
 ```
 
@@ -87,11 +95,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```python
-client = Magic8BallSDK.test(None, None)
+client = Magic8BallSDK.test()
 
-result, err = client.Magic8Ball(None).load(
-    {"id": "test01"}, None
-)
+result, err = client.Magic8Ball().load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -122,6 +128,7 @@ Create a `.env.local` file at the project root:
 
 ```
 MAGIC8-BALL_TEST_LIVE=TRUE
+MAGIC8-BALL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -145,6 +152,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

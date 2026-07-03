@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -126,13 +126,13 @@ local biased = client:Biased(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Biased(nil):create({
+local result, err = client:Biased():create({
   locale = --[[ `$STRING` ]],
   lucky = --[[ `$BOOLEAN` ]],
   question = --[[ `$STRING` ]],
   reading = --[[ `$STRING` ]],
   sentiment = --[[ `$OBJECT` ]],
-}, nil)
+})
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -140,7 +140,7 @@ local result, err = client:Biased(nil):create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Biased(nil):load({ id = "biased_id" }, nil)
+local result, err = client:Biased():load({ id = "biased_id" })
 ```
 
 ### Common Methods
@@ -195,7 +195,7 @@ local category = client:Category(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Category(nil):list(nil, nil)
+local results, err = client:Category():list()
 ```
 
 ### Common Methods
@@ -257,7 +257,7 @@ local category_fortune = client:CategoryFortune(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:CategoryFortune(nil):load({ id = "category_fortune_id" }, nil)
+local result, err = client:CategoryFortune():load({ id = "category_fortune_id" })
 ```
 
 ### Common Methods

@@ -80,12 +80,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'MAGIC_BALL_TEST_CATEGORY_FORTUNE_ENTID': {},
     'MAGIC_BALL_TEST_LIVE': 'FALSE',
+    'MAGIC_BALL_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.MAGIC_BALL_TEST_LIVE
 
   if (live) {
     const client = new Magic8BallSDK({
+      apikey: env.MAGIC_BALL_APIKEY,
     })
 
     let idmap: any = env['MAGIC_BALL_TEST_CATEGORY_FORTUNE_ENTID']

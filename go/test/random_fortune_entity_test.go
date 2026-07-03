@@ -104,6 +104,7 @@ func random_fortuneBasicSetup(extra map[string]any) *entityTestSetup {
 		"MAGIC_BALL_TEST_RANDOM_FORTUNE_ENTID": idmap,
 		"MAGIC_BALL_TEST_LIVE":      "FALSE",
 		"MAGIC_BALL_TEST_EXPLAIN":   "FALSE",
+		"MAGIC_BALL_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["MAGIC_BALL_TEST_RANDOM_FORTUNE_ENTID"])
@@ -114,6 +115,7 @@ func random_fortuneBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["MAGIC_BALL_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["MAGIC_BALL_APIKEY"],
 			},
 			extra,
 		})

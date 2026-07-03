@@ -1,22 +1,8 @@
 # Magic8Ball SDK
 
-Ask a yes/no question and get a mystical Magic 8-Ball fortune in return
+Magic 8-Ball API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Magic 8-Ball API
-
-The Magic 8-Ball API is a small, free fortune-telling service hosted at [eightballapi.com](https://eightballapi.com). It mimics the classic Magic 8-Ball toy, returning random or sentiment-aware yes/no/maybe-style readings to questions you send it.
-
-What you get from the API:
-
-- A random Magic 8-Ball reading from `GET /api`
-- A sentiment-biased reading via `POST /api/biased`, which analyses the wording of your `question` and chooses a fortune that matches its tone (positive, negative or neutral)
-- All available fortunes grouped by category from `GET /api/categories`
-- Optional `locale` parameter for non-English readings (for example `locale=fr`)
-- Optional `lucky` flag on the biased endpoint
-
-Responses are JSON and include the `reading`, the original `question`, a `sentiment` breakdown (score, comparative value, tokens, word categorisation), `locale` and `lucky` fields. No authentication is required and CORS / rate-limit details are not explicitly published.
 
 ## Try it
 
@@ -50,27 +36,31 @@ gem install magic8-ball-sdk
 luarocks install magic8-ball-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { Magic8BallSDK } from 'magic8-ball'
 
-const client = new Magic8BallSDK({})
+const client = new Magic8BallSDK({
+  apikey: process.env.MAGIC8-BALL_APIKEY,
+})
 
+// Load biased data
+const biased = await client.Biased().load({})
+console.log(biased.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,10 +90,10 @@ The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Biased** | Sentiment-aware fortune endpoint that picks a reading based on the tone of the submitted question, served from `POST /api/biased`. | `/api/biased` |
-| **Category** | Grouping of all possible Magic 8-Ball responses by sentiment category (positive, negative, neutral), exposed via `GET /api/categories`. | `/api/categories` |
-| **CategoryFortune** | An individual fortune string belonging to one of the sentiment categories returned by `GET /api/categories`. | `/api/{category}` |
-| **RandomFortune** | A single random Magic 8-Ball reading with no question analysis, returned by `GET /api`. | `` |
+| **Biased** |  | `/api/biased` |
+| **Category** |  | `/api/categories` |
+| **CategoryFortune** |  | `/api/{category}` |
+| **RandomFortune** |  | `` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -113,15 +103,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from magic8ball_sdk import Magic8BallSDK
 
-client = Magic8BallSDK({})
+client = Magic8BallSDK({
+    "apikey": os.environ.get("MAGIC8-BALL_APIKEY"),
+})
 
 
 # Load a specific biased
-biased, err = client.Biased(None).load(
-    {"id": "example_id"}, None
-)
+biased, err = client.Biased().load({"id": "example_id"})
+print(biased)
 ```
 
 ### PHP
@@ -130,13 +122,14 @@ biased, err = client.Biased(None).load(
 <?php
 require_once 'magic8ball_sdk.php';
 
-$client = new Magic8BallSDK([]);
+$client = new Magic8BallSDK([
+    "apikey" => getenv("MAGIC8-BALL_APIKEY"),
+]);
 
 
 // Load a specific biased
-[$biased, $err] = $client->Biased(null)->load(
-    ["id" => "example_id"], null
-);
+[$biased, $err] = $client->Biased()->load(["id" => "example_id"]);
+print_r($biased);
 ```
 
 ### Golang
@@ -144,8 +137,13 @@ $client = new Magic8BallSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/magic8-ball-sdk/go"
 
-client := sdk.NewMagic8BallSDK(map[string]any{})
+client := sdk.NewMagic8BallSDK(map[string]any{
+    "apikey": os.Getenv("MAGIC8-BALL_APIKEY"),
+})
 
+// Load biased data
+biased, err := client.Biased(nil).Load(map[string]any{}, nil)
+fmt.Println(biased)
 ```
 
 ### Ruby
@@ -153,13 +151,14 @@ client := sdk.NewMagic8BallSDK(map[string]any{})
 ```ruby
 require_relative "Magic8Ball_sdk"
 
-client = Magic8BallSDK.new({})
+client = Magic8BallSDK.new({
+  "apikey" => ENV["MAGIC8-BALL_APIKEY"],
+})
 
 
 # Load a specific biased
-biased, err = client.Biased(nil).load(
-  { "id" => "example_id" }, nil
-)
+biased, err = client.Biased().load({ "id" => "example_id" })
+puts biased
 ```
 
 ### Lua
@@ -167,13 +166,14 @@ biased, err = client.Biased(nil).load(
 ```lua
 local sdk = require("magic8-ball_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("MAGIC8-BALL_APIKEY"),
+})
 
 
 -- Load a specific biased
-local biased, err = client:Biased(nil):load(
-  { id = "example_id" }, nil
-)
+local biased, err = client:Biased():load({ id = "example_id" })
+print(biased)
 ```
 
 ## Unit testing in offline mode
@@ -192,25 +192,21 @@ const result = await client.Biased().load({ id: 'test01' })
 ### Python
 
 ```python
-client = Magic8BallSDK.test(None, None)
-result, err = client.Biased(None).load(
-    {"id": "test01"}, None
-)
+client = Magic8BallSDK.test()
+result, err = client.Biased().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = Magic8BallSDK::test(null, null);
-[$result, $err] = $client->Biased(null)->load(
-    ["id" => "test01"], null
-);
+$client = Magic8BallSDK::test();
+[$result, $err] = $client->Biased()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Biased(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -219,19 +215,15 @@ result, err := client.Biased(nil).Load(
 ### Ruby
 
 ```ruby
-client = Magic8BallSDK.test(nil, nil)
-result, err = client.Biased(nil).load(
-  { "id" => "test01" }, nil
-)
+client = Magic8BallSDK.test
+result, err = client.Biased().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Biased(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Biased():load({ id = "test01" })
 ```
 
 ## How it works
@@ -335,15 +327,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Magic 8-Ball API
-
-- Upstream: [https://eightballapi.com](https://eightballapi.com)
-
-- Free to use for everyone, with no authentication required
-- No API key needed to call any endpoint
-- Operated by the maintainers of eightballapi.com; please use responsibly
-- Rate limits are not publicly documented
 
 ---
 

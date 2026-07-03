@@ -106,6 +106,7 @@ function basicSetup(extra?: any) {
     'MAGIC__BALL_TEST_RANDOM_FORTUNE_ENTID': idmap,
     'MAGIC__BALL_TEST_LIVE': 'FALSE',
     'MAGIC__BALL_TEST_EXPLAIN': 'FALSE',
+    'MAGIC__BALL_APIKEY': 'NONE',
   })
 
   idmap = env['MAGIC__BALL_TEST_RANDOM_FORTUNE_ENTID']
@@ -115,6 +116,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new Magic8BallSDK(merge([
       {
+        apikey: env.MAGIC__BALL_APIKEY,
       },
       extra
     ]))
