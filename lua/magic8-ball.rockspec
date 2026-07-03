@@ -8,12 +8,14 @@ source = {
   dir = "magic8-ball-sdk/lua"
 }
 description = {
-  summary = "Magic8Ball SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Magic 8-Ball public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/magic8-ball-sdk",
+  issues_url = "https://github.com/voxgig-sdk/magic8-ball-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "magic8-ball" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

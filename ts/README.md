@@ -10,7 +10,7 @@ The TypeScript SDK for the Magic8Ball API — a type-safe, entity-oriented clien
 
 ## Install
 ```bash
-npm install magic8-ball
+npm install @voxgig-sdk/magic8-ball
 ```
 ## Tutorial: your first API call
 

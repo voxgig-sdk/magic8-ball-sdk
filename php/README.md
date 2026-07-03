@@ -10,7 +10,7 @@ The PHP SDK for the Magic8Ball API — an entity-oriented client using PHP conve
 
 ## Install
 ```bash
-composer require voxgig/magic8-ball-sdk
+composer require voxgig-sdk/magic8-ball
 ```
 
 
