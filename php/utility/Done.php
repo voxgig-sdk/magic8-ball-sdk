@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 class Magic8BallDone
 {
-    public static function call(Magic8BallContext $ctx): array
+    public static function call(Magic8BallContext $ctx): mixed
     {
         if ($ctx->ctrl->explain) {
             $ctx->ctrl->explain = ($ctx->utility->clean)($ctx, $ctx->ctrl->explain);
@@ -19,7 +19,7 @@ class Magic8BallDone
             if (is_object($resdata)) {
                 $resdata = (array)$resdata;
             }
-            return [$resdata, null];
+            return $resdata;
         }
         return ($ctx->utility->make_error)($ctx, null);
     }

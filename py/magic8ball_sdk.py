@@ -144,16 +144,23 @@ class Magic8BallSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class Magic8BallSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,30 +212,74 @@ class Magic8BallSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def biased(self):
+        """Idiomatic facade: client.biased.list() / client.biased.load({"id": ...})."""
+        from entity.biased_entity import BiasedEntity
+        cached = getattr(self, "_biased", None)
+        if cached is None:
+            cached = BiasedEntity(self, None)
+            self._biased = cached
+        return cached
 
     def Biased(self, data=None):
+        # Deprecated: use client.biased instead.
         from entity.biased_entity import BiasedEntity
         return BiasedEntity(self, data)
 
 
+    @property
+    def category(self):
+        """Idiomatic facade: client.category.list() / client.category.load({"id": ...})."""
+        from entity.category_entity import CategoryEntity
+        cached = getattr(self, "_category", None)
+        if cached is None:
+            cached = CategoryEntity(self, None)
+            self._category = cached
+        return cached
+
     def Category(self, data=None):
+        # Deprecated: use client.category instead.
         from entity.category_entity import CategoryEntity
         return CategoryEntity(self, data)
 
 
+    @property
+    def category_fortune(self):
+        """Idiomatic facade: client.category_fortune.list() / client.category_fortune.load({"id": ...})."""
+        from entity.category_fortune_entity import CategoryFortuneEntity
+        cached = getattr(self, "_category_fortune", None)
+        if cached is None:
+            cached = CategoryFortuneEntity(self, None)
+            self._category_fortune = cached
+        return cached
+
     def CategoryFortune(self, data=None):
+        # Deprecated: use client.category_fortune instead.
         from entity.category_fortune_entity import CategoryFortuneEntity
         return CategoryFortuneEntity(self, data)
 
 
+    @property
+    def random_fortune(self):
+        """Idiomatic facade: client.random_fortune.list() / client.random_fortune.load({"id": ...})."""
+        from entity.random_fortune_entity import RandomFortuneEntity
+        cached = getattr(self, "_random_fortune", None)
+        if cached is None:
+            cached = RandomFortuneEntity(self, None)
+            self._random_fortune = cached
+        return cached
+
     def RandomFortune(self, data=None):
+        # Deprecated: use client.random_fortune instead.
         from entity.random_fortune_entity import RandomFortuneEntity
         return RandomFortuneEntity(self, data)
 

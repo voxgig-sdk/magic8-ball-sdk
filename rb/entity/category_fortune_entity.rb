@@ -45,6 +45,7 @@ class CategoryFortuneEntity
     end
   end
 
+  # @return [CategoryFortune, Hash] the current CategoryFortune data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class CategoryFortuneEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of CategoryFortune fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single CategoryFortune.
+  #
+  # @param reqmatch [CategoryFortuneLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [CategoryFortune, Hash] the loaded CategoryFortune; raises Magic8BallError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

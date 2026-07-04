@@ -4,6 +4,7 @@
 main: {
   kit: {
     info: {
+      auth: false
       contact: {
         name: "API Support"
         url: "https://www.eightballapi.com/docs"

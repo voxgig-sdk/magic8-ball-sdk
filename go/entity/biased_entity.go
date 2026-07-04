@@ -85,6 +85,27 @@ func (e *BiasedEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Biased; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *BiasedEntity) DataTyped(data ...Biased) Biased {
+	if len(data) > 0 {
+		return typedFrom[Biased](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Biased](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Biased (all fields
+// optional at the wire level).
+func (e *BiasedEntity) MatchTyped(match ...Biased) Biased {
+	if len(match) > 0 {
+		return typedFrom[Biased](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Biased](e.Match())
+}
+
 
 func (e *BiasedEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *BiasedEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, 
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// BiasedLoadMatch and returns an Biased. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *BiasedEntity) LoadTyped(reqmatch BiasedLoadMatch, ctrl map[string]any) (Biased, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Biased{}, err
+	}
+	return typedFrom[Biased](res), nil
 }
 
 
@@ -139,6 +171,17 @@ func (e *BiasedEntity) Create(reqdata map[string]any, ctrl map[string]any) (any,
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// BiasedCreateData and returns an Biased. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *BiasedEntity) CreateTyped(reqdata BiasedCreateData, ctrl map[string]any) (Biased, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Biased{}, err
+	}
+	return typedFrom[Biased](res), nil
 }
 
 

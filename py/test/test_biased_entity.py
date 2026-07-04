@@ -44,15 +44,12 @@ class TestBiasedEntity:
         biased_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.biased"), "biased_ref01"))
 
-        biased_ref01_data_result, err = biased_ref01_ent.create(biased_ref01_data, None)
-        assert err is None
-        biased_ref01_data = helpers.to_map(biased_ref01_data_result)
+        biased_ref01_data = helpers.to_map(biased_ref01_ent.create(biased_ref01_data, None))
         assert biased_ref01_data is not None
 
         # LOAD
         biased_ref01_match_dt0 = {}
-        biased_ref01_data_dt0_loaded, err = biased_ref01_ent.load(biased_ref01_match_dt0, None)
-        assert err is None
+        biased_ref01_data_dt0_loaded = biased_ref01_ent.load(biased_ref01_match_dt0, None)
         assert biased_ref01_data_dt0_loaded is not None
 
 
@@ -93,7 +90,6 @@ def _biased_basic_setup(extra):
         "MAGIC_BALL_TEST_BIASED_ENTID": idmap,
         "MAGIC_BALL_TEST_LIVE": "FALSE",
         "MAGIC_BALL_TEST_EXPLAIN": "FALSE",
-        "MAGIC_BALL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -104,7 +100,6 @@ def _biased_basic_setup(extra):
     if env.get("MAGIC_BALL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("MAGIC_BALL_APIKEY"),
             },
             extra or {},
         ])

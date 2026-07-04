@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  CategoryFortune,
+  CategoryFortuneLoadMatch,
+} from '../Magic8BallTypes'
 
 // TODO: needs Entity superclass
-class CategoryFortuneEntity extends Magic8BallEntityBase {
+class CategoryFortuneEntity extends Magic8BallEntityBase<CategoryFortune> {
 
   constructor(client: Magic8BallSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class CategoryFortuneEntity extends Magic8BallEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: CategoryFortuneLoadMatch, ctrl?: Control): Promise<CategoryFortune> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class CategoryFortuneEntity extends Magic8BallEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<CategoryFortune> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

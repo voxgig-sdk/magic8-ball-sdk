@@ -1,7 +1,14 @@
 # Magic8Ball SDK Biased entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from magic8ball_types import (
+    Biased,
+    BiasedLoadMatch,
+    BiasedCreateData,
+)
 
 
 class BiasedEntity:
@@ -44,7 +51,7 @@ class BiasedEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Biased:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +60,12 @@ class BiasedEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Biased:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: BiasedLoadMatch, ctrl=None) -> Biased:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -82,7 +89,7 @@ class BiasedEntity:
     
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: BiasedCreateData, ctrl=None) -> Biased:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",

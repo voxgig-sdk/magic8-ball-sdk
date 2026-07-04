@@ -49,8 +49,7 @@ class CategoryFortuneEntityTest extends TestCase
         // LOAD
         $category_fortune_ref01_ent = $client->CategoryFortune(null);
         $category_fortune_ref01_match_dt0 = [];
-        [$category_fortune_ref01_data_dt0_loaded, $err] = $category_fortune_ref01_ent->load($category_fortune_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $category_fortune_ref01_data_dt0_loaded = $category_fortune_ref01_ent->load($category_fortune_ref01_match_dt0, null);
         $this->assertNotNull($category_fortune_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function category_fortune_basic_setup($extra)
         "MAGIC_BALL_TEST_CATEGORY_FORTUNE_ENTID" => $idmap,
         "MAGIC_BALL_TEST_LIVE" => "FALSE",
         "MAGIC_BALL_TEST_EXPLAIN" => "FALSE",
-        "MAGIC_BALL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function category_fortune_basic_setup($extra)
     if ($env["MAGIC_BALL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["MAGIC_BALL_APIKEY"],
             ],
             $extra ?? [],
         ]);

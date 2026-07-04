@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -96,7 +95,7 @@ same parameters as `direct()`.
 ## BiasedEntity
 
 ```lua
-local biased = client:Biased(nil)
+local biased = client:biased(nil)
 ```
 
 ### Fields
@@ -126,7 +125,7 @@ local biased = client:Biased(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Biased():create({
+local result, err = client:biased():create({
   locale = --[[ `$STRING` ]],
   lucky = --[[ `$BOOLEAN` ]],
   question = --[[ `$STRING` ]],
@@ -140,7 +139,7 @@ local result, err = client:Biased():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Biased():load({ id = "biased_id" })
+local result, err = client:biased():load({ id = "biased_id" })
 ```
 
 ### Common Methods
@@ -176,7 +175,7 @@ Return the entity name.
 ## CategoryEntity
 
 ```lua
-local category = client:Category(nil)
+local category = client:category(nil)
 ```
 
 ### Fields
@@ -195,7 +194,7 @@ local category = client:Category(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Category():list()
+local results, err = client:category():list()
 ```
 
 ### Common Methods
@@ -231,7 +230,7 @@ Return the entity name.
 ## CategoryFortuneEntity
 
 ```lua
-local category_fortune = client:CategoryFortune(nil)
+local category_fortune = client:category_fortune(nil)
 ```
 
 ### Fields
@@ -257,7 +256,7 @@ local category_fortune = client:CategoryFortune(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:CategoryFortune():load({ id = "category_fortune_id" })
+local result, err = client:category_fortune():load({ id = "category_fortune_id" })
 ```
 
 ### Common Methods
@@ -293,7 +292,7 @@ Return the entity name.
 ## RandomFortuneEntity
 
 ```lua
-local random_fortune = client:RandomFortune(nil)
+local random_fortune = client:random_fortune(nil)
 ```
 
 ### Common Methods

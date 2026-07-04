@@ -245,21 +245,33 @@ func (sdk *Magic8BallSDK) Direct(fetchargs map[string]any) (map[string]any, erro
 }
 
 
+// Biased returns a Biased entity bound to this client.
+// Idiomatic usage: client.Biased(nil).List(nil, nil) or
+// client.Biased(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *Magic8BallSDK) Biased(data map[string]any) Magic8BallEntity {
 	return NewBiasedEntityFunc(sdk, data)
 }
 
 
+// Category returns a Category entity bound to this client.
+// Idiomatic usage: client.Category(nil).List(nil, nil) or
+// client.Category(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *Magic8BallSDK) Category(data map[string]any) Magic8BallEntity {
 	return NewCategoryEntityFunc(sdk, data)
 }
 
 
+// CategoryFortune returns a CategoryFortune entity bound to this client.
+// Idiomatic usage: client.CategoryFortune(nil).List(nil, nil) or
+// client.CategoryFortune(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *Magic8BallSDK) CategoryFortune(data map[string]any) Magic8BallEntity {
 	return NewCategoryFortuneEntityFunc(sdk, data)
 }
 
 
+// RandomFortune returns a RandomFortune entity bound to this client.
+// Idiomatic usage: client.RandomFortune(nil).List(nil, nil) or
+// client.RandomFortune(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *Magic8BallSDK) RandomFortune(data map[string]any) Magic8BallEntity {
 	return NewRandomFortuneEntityFunc(sdk, data)
 }

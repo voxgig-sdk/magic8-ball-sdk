@@ -9,9 +9,12 @@ The TypeScript SDK for the Magic8Ball API — a type-safe, entity-oriented clien
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/magic8-ball
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/magic8-ball-sdk/releases](https://github.com/voxgig-sdk/magic8-ball-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { Magic8BallSDK } from 'magic8-ball'
+import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball'
 
-const client = new Magic8BallSDK({
-  apikey: process.env.MAGIC8-BALL_APIKEY,
-})
+const client = new Magic8BallSDK()
 ```
 
 ### 3. Load a biased
 
 ```ts
-const result = await client.Biased().load({ id: 'example_id' })
+const result = await client.biased.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -41,7 +42,7 @@ if (result.ok) {
 
 ```ts
 // Create
-const created = await client.Biased().create({
+const created = await client.biased.create({
   name: 'Example',
 })
 
@@ -89,7 +90,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = Magic8BallSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.biased.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -97,7 +98,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new Magic8BallSDK({ apikey: '...' })
+const client = new Magic8BallSDK()
 const testClient = client.tester()
 ```
 
@@ -106,7 +107,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.biased
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,7 +134,6 @@ const logger = {
 }
 
 const client = new Magic8BallSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -143,8 +143,7 @@ const client = new Magic8BallSDK({
 Create a `.env.local` file at the project root:
 
 ```
-MAGIC8-BALL_TEST_LIVE=TRUE
-MAGIC8-BALL_APIKEY=<your-key>
+MAGIC8_BALL_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -162,7 +161,6 @@ cd ts && npm test
 
 ```ts
 new Magic8BallSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -173,7 +171,6 @@ new Magic8BallSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -317,7 +314,7 @@ API path: ``
 
 ### Biased
 
-Create an instance: `const biased = client.Biased()`
+Create an instance: `const biased = client.biased`
 
 #### Operations
 
@@ -339,13 +336,13 @@ Create an instance: `const biased = client.Biased()`
 #### Example: Load
 
 ```ts
-const biased = await client.Biased().load({ id: 'biased_id' })
+const biased = await client.biased.load({ id: 'biased_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const biased = await client.Biased().create({
+const biased = await client.biased.create({
   locale: /* `$STRING` */,
   lucky: /* `$BOOLEAN` */,
   question: /* `$STRING` */,
@@ -357,7 +354,7 @@ const biased = await client.Biased().create({
 
 ### Category
 
-Create an instance: `const category = client.Category()`
+Create an instance: `const category = client.category`
 
 #### Operations
 
@@ -377,13 +374,13 @@ Create an instance: `const category = client.Category()`
 #### Example: List
 
 ```ts
-const categorys = await client.Category().list()
+const categorys = await client.category.list()
 ```
 
 
 ### CategoryFortune
 
-Create an instance: `const category_fortune = client.CategoryFortune()`
+Create an instance: `const category_fortune = client.category_fortune`
 
 #### Operations
 
@@ -402,13 +399,13 @@ Create an instance: `const category_fortune = client.CategoryFortune()`
 #### Example: Load
 
 ```ts
-const category_fortune = await client.CategoryFortune().load({ id: 'category_fortune_id' })
+const category_fortune = await client.category_fortune.load({ id: 'category_fortune_id' })
 ```
 
 
 ### RandomFortune
 
-Create an instance: `const random_fortune = client.RandomFortune()`
+Create an instance: `const random_fortune = client.random_fortune`
 
 
 ## Explanation
@@ -468,7 +465,7 @@ magic8-ball/
 Import the SDK from the package root:
 
 ```ts
-import { Magic8BallSDK } from 'magic8-ball'
+import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball'
 ```
 
 ### Entity state
@@ -478,11 +475,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const biased = client.biased
+await biased.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// biased.data() now returns the loaded biased data
+// biased.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

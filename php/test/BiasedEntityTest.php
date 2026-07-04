@@ -43,15 +43,13 @@ class BiasedEntityTest extends TestCase
         $biased_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.biased"), "biased_ref01"));
 
-        [$biased_ref01_data_result, $err] = $biased_ref01_ent->create($biased_ref01_data, null);
-        $this->assertNull($err);
+        $biased_ref01_data_result = $biased_ref01_ent->create($biased_ref01_data, null);
         $biased_ref01_data = Helpers::to_map($biased_ref01_data_result);
         $this->assertNotNull($biased_ref01_data);
 
         // LOAD
         $biased_ref01_match_dt0 = [];
-        [$biased_ref01_data_dt0_loaded, $err] = $biased_ref01_ent->load($biased_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $biased_ref01_data_dt0_loaded = $biased_ref01_ent->load($biased_ref01_match_dt0, null);
         $this->assertNotNull($biased_ref01_data_dt0_loaded);
 
     }
@@ -86,7 +84,6 @@ function biased_basic_setup($extra)
         "MAGIC_BALL_TEST_BIASED_ENTID" => $idmap,
         "MAGIC_BALL_TEST_LIVE" => "FALSE",
         "MAGIC_BALL_TEST_EXPLAIN" => "FALSE",
-        "MAGIC_BALL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +95,6 @@ function biased_basic_setup($extra)
     if ($env["MAGIC_BALL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["MAGIC_BALL_APIKEY"],
             ],
             $extra ?? [],
         ]);

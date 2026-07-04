@@ -9,7 +9,7 @@ require_once __DIR__ . '/../core/Error.php';
 
 class Magic8BallMakeError
 {
-    public static function call(?Magic8BallContext $ctx, mixed $err): array
+    public static function call(?Magic8BallContext $ctx, mixed $err): mixed
     {
         if ($ctx === null) {
             require_once __DIR__ . '/../core/Context.php';
@@ -52,8 +52,8 @@ class Magic8BallMakeError
         $ctx->ctrl->err = $sdk_err;
 
         if ($ctx->ctrl->throw_err === false) {
-            return [$result->resdata, null];
+            return $result->resdata;
         }
-        return [null, $sdk_err];
+        throw $sdk_err;
     }
 }

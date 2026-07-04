@@ -103,7 +103,7 @@ class Magic8BallSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class Magic8BallSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class Magic8BallSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,45 +216,89 @@ class Magic8BallSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Biased($data = null)
+    private $_biased = null;
+
+    // Idiomatic facade: $client->biased()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Biased() (PHP method
+    // names are case-insensitive).
+    public function biased($data = null)
     {
         require_once __DIR__ . '/entity/biased_entity.php';
+        if ($data === null) {
+            if ($this->_biased === null) {
+                $this->_biased = new BiasedEntity($this, null);
+            }
+            return $this->_biased;
+        }
         return new BiasedEntity($this, $data);
     }
 
 
-    public function Category($data = null)
+    private $_category = null;
+
+    // Idiomatic facade: $client->category()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Category() (PHP method
+    // names are case-insensitive).
+    public function category($data = null)
     {
         require_once __DIR__ . '/entity/category_entity.php';
+        if ($data === null) {
+            if ($this->_category === null) {
+                $this->_category = new CategoryEntity($this, null);
+            }
+            return $this->_category;
+        }
         return new CategoryEntity($this, $data);
     }
 
 
-    public function CategoryFortune($data = null)
+    private $_category_fortune = null;
+
+    // Idiomatic facade: $client->category_fortune()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias CategoryFortune() (PHP method
+    // names are case-insensitive).
+    public function category_fortune($data = null)
     {
         require_once __DIR__ . '/entity/category_fortune_entity.php';
+        if ($data === null) {
+            if ($this->_category_fortune === null) {
+                $this->_category_fortune = new CategoryFortuneEntity($this, null);
+            }
+            return $this->_category_fortune;
+        }
         return new CategoryFortuneEntity($this, $data);
     }
 
 
-    public function RandomFortune($data = null)
+    private $_random_fortune = null;
+
+    // Idiomatic facade: $client->random_fortune()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias RandomFortune() (PHP method
+    // names are case-insensitive).
+    public function random_fortune($data = null)
     {
         require_once __DIR__ . '/entity/random_fortune_entity.php';
+        if ($data === null) {
+            if ($this->_random_fortune === null) {
+                $this->_random_fortune = new RandomFortuneEntity($this, null);
+            }
+            return $this->_random_fortune;
+        }
         return new RandomFortuneEntity($this, $data);
     }
 

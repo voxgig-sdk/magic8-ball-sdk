@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Category,
+  CategoryListMatch,
+} from '../Magic8BallTypes'
 
 // TODO: needs Entity superclass
-class CategoryEntity extends Magic8BallEntityBase {
+class CategoryEntity extends Magic8BallEntityBase<Category> {
 
   constructor(client: Magic8BallSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class CategoryEntity extends Magic8BallEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: CategoryListMatch, ctrl?: Control): Promise<Category[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class CategoryEntity extends Magic8BallEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Category[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

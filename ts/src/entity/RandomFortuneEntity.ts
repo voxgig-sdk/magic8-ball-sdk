@@ -14,9 +14,12 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  RandomFortune,
+} from '../Magic8BallTypes'
 
 // TODO: needs Entity superclass
-class RandomFortuneEntity extends Magic8BallEntityBase {
+class RandomFortuneEntity extends Magic8BallEntityBase<RandomFortune> {
 
   constructor(client: Magic8BallSDK, entopts: any) {
     super(client, entopts)

@@ -20,9 +20,6 @@ class Magic8BallConfig
             ],
             "options" => [
                 "base" => "https://eightballapi.com",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -297,6 +294,7 @@ class Magic8BallConfig
                         'orig' => 'category',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                     'query' => [

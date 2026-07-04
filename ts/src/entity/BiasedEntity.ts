@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Biased,
+  BiasedLoadMatch,
+  BiasedCreateData,
+} from '../Magic8BallTypes'
 
 // TODO: needs Entity superclass
-class BiasedEntity extends Magic8BallEntityBase {
+class BiasedEntity extends Magic8BallEntityBase<Biased> {
 
   constructor(client: Magic8BallSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class BiasedEntity extends Magic8BallEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: BiasedLoadMatch, ctrl?: Control): Promise<Biased> {
 
     const utility = this._utility
 
@@ -136,7 +141,9 @@ class BiasedEntity extends Magic8BallEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Biased> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
@@ -144,7 +151,7 @@ class BiasedEntity extends Magic8BallEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: BiasedCreateData, ctrl?: Control): Promise<Biased> {
 
     const utility = this._utility
     const {
@@ -243,7 +250,9 @@ class BiasedEntity extends Magic8BallEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Biased> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -117,14 +117,12 @@ func category_fortuneDirectSetup(mockres any) *category_fortuneDirectSetupResult
 	env := envOverride(map[string]any{
 		"MAGIC_BALL_TEST_CATEGORY_FORTUNE_ENTID": map[string]any{},
 		"MAGIC_BALL_TEST_LIVE":    "FALSE",
-		"MAGIC_BALL_APIKEY":       "NONE",
 	})
 
 	live := env["MAGIC_BALL_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["MAGIC_BALL_APIKEY"],
 		}
 		client := sdk.NewMagic8BallSDK(mergedOpts)
 

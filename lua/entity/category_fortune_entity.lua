@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch CategoryFortuneLoadMatch
+---@param ctrl? table
+---@return CategoryFortune
+---@return string? err
 function CategoryFortuneEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

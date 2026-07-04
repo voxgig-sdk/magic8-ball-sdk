@@ -5,6 +5,8 @@ import { CategoryEntity } from './entity/CategoryEntity'
 import { CategoryFortuneEntity } from './entity/CategoryFortuneEntity'
 import { RandomFortuneEntity } from './entity/RandomFortuneEntity'
 
+export type * from './Magic8BallTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -205,24 +207,56 @@ class Magic8BallSDK {
 
 
 
+  _biased?: BiasedEntity
+
+  // Idiomatic facade: `client.biased.list()` / `client.biased.load({ id })`.
+  get biased(): BiasedEntity {
+    return (this._biased ??= new BiasedEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.biased` instead. */
   Biased(data?: any) {
     const self = this
     return new BiasedEntity(self,data)
   }
 
 
+  _category?: CategoryEntity
+
+  // Idiomatic facade: `client.category.list()` / `client.category.load({ id })`.
+  get category(): CategoryEntity {
+    return (this._category ??= new CategoryEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.category` instead. */
   Category(data?: any) {
     const self = this
     return new CategoryEntity(self,data)
   }
 
 
+  _category_fortune?: CategoryFortuneEntity
+
+  // Idiomatic facade: `client.category_fortune.list()` / `client.category_fortune.load({ id })`.
+  get category_fortune(): CategoryFortuneEntity {
+    return (this._category_fortune ??= new CategoryFortuneEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.category_fortune` instead. */
   CategoryFortune(data?: any) {
     const self = this
     return new CategoryFortuneEntity(self,data)
   }
 
 
+  _random_fortune?: RandomFortuneEntity
+
+  // Idiomatic facade: `client.random_fortune.list()` / `client.random_fortune.load({ id })`.
+  get random_fortune(): RandomFortuneEntity {
+    return (this._random_fortune ??= new RandomFortuneEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.random_fortune` instead. */
   RandomFortune(data?: any) {
     const self = this
     return new RandomFortuneEntity(self,data)

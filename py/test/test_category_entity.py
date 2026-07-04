@@ -50,8 +50,7 @@ class TestCategoryEntity:
         category_ref01_ent = client.Category(None)
         category_ref01_match = {}
 
-        category_ref01_list_result, err = category_ref01_ent.list(category_ref01_match, None)
-        assert err is None
+        category_ref01_list_result = category_ref01_ent.list(category_ref01_match, None)
         assert isinstance(category_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _category_basic_setup(extra):
         "MAGIC_BALL_TEST_CATEGORY_ENTID": idmap,
         "MAGIC_BALL_TEST_LIVE": "FALSE",
         "MAGIC_BALL_TEST_EXPLAIN": "FALSE",
-        "MAGIC_BALL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _category_basic_setup(extra):
     if env.get("MAGIC_BALL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("MAGIC_BALL_APIKEY"),
             },
             extra or {},
         ])

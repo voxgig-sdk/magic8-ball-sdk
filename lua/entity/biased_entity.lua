@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch BiasedLoadMatch
+---@param ctrl? table
+---@return Biased
+---@return string? err
 function BiasedEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -106,6 +110,10 @@ end
 
 
 
+---@param reqdata BiasedCreateData
+---@param ctrl? table
+---@return Biased
+---@return string? err
 function BiasedEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

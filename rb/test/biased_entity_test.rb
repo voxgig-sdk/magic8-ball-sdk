@@ -36,15 +36,13 @@ class BiasedEntityTest < Minitest::Test
     biased_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.biased"), "biased_ref01"))
 
-    biased_ref01_data_result, err = biased_ref01_ent.create(biased_ref01_data, nil)
-    assert_nil err
+    biased_ref01_data_result = biased_ref01_ent.create(biased_ref01_data, nil)
     biased_ref01_data = Helpers.to_map(biased_ref01_data_result)
     assert !biased_ref01_data.nil?
 
     # LOAD
     biased_ref01_match_dt0 = {}
-    biased_ref01_data_dt0_loaded, err = biased_ref01_ent.load(biased_ref01_match_dt0, nil)
-    assert_nil err
+    biased_ref01_data_dt0_loaded = biased_ref01_ent.load(biased_ref01_match_dt0, nil)
     assert !biased_ref01_data_dt0_loaded.nil?
 
   end
@@ -83,7 +81,6 @@ def biased_basic_setup(extra)
     "MAGIC_BALL_TEST_BIASED_ENTID" => idmap,
     "MAGIC_BALL_TEST_LIVE" => "FALSE",
     "MAGIC_BALL_TEST_EXPLAIN" => "FALSE",
-    "MAGIC_BALL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +92,6 @@ def biased_basic_setup(extra)
   if env["MAGIC_BALL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["MAGIC_BALL_APIKEY"],
       },
       extra || {},
     ])

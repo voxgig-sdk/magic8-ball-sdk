@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -146,7 +145,7 @@ Alias for `Magic8BallSDK.test()`.
 ## BiasedEntity
 
 ```ts
-const biased = client.Biased()
+const biased = client.biased
 ```
 
 ### Fields
@@ -176,7 +175,7 @@ const biased = client.Biased()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Biased().create({
+const result = await client.biased.create({
   locale: /* `$STRING` */,
   lucky: /* `$BOOLEAN` */,
   question: /* `$STRING` */,
@@ -190,7 +189,7 @@ const result = await client.Biased().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Biased().load({ id: 'biased_id' })
+const result = await client.biased.load({ id: 'biased_id' })
 ```
 
 ### Common Methods
@@ -224,7 +223,7 @@ Return a copy of the entity options.
 ## CategoryEntity
 
 ```ts
-const category = client.Category()
+const category = client.category
 ```
 
 ### Fields
@@ -243,7 +242,7 @@ const category = client.Category()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Category().list()
+const results = await client.category.list()
 ```
 
 ### Common Methods
@@ -277,7 +276,7 @@ Return a copy of the entity options.
 ## CategoryFortuneEntity
 
 ```ts
-const category_fortune = client.CategoryFortune()
+const category_fortune = client.category_fortune
 ```
 
 ### Fields
@@ -303,7 +302,7 @@ const category_fortune = client.CategoryFortune()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.CategoryFortune().load({ id: 'category_fortune_id' })
+const result = await client.category_fortune.load({ id: 'category_fortune_id' })
 ```
 
 ### Common Methods
@@ -337,7 +336,7 @@ Return a copy of the entity options.
 ## RandomFortuneEntity
 
 ```ts
-const random_fortune = client.RandomFortune()
+const random_fortune = client.random_fortune
 ```
 
 ### Common Methods

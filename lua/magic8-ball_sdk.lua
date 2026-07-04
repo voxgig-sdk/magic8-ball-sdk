@@ -244,24 +244,76 @@ end
 
 
 
+-- Idiomatic facade: client:biased():list() / client:biased():load({ id = ... })
+function Magic8BallSDK:biased(data)
+  local EntityMod = require("entity.biased_entity")
+  if data == nil then
+    if self._biased == nil then
+      self._biased = EntityMod.new(self, nil)
+    end
+    return self._biased
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:biased() instead.
 function Magic8BallSDK:Biased(data)
   local EntityMod = require("entity.biased_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:category():list() / client:category():load({ id = ... })
+function Magic8BallSDK:category(data)
+  local EntityMod = require("entity.category_entity")
+  if data == nil then
+    if self._category == nil then
+      self._category = EntityMod.new(self, nil)
+    end
+    return self._category
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:category() instead.
 function Magic8BallSDK:Category(data)
   local EntityMod = require("entity.category_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:category_fortune():list() / client:category_fortune():load({ id = ... })
+function Magic8BallSDK:category_fortune(data)
+  local EntityMod = require("entity.category_fortune_entity")
+  if data == nil then
+    if self._category_fortune == nil then
+      self._category_fortune = EntityMod.new(self, nil)
+    end
+    return self._category_fortune
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:category_fortune() instead.
 function Magic8BallSDK:CategoryFortune(data)
   local EntityMod = require("entity.category_fortune_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:random_fortune():list() / client:random_fortune():load({ id = ... })
+function Magic8BallSDK:random_fortune(data)
+  local EntityMod = require("entity.random_fortune_entity")
+  if data == nil then
+    if self._random_fortune == nil then
+      self._random_fortune = EntityMod.new(self, nil)
+    end
+    return self._random_fortune
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:random_fortune() instead.
 function Magic8BallSDK:RandomFortune(data)
   local EntityMod = require("entity.random_fortune_entity")
   return EntityMod.new(self, data)

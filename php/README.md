@@ -9,9 +9,10 @@ The PHP SDK for the Magic8Ball API — an entity-oriented client using PHP conve
 
 
 ## Install
-```bash
-composer require voxgig-sdk/magic8-ball
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/magic8-ball-sdk/releases](https://github.com/voxgig-sdk/magic8-ball-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,24 +26,25 @@ loading a specific record.
 <?php
 require_once 'magic8ball_sdk.php';
 
-$client = new Magic8BallSDK([
-    "apikey" => getenv("MAGIC8-BALL_APIKEY"),
-]);
+$client = new Magic8BallSDK();
 ```
 
 ### 3. Load a biased
 
 ```php
-[$result, $err] = $client->Biased()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->biased()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 ### 4. Create, update, and remove
 
 ```php
 // Create
-[$created, $_] = $client->Biased()->create(["name" => "Example"]);
+$created = $client->biased()->create(["name" => "Example"]);
 
 ```
 
@@ -54,28 +56,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -89,7 +94,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = Magic8BallSDK::test();
 
-[$result, $err] = $client->Magic8Ball()->load(["id" => "test01"]);
+$result = $client->biased()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -123,8 +128,7 @@ $client = new Magic8BallSDK([
 Create a `.env.local` file at the project root:
 
 ```
-MAGIC8-BALL_TEST_LIVE=TRUE
-MAGIC8-BALL_APIKEY=<your-key>
+MAGIC8_BALL_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -147,7 +151,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -196,8 +199,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -265,7 +272,7 @@ API path: ``
 
 ### Biased
 
-Create an instance: `const biased = client.Biased()`
+Create an instance: `const biased = client.biased`
 
 #### Operations
 
@@ -287,13 +294,13 @@ Create an instance: `const biased = client.Biased()`
 #### Example: Load
 
 ```ts
-const biased = await client.Biased().load({ id: 'biased_id' })
+const biased = await client.biased.load({ id: 'biased_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const biased = await client.Biased().create({
+const biased = await client.biased.create({
   locale: /* `$STRING` */,
   lucky: /* `$BOOLEAN` */,
   question: /* `$STRING` */,
@@ -305,7 +312,7 @@ const biased = await client.Biased().create({
 
 ### Category
 
-Create an instance: `const category = client.Category()`
+Create an instance: `const category = client.category`
 
 #### Operations
 
@@ -325,13 +332,13 @@ Create an instance: `const category = client.Category()`
 #### Example: List
 
 ```ts
-const categorys = await client.Category().list()
+const categorys = await client.category.list()
 ```
 
 
 ### CategoryFortune
 
-Create an instance: `const category_fortune = client.CategoryFortune()`
+Create an instance: `const category_fortune = client.category_fortune`
 
 #### Operations
 
@@ -350,13 +357,13 @@ Create an instance: `const category_fortune = client.CategoryFortune()`
 #### Example: Load
 
 ```ts
-const category_fortune = await client.CategoryFortune().load({ id: 'category_fortune_id' })
+const category_fortune = await client.category_fortune.load({ id: 'category_fortune_id' })
 ```
 
 
 ### RandomFortune
 
-Create an instance: `const random_fortune = client.RandomFortune()`
+Create an instance: `const random_fortune = client.random_fortune`
 
 
 ## Explanation
@@ -430,11 +437,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$biased = $client->biased();
+$biased->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $biased->dataGet() now returns the loaded biased data
+// $biased->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
