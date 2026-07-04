@@ -98,7 +98,7 @@ same parameters as `direct()`. Raises on error.
 ## BiasedEntity
 
 ```ruby
-biased = client.biased
+biased = client.Biased
 ```
 
 ### Fields
@@ -128,7 +128,7 @@ biased = client.biased
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.biased.create({
+result = client.Biased.create({
   "locale" => # `$STRING`,
   "lucky" => # `$BOOLEAN`,
   "question" => # `$STRING`,
@@ -142,7 +142,7 @@ result = client.biased.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.biased.load({ "id" => "biased_id" })
+result = client.Biased.load({ "id" => "biased_id" })
 ```
 
 ### Common Methods
@@ -178,7 +178,7 @@ Return the entity name.
 ## CategoryEntity
 
 ```ruby
-category = client.category
+category = client.Category
 ```
 
 ### Fields
@@ -197,7 +197,7 @@ category = client.category
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.category.list(nil)
+results = client.Category.list(nil)
 ```
 
 ### Common Methods
@@ -233,7 +233,7 @@ Return the entity name.
 ## CategoryFortuneEntity
 
 ```ruby
-category_fortune = client.category_fortune
+category_fortune = client.CategoryFortune
 ```
 
 ### Fields
@@ -259,7 +259,7 @@ category_fortune = client.category_fortune
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.category_fortune.load({ "id" => "category_fortune_id" })
+result = client.CategoryFortune.load({ "id" => "category_fortune_id" })
 ```
 
 ### Common Methods
@@ -295,7 +295,7 @@ Return the entity name.
 ## RandomFortuneEntity
 
 ```ruby
-random_fortune = client.random_fortune
+random_fortune = client.RandomFortune
 ```
 
 ### Common Methods

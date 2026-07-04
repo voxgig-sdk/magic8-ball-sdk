@@ -95,7 +95,7 @@ same parameters as `direct()`.
 ## BiasedEntity
 
 ```lua
-local biased = client:biased(nil)
+local biased = client:Biased(nil)
 ```
 
 ### Fields
@@ -125,7 +125,7 @@ local biased = client:biased(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:biased():create({
+local result, err = client:Biased():create({
   locale = --[[ `$STRING` ]],
   lucky = --[[ `$BOOLEAN` ]],
   question = --[[ `$STRING` ]],
@@ -139,7 +139,7 @@ local result, err = client:biased():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:biased():load({ id = "biased_id" })
+local result, err = client:Biased():load({ id = "biased_id" })
 ```
 
 ### Common Methods
@@ -175,7 +175,7 @@ Return the entity name.
 ## CategoryEntity
 
 ```lua
-local category = client:category(nil)
+local category = client:Category(nil)
 ```
 
 ### Fields
@@ -194,7 +194,7 @@ local category = client:category(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:category():list()
+local results, err = client:Category():list()
 ```
 
 ### Common Methods
@@ -230,7 +230,7 @@ Return the entity name.
 ## CategoryFortuneEntity
 
 ```lua
-local category_fortune = client:category_fortune(nil)
+local category_fortune = client:CategoryFortune(nil)
 ```
 
 ### Fields
@@ -256,7 +256,7 @@ local category_fortune = client:category_fortune(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:category_fortune():load({ id = "category_fortune_id" })
+local result, err = client:CategoryFortune():load({ id = "category_fortune_id" })
 ```
 
 ### Common Methods
@@ -292,7 +292,7 @@ Return the entity name.
 ## RandomFortuneEntity
 
 ```lua
-local random_fortune = client:random_fortune(nil)
+local random_fortune = client:RandomFortune(nil)
 ```
 
 ### Common Methods

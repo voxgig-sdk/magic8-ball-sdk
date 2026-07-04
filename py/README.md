@@ -33,10 +33,12 @@ client = Magic8BallSDK()
 
 ### 3. Load a biased
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.biased.load({"id": "example_id"})
-    print(result)
+    biased = client.Biased().load({"id": "example_id"})
+    print(biased)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -44,8 +46,8 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.biased.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Biased().create({"name": "Example"})
 
 ```
 
@@ -92,8 +94,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = Magic8BallSDK.test()
 
-result = client.biased.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+biased = client.Biased().load({"id": "test01"})
+# biased contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -267,7 +270,7 @@ API path: ``
 
 ### Biased
 
-Create an instance: `const biased = client.biased`
+Create an instance: `biased = client.Biased()`
 
 #### Operations
 
@@ -288,26 +291,26 @@ Create an instance: `const biased = client.biased`
 
 #### Example: Load
 
-```ts
-const biased = await client.biased.load({ id: 'biased_id' })
+```python
+biased = client.Biased().load({"id": "biased_id"})
 ```
 
 #### Example: Create
 
-```ts
-const biased = await client.biased.create({
-  locale: /* `$STRING` */,
-  lucky: /* `$BOOLEAN` */,
-  question: /* `$STRING` */,
-  reading: /* `$STRING` */,
-  sentiment: /* `$OBJECT` */,
+```python
+biased = client.Biased().create({
+    "locale": ...,  # `$STRING`
+    "lucky": ...,  # `$BOOLEAN`
+    "question": ...,  # `$STRING`
+    "reading": ...,  # `$STRING`
+    "sentiment": ...,  # `$OBJECT`
 })
 ```
 
 
 ### Category
 
-Create an instance: `const category = client.category`
+Create an instance: `category = client.Category()`
 
 #### Operations
 
@@ -326,14 +329,14 @@ Create an instance: `const category = client.category`
 
 #### Example: List
 
-```ts
-const categorys = await client.category.list()
+```python
+categorys = client.Category().list({})
 ```
 
 
 ### CategoryFortune
 
-Create an instance: `const category_fortune = client.category_fortune`
+Create an instance: `category_fortune = client.CategoryFortune()`
 
 #### Operations
 
@@ -351,14 +354,14 @@ Create an instance: `const category_fortune = client.category_fortune`
 
 #### Example: Load
 
-```ts
-const category_fortune = await client.category_fortune.load({ id: 'category_fortune_id' })
+```python
+category_fortune = client.CategoryFortune().load({"id": "category_fortune_id"})
 ```
 
 
 ### RandomFortune
 
-Create an instance: `const random_fortune = client.random_fortune`
+Create an instance: `random_fortune = client.RandomFortune()`
 
 
 ## Explanation
@@ -431,7 +434,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-biased = client.biased
+biased = client.Biased()
 biased.load({"id": "example_id"})
 
 # biased.data_get() now returns the loaded biased data

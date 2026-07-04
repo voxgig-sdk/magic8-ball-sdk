@@ -220,73 +220,33 @@ class Magic8BallSDK:
         }
 
 
-    @property
-    def biased(self):
-        """Idiomatic facade: client.biased.list() / client.biased.load({"id": ...})."""
-        from entity.biased_entity import BiasedEntity
-        cached = getattr(self, "_biased", None)
-        if cached is None:
-            cached = BiasedEntity(self, None)
-            self._biased = cached
-        return cached
-
-    def Biased(self, data=None):
-        # Deprecated: use client.biased instead.
+    def Biased(self, data=None) -> "BiasedEntity":
+        """Entity factory: client.Biased().list({}) / client.Biased().load({"id": ...})."""
         from entity.biased_entity import BiasedEntity
         return BiasedEntity(self, data)
 
 
-    @property
-    def category(self):
-        """Idiomatic facade: client.category.list() / client.category.load({"id": ...})."""
-        from entity.category_entity import CategoryEntity
-        cached = getattr(self, "_category", None)
-        if cached is None:
-            cached = CategoryEntity(self, None)
-            self._category = cached
-        return cached
-
-    def Category(self, data=None):
-        # Deprecated: use client.category instead.
+    def Category(self, data=None) -> "CategoryEntity":
+        """Entity factory: client.Category().list({}) / client.Category().load({"id": ...})."""
         from entity.category_entity import CategoryEntity
         return CategoryEntity(self, data)
 
 
-    @property
-    def category_fortune(self):
-        """Idiomatic facade: client.category_fortune.list() / client.category_fortune.load({"id": ...})."""
-        from entity.category_fortune_entity import CategoryFortuneEntity
-        cached = getattr(self, "_category_fortune", None)
-        if cached is None:
-            cached = CategoryFortuneEntity(self, None)
-            self._category_fortune = cached
-        return cached
-
-    def CategoryFortune(self, data=None):
-        # Deprecated: use client.category_fortune instead.
+    def CategoryFortune(self, data=None) -> "CategoryFortuneEntity":
+        """Entity factory: client.CategoryFortune().list({}) / client.CategoryFortune().load({"id": ...})."""
         from entity.category_fortune_entity import CategoryFortuneEntity
         return CategoryFortuneEntity(self, data)
 
 
-    @property
-    def random_fortune(self):
-        """Idiomatic facade: client.random_fortune.list() / client.random_fortune.load({"id": ...})."""
-        from entity.random_fortune_entity import RandomFortuneEntity
-        cached = getattr(self, "_random_fortune", None)
-        if cached is None:
-            cached = RandomFortuneEntity(self, None)
-            self._random_fortune = cached
-        return cached
-
-    def RandomFortune(self, data=None):
-        # Deprecated: use client.random_fortune instead.
+    def RandomFortune(self, data=None) -> "RandomFortuneEntity":
+        """Entity factory: client.RandomFortune().list({}) / client.RandomFortune().load({"id": ...})."""
         from entity.random_fortune_entity import RandomFortuneEntity
         return RandomFortuneEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "Magic8BallSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -306,3 +266,12 @@ class Magic8BallSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.biased_entity import BiasedEntity
+    from entity.category_entity import CategoryEntity
+    from entity.category_fortune_entity import CategoryFortuneEntity
+    from entity.random_fortune_entity import RandomFortuneEntity

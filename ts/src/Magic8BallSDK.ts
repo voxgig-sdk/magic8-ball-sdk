@@ -207,56 +207,28 @@ class Magic8BallSDK {
 
 
 
-  _biased?: BiasedEntity
-
-  // Idiomatic facade: `client.biased.list()` / `client.biased.load({ id })`.
-  get biased(): BiasedEntity {
-    return (this._biased ??= new BiasedEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.biased` instead. */
+  // Entity access: `client.Biased().list()` / `client.Biased().load({ id })`.
   Biased(data?: any) {
     const self = this
     return new BiasedEntity(self,data)
   }
 
 
-  _category?: CategoryEntity
-
-  // Idiomatic facade: `client.category.list()` / `client.category.load({ id })`.
-  get category(): CategoryEntity {
-    return (this._category ??= new CategoryEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.category` instead. */
+  // Entity access: `client.Category().list()` / `client.Category().load({ id })`.
   Category(data?: any) {
     const self = this
     return new CategoryEntity(self,data)
   }
 
 
-  _category_fortune?: CategoryFortuneEntity
-
-  // Idiomatic facade: `client.category_fortune.list()` / `client.category_fortune.load({ id })`.
-  get category_fortune(): CategoryFortuneEntity {
-    return (this._category_fortune ??= new CategoryFortuneEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.category_fortune` instead. */
+  // Entity access: `client.CategoryFortune().list()` / `client.CategoryFortune().load({ id })`.
   CategoryFortune(data?: any) {
     const self = this
     return new CategoryFortuneEntity(self,data)
   }
 
 
-  _random_fortune?: RandomFortuneEntity
-
-  // Idiomatic facade: `client.random_fortune.list()` / `client.random_fortune.load({ id })`.
-  get random_fortune(): RandomFortuneEntity {
-    return (this._random_fortune ??= new RandomFortuneEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.random_fortune` instead. */
+  // Entity access: `client.RandomFortune().list()` / `client.RandomFortune().load({ id })`.
   RandomFortune(data?: any) {
     const self = this
     return new RandomFortuneEntity(self,data)

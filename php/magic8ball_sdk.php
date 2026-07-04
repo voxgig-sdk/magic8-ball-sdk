@@ -233,10 +233,10 @@ class Magic8BallSDK
 
     private $_biased = null;
 
-    // Idiomatic facade: $client->biased()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Biased() (PHP method
-    // names are case-insensitive).
-    public function biased($data = null)
+    // Canonical facade: $client->Biased()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->biased()
+    // resolves here too.
+    public function Biased($data = null)
     {
         require_once __DIR__ . '/entity/biased_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class Magic8BallSDK
 
     private $_category = null;
 
-    // Idiomatic facade: $client->category()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Category() (PHP method
-    // names are case-insensitive).
-    public function category($data = null)
+    // Canonical facade: $client->Category()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->category()
+    // resolves here too.
+    public function Category($data = null)
     {
         require_once __DIR__ . '/entity/category_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class Magic8BallSDK
 
     private $_category_fortune = null;
 
-    // Idiomatic facade: $client->category_fortune()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias CategoryFortune() (PHP method
-    // names are case-insensitive).
-    public function category_fortune($data = null)
+    // Canonical facade: $client->CategoryFortune()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->category_fortune()
+    // resolves here too.
+    public function CategoryFortune($data = null)
     {
         require_once __DIR__ . '/entity/category_fortune_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class Magic8BallSDK
 
     private $_random_fortune = null;
 
-    // Idiomatic facade: $client->random_fortune()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias RandomFortune() (PHP method
-    // names are case-insensitive).
-    public function random_fortune($data = null)
+    // Canonical facade: $client->RandomFortune()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->random_fortune()
+    // resolves here too.
+    public function RandomFortune($data = null)
     {
         require_once __DIR__ . '/entity/random_fortune_entity.php';
         if ($data === null) {

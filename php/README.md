@@ -33,9 +33,10 @@ $client = new Magic8BallSDK();
 
 ```php
 try {
-    $result = $client->biased()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Biased record (throws on error).
+    $biased = $client->Biased()->load(["id" => "example_id"]);
+    print_r($biased);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -43,8 +44,8 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->biased()->create(["name" => "Example"]);
+// create() returns the bare created Biased record.
+$created = $client->Biased()->create(["name" => "Example"]);
 
 ```
 
@@ -89,13 +90,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = Magic8BallSDK::test();
+$client = Magic8BallSDK::test([
+    "entity" => ["biased" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->biased()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$biased = $client->Biased()->load(["id" => "test01"]);
+print_r($biased);
 ```
 
 ### Use a custom fetch function
@@ -272,7 +277,7 @@ API path: ``
 
 ### Biased
 
-Create an instance: `const biased = client.biased`
+Create an instance: `$biased = $client->Biased();`
 
 #### Operations
 
@@ -293,26 +298,27 @@ Create an instance: `const biased = client.biased`
 
 #### Example: Load
 
-```ts
-const biased = await client.biased.load({ id: 'biased_id' })
+```php
+// load() returns the bare Biased record (throws on error).
+$biased = $client->Biased()->load(["id" => "biased_id"]);
 ```
 
 #### Example: Create
 
-```ts
-const biased = await client.biased.create({
-  locale: /* `$STRING` */,
-  lucky: /* `$BOOLEAN` */,
-  question: /* `$STRING` */,
-  reading: /* `$STRING` */,
-  sentiment: /* `$OBJECT` */,
-})
+```php
+$biased = $client->Biased()->create([
+    "locale" => null, // `$STRING`
+    "lucky" => null, // `$BOOLEAN`
+    "question" => null, // `$STRING`
+    "reading" => null, // `$STRING`
+    "sentiment" => null, // `$OBJECT`
+]);
 ```
 
 
 ### Category
 
-Create an instance: `const category = client.category`
+Create an instance: `$category = $client->Category();`
 
 #### Operations
 
@@ -331,14 +337,15 @@ Create an instance: `const category = client.category`
 
 #### Example: List
 
-```ts
-const categorys = await client.category.list()
+```php
+// list() returns an array of Category records (throws on error).
+$categorys = $client->Category()->list();
 ```
 
 
 ### CategoryFortune
 
-Create an instance: `const category_fortune = client.category_fortune`
+Create an instance: `$category_fortune = $client->CategoryFortune();`
 
 #### Operations
 
@@ -356,14 +363,15 @@ Create an instance: `const category_fortune = client.category_fortune`
 
 #### Example: Load
 
-```ts
-const category_fortune = await client.category_fortune.load({ id: 'category_fortune_id' })
+```php
+// load() returns the bare CategoryFortune record (throws on error).
+$category_fortune = $client->CategoryFortune()->load(["id" => "category_fortune_id"]);
 ```
 
 
 ### RandomFortune
 
-Create an instance: `const random_fortune = client.random_fortune`
+Create an instance: `$random_fortune = $client->RandomFortune();`
 
 
 ## Explanation
@@ -437,7 +445,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$biased = $client->biased();
+$biased = $client->Biased();
 $biased->load(["id" => "example_id"]);
 
 // $biased->dataGet() now returns the loaded biased data

@@ -32,8 +32,9 @@ client = Magic8BallSDK.new
 
 ```ruby
 begin
-  result = client.biased.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Biased record (raises on error).
+  biased = client.Biased.load({ "id" => "example_id" })
+  puts biased
 rescue => err
   warn "load failed: #{err}"
 end
@@ -42,8 +43,8 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# Create
-created = client.biased.create({ "name" => "Example" })
+# create returns the bare created Biased record.
+created = client.Biased.create({ "name" => "Example" })
 
 ```
 
@@ -88,13 +89,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = Magic8BallSDK.test
+client = Magic8BallSDK.test({
+  "entity" => { "biased" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.biased.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+biased = client.Biased.load({ "id" => "test01" })
+puts biased
 ```
 
 ### Use a custom fetch function
@@ -267,7 +272,7 @@ API path: ``
 
 ### Biased
 
-Create an instance: `const biased = client.biased`
+Create an instance: `biased = client.Biased`
 
 #### Operations
 
@@ -288,26 +293,27 @@ Create an instance: `const biased = client.biased`
 
 #### Example: Load
 
-```ts
-const biased = await client.biased.load({ id: 'biased_id' })
+```ruby
+# load returns the bare Biased record (raises on error).
+biased = client.Biased.load({ "id" => "biased_id" })
 ```
 
 #### Example: Create
 
-```ts
-const biased = await client.biased.create({
-  locale: /* `$STRING` */,
-  lucky: /* `$BOOLEAN` */,
-  question: /* `$STRING` */,
-  reading: /* `$STRING` */,
-  sentiment: /* `$OBJECT` */,
+```ruby
+biased = client.Biased.create({
+  "locale" => nil, # `$STRING`
+  "lucky" => nil, # `$BOOLEAN`
+  "question" => nil, # `$STRING`
+  "reading" => nil, # `$STRING`
+  "sentiment" => nil, # `$OBJECT`
 })
 ```
 
 
 ### Category
 
-Create an instance: `const category = client.category`
+Create an instance: `category = client.Category`
 
 #### Operations
 
@@ -326,14 +332,15 @@ Create an instance: `const category = client.category`
 
 #### Example: List
 
-```ts
-const categorys = await client.category.list()
+```ruby
+# list returns an Array of Category records (raises on error).
+categorys = client.Category.list
 ```
 
 
 ### CategoryFortune
 
-Create an instance: `const category_fortune = client.category_fortune`
+Create an instance: `category_fortune = client.CategoryFortune`
 
 #### Operations
 
@@ -351,14 +358,15 @@ Create an instance: `const category_fortune = client.category_fortune`
 
 #### Example: Load
 
-```ts
-const category_fortune = await client.category_fortune.load({ id: 'category_fortune_id' })
+```ruby
+# load returns the bare CategoryFortune record (raises on error).
+category_fortune = client.CategoryFortune.load({ "id" => "category_fortune_id" })
 ```
 
 
 ### RandomFortune
 
-Create an instance: `const random_fortune = client.random_fortune`
+Create an instance: `random_fortune = client.RandomFortune`
 
 
 ## Explanation
@@ -432,7 +440,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-biased = client.biased
+biased = client.Biased
 biased.load({ "id" => "example_id" })
 
 # biased.data_get now returns the loaded biased data

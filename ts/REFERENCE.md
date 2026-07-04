@@ -145,7 +145,7 @@ Alias for `Magic8BallSDK.test()`.
 ## BiasedEntity
 
 ```ts
-const biased = client.biased
+const biased = client.Biased()
 ```
 
 ### Fields
@@ -175,7 +175,7 @@ const biased = client.biased
 Create a new entity with the given data.
 
 ```ts
-const result = await client.biased.create({
+const result = await client.Biased().create({
   locale: /* `$STRING` */,
   lucky: /* `$BOOLEAN` */,
   question: /* `$STRING` */,
@@ -189,7 +189,7 @@ const result = await client.biased.create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.biased.load({ id: 'biased_id' })
+const result = await client.Biased().load({ id: 'biased_id' })
 ```
 
 ### Common Methods
@@ -223,7 +223,7 @@ Return a copy of the entity options.
 ## CategoryEntity
 
 ```ts
-const category = client.category
+const category = client.Category()
 ```
 
 ### Fields
@@ -242,7 +242,7 @@ const category = client.category
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.category.list()
+const results = await client.Category().list()
 ```
 
 ### Common Methods
@@ -276,7 +276,7 @@ Return a copy of the entity options.
 ## CategoryFortuneEntity
 
 ```ts
-const category_fortune = client.category_fortune
+const category_fortune = client.CategoryFortune()
 ```
 
 ### Fields
@@ -302,7 +302,7 @@ const category_fortune = client.category_fortune
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.category_fortune.load({ id: 'category_fortune_id' })
+const result = await client.CategoryFortune().load({ id: 'category_fortune_id' })
 ```
 
 ### Common Methods
@@ -336,7 +336,7 @@ Return a copy of the entity options.
 ## RandomFortuneEntity
 
 ```ts
-const random_fortune = client.random_fortune
+const random_fortune = client.RandomFortune()
 ```
 
 ### Common Methods

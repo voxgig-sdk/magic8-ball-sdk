@@ -34,16 +34,17 @@ local client = sdk.new()
 ### 3. Load a biased
 
 ```lua
-local result, err = client:biased():load({ id = "example_id" })
+local biased, err = client:Biased():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(biased)
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:biased():create({ name = "Example" })
+local created, err = client:Biased():create({ name = "Example" })
+if err then error(err) end
 
 ```
 
@@ -90,8 +91,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:biased():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Biased():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -194,17 +195,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local biased, err = client:Biased():load({ id = "example_id" })
+    if err then error(err) end
+    -- biased is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -263,7 +269,7 @@ API path: ``
 
 ### Biased
 
-Create an instance: `const biased = client.biased`
+Create an instance: `local biased = client:Biased(nil)`
 
 #### Operations
 
@@ -284,26 +290,26 @@ Create an instance: `const biased = client.biased`
 
 #### Example: Load
 
-```ts
-const biased = await client.biased.load({ id: 'biased_id' })
+```lua
+local biased, err = client:Biased():load({ id = "biased_id" })
 ```
 
 #### Example: Create
 
-```ts
-const biased = await client.biased.create({
-  locale: /* `$STRING` */,
-  lucky: /* `$BOOLEAN` */,
-  question: /* `$STRING` */,
-  reading: /* `$STRING` */,
-  sentiment: /* `$OBJECT` */,
+```lua
+local biased, err = client:Biased():create({
+  locale = nil, -- `$STRING`
+  lucky = nil, -- `$BOOLEAN`
+  question = nil, -- `$STRING`
+  reading = nil, -- `$STRING`
+  sentiment = nil, -- `$OBJECT`
 })
 ```
 
 
 ### Category
 
-Create an instance: `const category = client.category`
+Create an instance: `local category = client:Category(nil)`
 
 #### Operations
 
@@ -322,14 +328,14 @@ Create an instance: `const category = client.category`
 
 #### Example: List
 
-```ts
-const categorys = await client.category.list()
+```lua
+local categorys, err = client:Category():list()
 ```
 
 
 ### CategoryFortune
 
-Create an instance: `const category_fortune = client.category_fortune`
+Create an instance: `local category_fortune = client:CategoryFortune(nil)`
 
 #### Operations
 
@@ -347,14 +353,14 @@ Create an instance: `const category_fortune = client.category_fortune`
 
 #### Example: Load
 
-```ts
-const category_fortune = await client.category_fortune.load({ id: 'category_fortune_id' })
+```lua
+local category_fortune, err = client:CategoryFortune():load({ id = "category_fortune_id" })
 ```
 
 
 ### RandomFortune
 
-Create an instance: `const random_fortune = client.random_fortune`
+Create an instance: `local random_fortune = client:RandomFortune(nil)`
 
 
 ## Explanation
@@ -428,7 +434,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local biased = client:biased()
+local biased = client:Biased()
 biased:load({ id = "example_id" })
 
 -- biased:data_get() now returns the loaded biased data

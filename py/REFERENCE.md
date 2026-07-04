@@ -92,7 +92,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## BiasedEntity
 
 ```python
-biased = client.biased
+biased = client.Biased()
 ```
 
 ### Fields
@@ -122,12 +122,12 @@ biased = client.biased
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.biased.create({
-    "locale": # `$STRING`,
-    "lucky": # `$BOOLEAN`,
-    "question": # `$STRING`,
-    "reading": # `$STRING`,
-    "sentiment": # `$OBJECT`,
+result = client.Biased().create({
+    "locale": ...,  # `$STRING`
+    "lucky": ...,  # `$BOOLEAN`
+    "question": ...,  # `$STRING`
+    "reading": ...,  # `$STRING`
+    "sentiment": ...,  # `$OBJECT`
 })
 ```
 
@@ -136,7 +136,7 @@ result = client.biased.create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.biased.load({"id": "biased_id"})
+result = client.Biased().load({"id": "biased_id"})
 ```
 
 ### Common Methods
@@ -171,7 +171,7 @@ Return the entity name.
 ## CategoryEntity
 
 ```python
-category = client.category
+category = client.Category()
 ```
 
 ### Fields
@@ -190,7 +190,9 @@ category = client.category
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.category.list({})
+results = client.Category().list({})
+for category in results:
+    print(category)
 ```
 
 ### Common Methods
@@ -225,7 +227,7 @@ Return the entity name.
 ## CategoryFortuneEntity
 
 ```python
-category_fortune = client.category_fortune
+category_fortune = client.CategoryFortune()
 ```
 
 ### Fields
@@ -251,7 +253,7 @@ category_fortune = client.category_fortune
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.category_fortune.load({"id": "category_fortune_id"})
+result = client.CategoryFortune().load({"id": "category_fortune_id"})
 ```
 
 ### Common Methods
@@ -286,7 +288,7 @@ Return the entity name.
 ## RandomFortuneEntity
 
 ```python
-random_fortune = client.random_fortune
+random_fortune = client.RandomFortune()
 ```
 
 ### Common Methods

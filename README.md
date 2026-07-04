@@ -26,9 +26,9 @@ import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball'
 
 const client = new Magic8BallSDK()
 
-// Load biased data
-const biased = await client.biased.load({})
-console.log(biased.data)
+// Load biased data (returns a Biased)
+const biased = await client.Biased().load()
+console.log(biased)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -87,8 +87,8 @@ from magic8ball_sdk import Magic8BallSDK
 client = Magic8BallSDK()
 
 
-# Load a specific biased
-biased = client.biased.load({"id": "example_id"})
+# Load a specific biased (returns the record, raises on error)
+biased = client.Biased().load({"id": "example_id"})
 print(biased)
 ```
 
@@ -101,8 +101,8 @@ require_once 'magic8ball_sdk.php';
 $client = new Magic8BallSDK();
 
 
-// Load a specific biased
-$biased = $client->biased()->load(["id" => "example_id"]);
+// Load a specific biased (returns the bare record; throws on error)
+$biased = $client->Biased()->load(["id" => "example_id"]);
 print_r($biased);
 ```
 
@@ -126,8 +126,8 @@ require_relative "Magic8Ball_sdk"
 client = Magic8BallSDK.new
 
 
-# Load a specific biased
-biased = client.biased.load({ "id" => "example_id" })
+# Load a specific biased (returns the bare record; raises on error)
+biased = client.Biased.load({ "id" => "example_id" })
 puts biased
 ```
 
@@ -140,7 +140,7 @@ local client = sdk.new()
 
 
 -- Load a specific biased
-local biased, err = client:biased():load({ id = "example_id" })
+local biased, err = client:Biased():load({ id = "example_id" })
 print(biased)
 ```
 
@@ -153,22 +153,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = Magic8BallSDK.test()
-const result = await client.biased.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const biased = await client.Biased().load({ id: 'test01' })
+// biased is a bare Biased populated with mock data
+console.log(biased)
 ```
 
 ### Python
 
 ```python
 client = Magic8BallSDK.test()
-result = client.biased.load({"id": "test01"})
+biased = client.Biased().load({"id": "test01"})
+print(biased)
 ```
 
 ### PHP
 
 ```php
-$client = Magic8BallSDK::test();
-$result = $client->biased()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = Magic8BallSDK::test([
+    "entity" => ["biased" => ["test01" => ["id" => "test01"]]],
+]);
+$biased = $client->Biased()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -183,15 +188,18 @@ result, err := client.Biased(nil).Load(
 ### Ruby
 
 ```ruby
-client = Magic8BallSDK.test
-result = client.biased.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = Magic8BallSDK.test({
+  "entity" => { "biased" => { "test01" => { "id" => "test01" } } },
+})
+biased = client.Biased.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:biased():load({ id = "test01" })
+local result, err = client:Biased():load({ id = "test01" })
 ```
 
 ## How it works
@@ -239,6 +247,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

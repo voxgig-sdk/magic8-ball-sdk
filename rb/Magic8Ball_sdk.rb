@@ -208,52 +208,28 @@ class Magic8BallSDK
   end
 
 
-  # Idiomatic facade: client.biased.list / client.biased.load({ "id" => ... })
-  def biased
-    require_relative 'entity/biased_entity'
-    @biased ||= BiasedEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.biased instead.
+  # Canonical facade: client.Biased.list / client.Biased.load({ "id" => ... })
   def Biased(data = nil)
     require_relative 'entity/biased_entity'
     BiasedEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.category.list / client.category.load({ "id" => ... })
-  def category
-    require_relative 'entity/category_entity'
-    @category ||= CategoryEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.category instead.
+  # Canonical facade: client.Category.list / client.Category.load({ "id" => ... })
   def Category(data = nil)
     require_relative 'entity/category_entity'
     CategoryEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.category_fortune.list / client.category_fortune.load({ "id" => ... })
-  def category_fortune
-    require_relative 'entity/category_fortune_entity'
-    @category_fortune ||= CategoryFortuneEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.category_fortune instead.
+  # Canonical facade: client.CategoryFortune.list / client.CategoryFortune.load({ "id" => ... })
   def CategoryFortune(data = nil)
     require_relative 'entity/category_fortune_entity'
     CategoryFortuneEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.random_fortune.list / client.random_fortune.load({ "id" => ... })
-  def random_fortune
-    require_relative 'entity/random_fortune_entity'
-    @random_fortune ||= RandomFortuneEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.random_fortune instead.
+  # Canonical facade: client.RandomFortune.list / client.RandomFortune.load({ "id" => ... })
   def RandomFortune(data = nil)
     require_relative 'entity/random_fortune_entity'
     RandomFortuneEntity.new(self, data)

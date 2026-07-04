@@ -4,15 +4,19 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Biased:
+class Biased(TypedDict):
     locale: str
     lucky: bool
     question: str
@@ -20,53 +24,45 @@ class Biased:
     sentiment: dict
 
 
-@dataclass
-class BiasedLoadMatch:
-    locale: Optional[str] = None
-    lucky: Optional[bool] = None
-    question: Optional[str] = None
-    reading: Optional[str] = None
-    sentiment: Optional[dict] = None
+class BiasedLoadMatch(TypedDict, total=False):
+    locale: str
+    lucky: bool
+    question: str
+    reading: str
+    sentiment: dict
 
 
-@dataclass
-class BiasedCreateData:
-    locale: Optional[str] = None
-    lucky: Optional[bool] = None
-    question: Optional[str] = None
-    reading: Optional[str] = None
-    sentiment: Optional[dict] = None
+class BiasedCreateData(TypedDict, total=False):
+    locale: str
+    lucky: bool
+    question: str
+    reading: str
+    sentiment: dict
 
 
-@dataclass
-class Category:
+class Category(TypedDict):
     locale: str
     negative: list
     neutral: list
     positive: list
 
 
-@dataclass
-class CategoryListMatch:
-    locale: Optional[str] = None
-    negative: Optional[list] = None
-    neutral: Optional[list] = None
-    positive: Optional[list] = None
+class CategoryListMatch(TypedDict, total=False):
+    locale: str
+    negative: list
+    neutral: list
+    positive: list
 
 
-@dataclass
-class CategoryFortune:
+class CategoryFortune(TypedDict):
     category: str
     locale: str
     reading: str
 
 
-@dataclass
-class CategoryFortuneLoadMatch:
+class CategoryFortuneLoadMatch(TypedDict):
     category: str
 
 
-@dataclass
-class RandomFortune:
+class RandomFortune(TypedDict):
     pass
-
