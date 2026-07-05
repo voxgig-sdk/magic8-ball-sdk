@@ -33,7 +33,7 @@ Biased = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Biased#load (any subset of Biased fields).
+# Request payload for Biased#load.
 #
 # @!attribute [rw] locale
 #   @return [String, nil]
@@ -58,22 +58,22 @@ BiasedLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Biased#create (any subset of Biased fields).
+# Request payload for Biased#create.
 #
 # @!attribute [rw] locale
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] lucky
-#   @return [Boolean, nil]
+#   @return [Boolean]
 #
 # @!attribute [rw] question
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] reading
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] sentiment
-#   @return [Hash, nil]
+#   @return [Hash]
 BiasedCreateData = Struct.new(
   :locale,
   :lucky,
@@ -104,7 +104,7 @@ Category = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Category#list (any subset of Category fields).
+# Request payload for Category#list.
 #
 # @!attribute [rw] locale
 #   @return [String, nil]

@@ -4,6 +4,8 @@
 
 The Lua SDK for the Magic8Ball API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Biased()` — each with the same small set of operations (`list`, `load`, `create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -34,7 +36,7 @@ local client = sdk.new()
 ### 3. Load a biased
 
 ```lua
-local biased, err = client:Biased():load({ id = "example_id" })
+local biased, err = client:Biased():load()
 if err then error(err) end
 print(biased)
 ```
@@ -43,9 +45,31 @@ print(biased)
 
 ```lua
 -- Create
-local created, err = client:Biased():create({ name = "Example" })
+local created, err = client:Biased():create({ locale = "example", lucky = true, question = "example", reading = "example", sentiment = {} })
 if err then error(err) end
 
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local biased, err = client:Biased():load()
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -91,8 +115,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Biased():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:Biased():load()
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -184,8 +208,6 @@ All entities share the same interface.
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
 | `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
 | `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -200,12 +222,12 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `load` / `create` | the entity record (a `table`) |
 | `list` | an array (`table`) of entity records |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local biased, err = client:Biased():load({ id = "example_id" })
+    local biased, err = client:Biased():load()
     if err then error(err) end
     -- biased is the loaded record
 
@@ -282,27 +304,27 @@ Create an instance: `local biased = client:Biased(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `locale` | ``$STRING`` |  |
-| `lucky` | ``$BOOLEAN`` |  |
-| `question` | ``$STRING`` |  |
-| `reading` | ``$STRING`` |  |
-| `sentiment` | ``$OBJECT`` |  |
+| `locale` | `string` |  |
+| `lucky` | `boolean` |  |
+| `question` | `string` |  |
+| `reading` | `string` |  |
+| `sentiment` | `table` |  |
 
 #### Example: Load
 
 ```lua
-local biased, err = client:Biased():load({ id = "biased_id" })
+local biased, err = client:Biased():load()
 ```
 
 #### Example: Create
 
 ```lua
 local biased, err = client:Biased():create({
-  locale = nil, -- `$STRING`
-  lucky = nil, -- `$BOOLEAN`
-  question = nil, -- `$STRING`
-  reading = nil, -- `$STRING`
-  sentiment = nil, -- `$OBJECT`
+  locale = nil, -- string
+  lucky = nil, -- boolean
+  question = nil, -- string
+  reading = nil, -- string
+  sentiment = nil, -- table
 })
 ```
 
@@ -321,10 +343,10 @@ Create an instance: `local category = client:Category(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `locale` | ``$STRING`` |  |
-| `negative` | ``$ARRAY`` |  |
-| `neutral` | ``$ARRAY`` |  |
-| `positive` | ``$ARRAY`` |  |
+| `locale` | `string` |  |
+| `negative` | `table` |  |
+| `neutral` | `table` |  |
+| `positive` | `table` |  |
 
 #### Example: List
 
@@ -347,14 +369,14 @@ Create an instance: `local category_fortune = client:CategoryFortune(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | ``$STRING`` |  |
-| `locale` | ``$STRING`` |  |
-| `reading` | ``$STRING`` |  |
+| `category` | `string` |  |
+| `locale` | `string` |  |
+| `reading` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local category_fortune, err = client:CategoryFortune():load({ id = "category_fortune_id" })
+local category_fortune, err = client:CategoryFortune():load()
 ```
 
 
@@ -363,12 +385,16 @@ local category_fortune, err = client:CategoryFortune():load({ id = "category_for
 Create an instance: `local random_fortune = client:RandomFortune(nil)`
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -385,8 +411,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -435,9 +462,9 @@ stores the returned data and match criteria internally.
 
 ```lua
 local biased = client:Biased()
-biased:load({ id = "example_id" })
+biased:load()
 
--- biased:data_get() now returns the loaded biased data
+-- biased:data_get() now returns the biased data from the last load
 -- biased:match_get() returns the last match criteria
 ```
 

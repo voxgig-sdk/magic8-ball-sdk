@@ -221,25 +221,25 @@ class Magic8BallSDK:
 
 
     def Biased(self, data=None) -> "BiasedEntity":
-        """Entity factory: client.Biased().list({}) / client.Biased().load({"id": ...})."""
+        """Entity factory: client.Biased().list() / client.Biased().load({"id": ...})."""
         from entity.biased_entity import BiasedEntity
         return BiasedEntity(self, data)
 
 
     def Category(self, data=None) -> "CategoryEntity":
-        """Entity factory: client.Category().list({}) / client.Category().load({"id": ...})."""
+        """Entity factory: client.Category().list() / client.Category().load({"id": ...})."""
         from entity.category_entity import CategoryEntity
         return CategoryEntity(self, data)
 
 
     def CategoryFortune(self, data=None) -> "CategoryFortuneEntity":
-        """Entity factory: client.CategoryFortune().list({}) / client.CategoryFortune().load({"id": ...})."""
+        """Entity factory: client.CategoryFortune().list() / client.CategoryFortune().load({"id": ...})."""
         from entity.category_fortune_entity import CategoryFortuneEntity
         return CategoryFortuneEntity(self, data)
 
 
     def RandomFortune(self, data=None) -> "RandomFortuneEntity":
-        """Entity factory: client.RandomFortune().list({}) / client.RandomFortune().load({"id": ...})."""
+        """Entity factory: client.RandomFortune().list() / client.RandomFortune().load({"id": ...})."""
         from entity.random_fortune_entity import RandomFortuneEntity
         return RandomFortuneEntity(self, data)
 

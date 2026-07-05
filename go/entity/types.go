@@ -17,8 +17,7 @@ type Biased struct {
 	Sentiment map[string]any `json:"sentiment"`
 }
 
-// BiasedLoadMatch mirrors the biased fields as an all-optional match
-// filter (Go analog of Partial<Biased>).
+// BiasedLoadMatch is the typed request payload for Biased.LoadTyped.
 type BiasedLoadMatch struct {
 	Locale *string `json:"locale,omitempty"`
 	Lucky *bool `json:"lucky,omitempty"`
@@ -27,14 +26,13 @@ type BiasedLoadMatch struct {
 	Sentiment *map[string]any `json:"sentiment,omitempty"`
 }
 
-// BiasedCreateData mirrors the biased fields as an all-optional match
-// filter (Go analog of Partial<Biased>).
+// BiasedCreateData is the typed request payload for Biased.CreateTyped.
 type BiasedCreateData struct {
-	Locale *string `json:"locale,omitempty"`
-	Lucky *bool `json:"lucky,omitempty"`
-	Question *string `json:"question,omitempty"`
-	Reading *string `json:"reading,omitempty"`
-	Sentiment *map[string]any `json:"sentiment,omitempty"`
+	Locale string `json:"locale"`
+	Lucky bool `json:"lucky"`
+	Question string `json:"question"`
+	Reading string `json:"reading"`
+	Sentiment map[string]any `json:"sentiment"`
 }
 
 // Category is the typed data model for the category entity.
@@ -45,8 +43,7 @@ type Category struct {
 	Positive []any `json:"positive"`
 }
 
-// CategoryListMatch mirrors the category fields as an all-optional match
-// filter (Go analog of Partial<Category>).
+// CategoryListMatch is the typed request payload for Category.ListTyped.
 type CategoryListMatch struct {
 	Locale *string `json:"locale,omitempty"`
 	Negative *[]any `json:"negative,omitempty"`

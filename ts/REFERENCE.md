@@ -152,21 +152,21 @@ const biased = client.Biased()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `lucky` | ``$BOOLEAN`` | Yes |  |
-| `question` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
-| `sentiment` | ``$OBJECT`` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `lucky` | `boolean` | Yes |  |
+| `question` | `string` | Yes |  |
+| `reading` | `string` | Yes |  |
+| `sentiment` | `Record<string, any>` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `locale` | - | - | Yes | - | - |
-| `lucky` | - | - | Yes | - | - |
-| `question` | - | - | - | - | - |
-| `reading` | - | - | - | - | - |
-| `sentiment` | - | - | - | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `locale` | - | Yes |
+| `lucky` | - | Yes |
+| `question` | - | - |
+| `reading` | - | - |
+| `sentiment` | - | - |
 
 ### Operations
 
@@ -176,11 +176,11 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Biased().create({
-  locale: /* `$STRING` */,
-  lucky: /* `$BOOLEAN` */,
-  question: /* `$STRING` */,
-  reading: /* `$STRING` */,
-  sentiment: /* `$OBJECT` */,
+  locale: /* string */,
+  lucky: /* boolean */,
+  question: /* string */,
+  reading: /* string */,
+  sentiment: /* Record<string, any> */,
 })
 ```
 
@@ -189,7 +189,7 @@ const result = await client.Biased().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Biased().load({ id: 'biased_id' })
+const result = await client.Biased().load()
 ```
 
 ### Common Methods
@@ -230,10 +230,10 @@ const category = client.Category()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `negative` | ``$ARRAY`` | Yes |  |
-| `neutral` | ``$ARRAY`` | Yes |  |
-| `positive` | ``$ARRAY`` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `negative` | `any[]` | Yes |  |
+| `neutral` | `any[]` | Yes |  |
+| `positive` | `any[]` | Yes |  |
 
 ### Operations
 
@@ -283,17 +283,17 @@ const category_fortune = client.CategoryFortune()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `locale` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
+| `category` | `string` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `reading` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `category` | - | - | - | - | - |
-| `locale` | Yes | - | - | - | - |
-| `reading` | - | - | - | - | - |
+| Field | load |
+| --- | --- |
+| `category` | - |
+| `locale` | Yes |
+| `reading` | - |
 
 ### Operations
 
@@ -302,7 +302,7 @@ const category_fortune = client.CategoryFortune()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.CategoryFortune().load({ id: 'category_fortune_id' })
+const result = await client.CategoryFortune().load()
 ```
 
 ### Common Methods

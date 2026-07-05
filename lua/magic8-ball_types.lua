@@ -14,8 +14,18 @@
 ---@field sentiment table
 
 ---@class BiasedLoadMatch
+---@field locale? string
+---@field lucky? boolean
+---@field question? string
+---@field reading? string
+---@field sentiment? table
 
 ---@class BiasedCreateData
+---@field locale string
+---@field lucky boolean
+---@field question string
+---@field reading string
+---@field sentiment table
 
 ---@class Category
 ---@field locale string
@@ -24,6 +34,10 @@
 ---@field positive table
 
 ---@class CategoryListMatch
+---@field locale? string
+---@field negative? table
+---@field neutral? table
+---@field positive? table
 
 ---@class CategoryFortune
 ---@field category string

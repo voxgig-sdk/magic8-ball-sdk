@@ -22,7 +22,7 @@ class Biased
     public array $sentiment;
 }
 
-/** Match filter for Biased#load (any subset of Biased fields). */
+/** Request payload for Biased#load. */
 class BiasedLoadMatch
 {
     public ?string $locale = null;
@@ -32,14 +32,14 @@ class BiasedLoadMatch
     public ?array $sentiment = null;
 }
 
-/** Match filter for Biased#create (any subset of Biased fields). */
+/** Request payload for Biased#create. */
 class BiasedCreateData
 {
-    public ?string $locale = null;
-    public ?bool $lucky = null;
-    public ?string $question = null;
-    public ?string $reading = null;
-    public ?array $sentiment = null;
+    public string $locale;
+    public bool $lucky;
+    public string $question;
+    public string $reading;
+    public array $sentiment;
 }
 
 /** Category entity data model. */
@@ -51,7 +51,7 @@ class Category
     public array $positive;
 }
 
-/** Match filter for Category#list (any subset of Category fields). */
+/** Request payload for Category#list. */
 class CategoryListMatch
 {
     public ?string $locale = null;

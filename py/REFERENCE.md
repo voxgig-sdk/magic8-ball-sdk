@@ -8,7 +8,7 @@ Complete API reference for the Magic8Ball Python SDK.
 ### Constructor
 
 ```python
-from magic8-ball_sdk import Magic8BallSDK
+from magic8ball_sdk import Magic8BallSDK
 
 client = Magic8BallSDK(options)
 ```
@@ -99,21 +99,21 @@ biased = client.Biased()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `lucky` | ``$BOOLEAN`` | Yes |  |
-| `question` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
-| `sentiment` | ``$OBJECT`` | Yes |  |
+| `locale` | `str` | Yes |  |
+| `lucky` | `bool` | Yes |  |
+| `question` | `str` | Yes |  |
+| `reading` | `str` | Yes |  |
+| `sentiment` | `dict` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `locale` | - | - | Yes | - | - |
-| `lucky` | - | - | Yes | - | - |
-| `question` | - | - | - | - | - |
-| `reading` | - | - | - | - | - |
-| `sentiment` | - | - | - | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `locale` | - | Yes |
+| `lucky` | - | Yes |
+| `question` | - | - |
+| `reading` | - | - |
+| `sentiment` | - | - |
 
 ### Operations
 
@@ -123,11 +123,11 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Biased().create({
-    "locale": ...,  # `$STRING`
-    "lucky": ...,  # `$BOOLEAN`
-    "question": ...,  # `$STRING`
-    "reading": ...,  # `$STRING`
-    "sentiment": ...,  # `$OBJECT`
+    "locale": "example",  # str
+    "lucky": True,  # bool
+    "question": "example",  # str
+    "reading": "example",  # str
+    "sentiment": {},  # dict
 })
 ```
 
@@ -136,7 +136,7 @@ result = client.Biased().create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Biased().load({"id": "biased_id"})
+result = client.Biased().load()
 ```
 
 ### Common Methods
@@ -178,19 +178,19 @@ category = client.Category()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `negative` | ``$ARRAY`` | Yes |  |
-| `neutral` | ``$ARRAY`` | Yes |  |
-| `positive` | ``$ARRAY`` | Yes |  |
+| `locale` | `str` | Yes |  |
+| `negative` | `list` | Yes |  |
+| `neutral` | `list` | Yes |  |
+| `positive` | `list` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Category().list({})
+results = client.Category().list()
 for category in results:
     print(category)
 ```
@@ -234,17 +234,17 @@ category_fortune = client.CategoryFortune()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `locale` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
+| `category` | `str` | Yes |  |
+| `locale` | `str` | Yes |  |
+| `reading` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `category` | - | - | - | - | - |
-| `locale` | Yes | - | - | - | - |
-| `reading` | - | - | - | - | - |
+| Field | load |
+| --- | --- |
+| `category` | - |
+| `locale` | Yes |
+| `reading` | - |
 
 ### Operations
 
@@ -253,7 +253,7 @@ category_fortune = client.CategoryFortune()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.CategoryFortune().load({"id": "category_fortune_id"})
+result = client.CategoryFortune().load()
 ```
 
 ### Common Methods

@@ -8,7 +8,7 @@ Complete API reference for the Magic8Ball Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'magic8-ball_sdk'
+require_relative 'Magic8Ball_sdk'
 
 client = Magic8BallSDK.new(options)
 ```
@@ -105,21 +105,21 @@ biased = client.Biased
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `lucky` | ``$BOOLEAN`` | Yes |  |
-| `question` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
-| `sentiment` | ``$OBJECT`` | Yes |  |
+| `locale` | `String` | Yes |  |
+| `lucky` | `Boolean` | Yes |  |
+| `question` | `String` | Yes |  |
+| `reading` | `String` | Yes |  |
+| `sentiment` | `Hash` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `locale` | - | - | Yes | - | - |
-| `lucky` | - | - | Yes | - | - |
-| `question` | - | - | - | - | - |
-| `reading` | - | - | - | - | - |
-| `sentiment` | - | - | - | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `locale` | - | Yes |
+| `lucky` | - | Yes |
+| `question` | - | - |
+| `reading` | - | - |
+| `sentiment` | - | - |
 
 ### Operations
 
@@ -129,11 +129,11 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Biased.create({
-  "locale" => # `$STRING`,
-  "lucky" => # `$BOOLEAN`,
-  "question" => # `$STRING`,
-  "reading" => # `$STRING`,
-  "sentiment" => # `$OBJECT`,
+  "locale" => "example", # String
+  "lucky" => true, # Boolean
+  "question" => "example", # String
+  "reading" => "example", # String
+  "sentiment" => {}, # Hash
 })
 ```
 
@@ -142,7 +142,7 @@ result = client.Biased.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Biased.load({ "id" => "biased_id" })
+result = client.Biased.load()
 ```
 
 ### Common Methods
@@ -185,19 +185,19 @@ category = client.Category
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `negative` | ``$ARRAY`` | Yes |  |
-| `neutral` | ``$ARRAY`` | Yes |  |
-| `positive` | ``$ARRAY`` | Yes |  |
+| `locale` | `String` | Yes |  |
+| `negative` | `Array` | Yes |  |
+| `neutral` | `Array` | Yes |  |
+| `positive` | `Array` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Category.list(nil)
+results = client.Category.list
 ```
 
 ### Common Methods
@@ -240,17 +240,17 @@ category_fortune = client.CategoryFortune
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `locale` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
+| `category` | `String` | Yes |  |
+| `locale` | `String` | Yes |  |
+| `reading` | `String` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `category` | - | - | - | - | - |
-| `locale` | Yes | - | - | - | - |
-| `reading` | - | - | - | - | - |
+| Field | load |
+| --- | --- |
+| `category` | - |
+| `locale` | Yes |
+| `reading` | - |
 
 ### Operations
 
@@ -259,7 +259,7 @@ category_fortune = client.CategoryFortune
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.CategoryFortune.load({ "id" => "category_fortune_id" })
+result = client.CategoryFortune.load()
 ```
 
 ### Common Methods

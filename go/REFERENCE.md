@@ -109,21 +109,21 @@ biased := client.Biased(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `lucky` | ``$BOOLEAN`` | Yes |  |
-| `question` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
-| `sentiment` | ``$OBJECT`` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `lucky` | `bool` | Yes |  |
+| `question` | `string` | Yes |  |
+| `reading` | `string` | Yes |  |
+| `sentiment` | `map[string]any` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `locale` | - | - | Yes | - | - |
-| `lucky` | - | - | Yes | - | - |
-| `question` | - | - | - | - | - |
-| `reading` | - | - | - | - | - |
-| `sentiment` | - | - | - | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `locale` | - | Yes |
+| `lucky` | - | Yes |
+| `question` | - | - |
+| `reading` | - | - |
+| `sentiment` | - | - |
 
 ### Operations
 
@@ -133,11 +133,11 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Biased(nil).Create(map[string]any{
-    "locale": /* `$STRING` */,
-    "lucky": /* `$BOOLEAN` */,
-    "question": /* `$STRING` */,
-    "reading": /* `$STRING` */,
-    "sentiment": /* `$OBJECT` */,
+    "locale": /* string */,
+    "lucky": /* bool */,
+    "question": /* string */,
+    "reading": /* string */,
+    "sentiment": /* map[string]any */,
 }, nil)
 ```
 
@@ -146,7 +146,7 @@ result, err := client.Biased(nil).Create(map[string]any{
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Biased(nil).Load(map[string]any{"id": "biased_id"}, nil)
+result, err := client.Biased(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -183,10 +183,10 @@ category := client.Category(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `negative` | ``$ARRAY`` | Yes |  |
-| `neutral` | ``$ARRAY`` | Yes |  |
-| `positive` | ``$ARRAY`` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `negative` | `[]any` | Yes |  |
+| `neutral` | `[]any` | Yes |  |
+| `positive` | `[]any` | Yes |  |
 
 ### Operations
 
@@ -232,17 +232,17 @@ category_fortune := client.CategoryFortune(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `locale` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
+| `category` | `string` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `reading` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `category` | - | - | - | - | - |
-| `locale` | Yes | - | - | - | - |
-| `reading` | - | - | - | - | - |
+| Field | load |
+| --- | --- |
+| `category` | - |
+| `locale` | Yes |
+| `reading` | - |
 
 ### Operations
 
@@ -251,7 +251,7 @@ category_fortune := client.CategoryFortune(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.CategoryFortune(nil).Load(map[string]any{"id": "category_fortune_id"}, nil)
+result, err := client.CategoryFortune(nil).Load(nil, nil)
 ```
 
 ### Common Methods

@@ -8,7 +8,7 @@ Complete API reference for the Magic8Ball PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/magic8-ball_sdk.php';
+require_once __DIR__ . '/magic8ball_sdk.php';
 
 $client = new Magic8BallSDK($options);
 ```
@@ -57,11 +57,11 @@ Create a new `CategoryFortuneEntity` instance. Pass `null` for no initial data.
 
 Create a new `RandomFortuneEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): Magic8BallUtility`
 
 Return a copy of the SDK utility object.
 
@@ -104,21 +104,21 @@ $biased = $client->Biased();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `lucky` | ``$BOOLEAN`` | Yes |  |
-| `question` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
-| `sentiment` | ``$OBJECT`` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `lucky` | `bool` | Yes |  |
+| `question` | `string` | Yes |  |
+| `reading` | `string` | Yes |  |
+| `sentiment` | `array` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `locale` | - | - | Yes | - | - |
-| `lucky` | - | - | Yes | - | - |
-| `question` | - | - | - | - | - |
-| `reading` | - | - | - | - | - |
-| `sentiment` | - | - | - | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `locale` | - | Yes |
+| `lucky` | - | Yes |
+| `question` | - | - |
+| `reading` | - | - |
+| `sentiment` | - | - |
 
 ### Operations
 
@@ -128,11 +128,11 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Biased()->create([
-  "locale" => /* `$STRING` */,
-  "lucky" => /* `$BOOLEAN` */,
-  "question" => /* `$STRING` */,
-  "reading" => /* `$STRING` */,
-  "sentiment" => /* `$OBJECT` */,
+  "locale" => null, // string
+  "lucky" => null, // bool
+  "question" => null, // string
+  "reading" => null, // string
+  "sentiment" => null, // array
 ]);
 ```
 
@@ -141,24 +141,24 @@ $result = $client->Biased()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Biased()->load(["id" => "biased_id"]);
+$result = $client->Biased()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -167,7 +167,7 @@ Set the entity match criteria.
 Create a new `BiasedEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -184,36 +184,36 @@ $category = $client->Category();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | ``$STRING`` | Yes |  |
-| `negative` | ``$ARRAY`` | Yes |  |
-| `neutral` | ``$ARRAY`` | Yes |  |
-| `positive` | ``$ARRAY`` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `negative` | `array` | Yes |  |
+| `neutral` | `array` | Yes |  |
+| `positive` | `array` | Yes |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Category()->list([]);
+$results = $client->Category()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -222,7 +222,7 @@ Set the entity match criteria.
 Create a new `CategoryEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -239,17 +239,17 @@ $category_fortune = $client->CategoryFortune();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `locale` | ``$STRING`` | Yes |  |
-| `reading` | ``$STRING`` | Yes |  |
+| `category` | `string` | Yes |  |
+| `locale` | `string` | Yes |  |
+| `reading` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `category` | - | - | - | - | - |
-| `locale` | Yes | - | - | - | - |
-| `reading` | - | - | - | - | - |
+| Field | load |
+| --- | --- |
+| `category` | - |
+| `locale` | Yes |
+| `reading` | - |
 
 ### Operations
 
@@ -258,24 +258,24 @@ $category_fortune = $client->CategoryFortune();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->CategoryFortune()->load(["id" => "category_fortune_id"]);
+$result = $client->CategoryFortune()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -284,7 +284,7 @@ Set the entity match criteria.
 Create a new `CategoryFortuneEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -299,19 +299,19 @@ $random_fortune = $client->RandomFortune();
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -320,7 +320,7 @@ Set the entity match criteria.
 Create a new `RandomFortuneEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

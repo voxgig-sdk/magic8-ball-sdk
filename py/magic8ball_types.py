@@ -32,7 +32,7 @@ class BiasedLoadMatch(TypedDict, total=False):
     sentiment: dict
 
 
-class BiasedCreateData(TypedDict, total=False):
+class BiasedCreateData(TypedDict):
     locale: str
     lucky: bool
     question: str

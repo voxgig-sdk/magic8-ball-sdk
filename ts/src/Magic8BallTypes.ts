@@ -13,9 +13,21 @@ export interface Biased {
   sentiment: Record<string, any>
 }
 
-export type BiasedLoadMatch = Partial<Biased>
+export interface BiasedLoadMatch {
+  locale?: string
+  lucky?: boolean
+  question?: string
+  reading?: string
+  sentiment?: Record<string, any>
+}
 
-export type BiasedCreateData = Partial<Biased>
+export interface BiasedCreateData {
+  locale: string
+  lucky: boolean
+  question: string
+  reading: string
+  sentiment: Record<string, any>
+}
 
 export interface Category {
   locale: string
@@ -24,7 +36,12 @@ export interface Category {
   positive: any[]
 }
 
-export type CategoryListMatch = Partial<Category>
+export interface CategoryListMatch {
+  locale?: string
+  negative?: any[]
+  neutral?: any[]
+  positive?: any[]
+}
 
 export interface CategoryFortune {
   category: string
