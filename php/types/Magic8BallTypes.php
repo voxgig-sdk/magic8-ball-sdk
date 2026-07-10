@@ -71,7 +71,7 @@ class CategoryFortune
 /** Request payload for CategoryFortune#load. */
 class CategoryFortuneLoadMatch
 {
-    public string $category;
+    public ?string $category = null;
 }
 
 /** RandomFortune entity data model. */

@@ -50,7 +50,7 @@ export interface CategoryFortune {
 }
 
 export interface CategoryFortuneLoadMatch {
-  category: string
+  category?: string
 }
 
 export interface RandomFortune {

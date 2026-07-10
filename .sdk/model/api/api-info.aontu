@@ -19,9 +19,9 @@ main: {
           url: "https://eightballapi.com"
         }
       ]
+      summary: "The Magic 8-Ball API provides mystical yes/no responses to user questions through a simple, RESTful interface."
       title: "Magic 8-Ball API"
       version: "1.0.0"
+      website: "https://www.eightballapi.com/docs"
     }
   }
-}
-

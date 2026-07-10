@@ -176,11 +176,11 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Biased().create({
-  locale: /* string */,
-  lucky: /* boolean */,
-  question: /* string */,
-  reading: /* string */,
-  sentiment: /* Record<string, any> */,
+  locale: 'example_locale',
+  lucky: true,
+  question: 'example_question',
+  reading: 'example_reading',
+  sentiment: {},
 })
 ```
 

@@ -46,7 +46,7 @@ end
 
 ```ruby
 # create returns the bare created Biased record.
-created = client.Biased.create({ "locale" => "example", "lucky" => true, "question" => "example", "reading" => "example", "sentiment" => {} })
+created = client.Biased.create({ "locale" => "example_locale", "lucky" => true, "question" => "example_question", "reading" => "example_reading", "sentiment" => {} })
 
 ```
 
@@ -328,10 +328,10 @@ biased = client.Biased.load()
 
 ```ruby
 biased = client.Biased.create({
-  "locale" => "example", # String
+  "locale" => "example_locale", # String
   "lucky" => true, # Boolean
-  "question" => "example", # String
-  "reading" => "example", # String
+  "question" => "example_question", # String
+  "reading" => "example_reading", # String
   "sentiment" => {}, # Hash
 })
 ```

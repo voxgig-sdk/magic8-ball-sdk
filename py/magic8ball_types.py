@@ -60,7 +60,7 @@ class CategoryFortune(TypedDict):
     reading: str
 
 
-class CategoryFortuneLoadMatch(TypedDict):
+class CategoryFortuneLoadMatch(TypedDict, total=False):
     category: str
 
 

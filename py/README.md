@@ -52,7 +52,7 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Biased().create({"locale": "example", "lucky": True, "question": "example", "reading": "example", "sentiment": {}})
+created = client.Biased().create({"locale": "example_locale", "lucky": True, "question": "example_question", "reading": "example_reading", "sentiment": {}})
 
 ```
 
@@ -333,10 +333,10 @@ biased = client.Biased().load()
 
 ```python
 biased = client.Biased().create({
-    "locale": "example",  # str
+    "locale": "example_locale",  # str
     "lucky": True,  # bool
-    "question": "example",  # str
-    "reading": "example",  # str
+    "question": "example_question",  # str
+    "reading": "example_reading",  # str
     "sentiment": {},  # dict
 })
 ```

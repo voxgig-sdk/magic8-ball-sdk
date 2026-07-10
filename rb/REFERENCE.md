@@ -129,10 +129,10 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Biased.create({
-  "locale" => "example", # String
+  "locale" => "example_locale", # String
   "lucky" => true, # Boolean
-  "question" => "example", # String
-  "reading" => "example", # String
+  "question" => "example_question", # String
+  "reading" => "example_reading", # String
   "sentiment" => {}, # Hash
 })
 ```

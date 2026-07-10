@@ -145,7 +145,7 @@ CategoryFortune = Struct.new(
 # Request payload for CategoryFortune#load.
 #
 # @!attribute [rw] category
-#   @return [String]
+#   @return [String, nil]
 CategoryFortuneLoadMatch = Struct.new(
   :category,
   keyword_init: true

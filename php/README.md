@@ -47,7 +47,7 @@ try {
 
 ```php
 // create() returns the bare created Biased record.
-$created = $client->Biased()->create(["locale" => "example", "lucky" => true, "question" => "example", "reading" => "example", "sentiment" => []]);
+$created = $client->Biased()->create(["locale" => "example_locale", "lucky" => true, "question" => "example_question", "reading" => "example_reading", "sentiment" => []]);
 
 ```
 

@@ -45,7 +45,7 @@ print(biased)
 
 ```lua
 -- Create
-local created, err = client:Biased():create({ locale = "example", lucky = true, question = "example", reading = "example", sentiment = {} })
+local created, err = client:Biased():create({ locale = "example_locale", lucky = true, question = "example_question", reading = "example_reading", sentiment = {} })
 if err then error(err) end
 
 ```
@@ -320,11 +320,11 @@ local biased, err = client:Biased():load()
 
 ```lua
 local biased, err = client:Biased():create({
-  locale = nil, -- string
-  lucky = nil, -- boolean
-  question = nil, -- string
-  reading = nil, -- string
-  sentiment = nil, -- table
+  locale = "example_locale", -- string
+  lucky = true, -- boolean
+  question = "example_question", -- string
+  reading = "example_reading", -- string
+  sentiment = {}, -- table
 })
 ```
 

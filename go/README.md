@@ -58,7 +58,7 @@ func main() {
     fmt.Println(biased)
 
     // Create a biased.
-    created, err := client.Biased(nil).Create(map[string]any{"locale": "example", "lucky": true, "question": "example", "reading": "example", "sentiment": map[string]any{}}, nil)
+    created, err := client.Biased(nil).Create(map[string]any{"locale": "example_locale", "lucky": true, "question": "example_question", "reading": "example_reading", "sentiment": map[string]any{}}, nil)
     if err != nil {
         panic(err)
     }
@@ -328,8 +328,8 @@ Create an instance: `biased := client.Biased(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -355,12 +355,16 @@ fmt.Println(biased) // the loaded record
 
 ```go
 result, err := client.Biased(nil).Create(map[string]any{
-    "locale": /* string */,
-    "lucky": /* bool */,
-    "question": /* string */,
-    "reading": /* string */,
-    "sentiment": /* map[string]any */,
+    "locale": "example_locale",
+    "lucky": true,
+    "question": "example_question",
+    "reading": "example_reading",
+    "sentiment": map[string]any{},
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -396,7 +400,7 @@ fmt.Println(categorys) // the array of records
 
 ### CategoryFortune
 
-Create an instance: `category_fortune := client.CategoryFortune(nil)`
+Create an instance: `categoryFortune := client.CategoryFortune(nil)`
 
 #### Operations
 
@@ -415,17 +419,17 @@ Create an instance: `category_fortune := client.CategoryFortune(nil)`
 #### Example: Load
 
 ```go
-category_fortune, err := client.CategoryFortune(nil).Load(nil, nil)
+categoryFortune, err := client.CategoryFortune(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(category_fortune) // the loaded record
+fmt.Println(categoryFortune) // the loaded record
 ```
 
 
 ### RandomFortune
 
-Create an instance: `random_fortune := client.RandomFortune(nil)`
+Create an instance: `randomFortune := client.RandomFortune(nil)`
 
 
 ## Advanced

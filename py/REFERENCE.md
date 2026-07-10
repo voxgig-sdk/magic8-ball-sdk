@@ -123,10 +123,10 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Biased().create({
-    "locale": "example",  # str
+    "locale": "example_locale",  # str
     "lucky": True,  # bool
-    "question": "example",  # str
-    "reading": "example",  # str
+    "question": "example_question",  # str
+    "reading": "example_reading",  # str
     "sentiment": {},  # dict
 })
 ```

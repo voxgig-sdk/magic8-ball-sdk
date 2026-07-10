@@ -60,7 +60,7 @@ type CategoryFortune struct {
 
 // CategoryFortuneLoadMatch is the typed request payload for CategoryFortune.LoadTyped.
 type CategoryFortuneLoadMatch struct {
-	Category string `json:"category"`
+	Category *string `json:"category,omitempty"`
 }
 
 // RandomFortune is the typed data model for the random_fortune entity.

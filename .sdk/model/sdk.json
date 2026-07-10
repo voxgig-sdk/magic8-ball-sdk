@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -575,14 +572,17 @@
         "license": {
           "name": "Free for everyone"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://eightballapi.com"
           }
         ],
+        "summary": "The Magic 8-Ball API provides mystical yes/no responses to user questions through a simple, RESTful interface.",
         "title": "Magic 8-Ball API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://www.eightballapi.com/docs"
       },
       "option": {},
       "target": {
@@ -635,6 +635,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -685,6 +688,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
