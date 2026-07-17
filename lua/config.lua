@@ -1,4 +1,4 @@
--- ProjectName SDK configuration
+-- Magic8Ball SDK configuration
 
 local function make_config()
   return {
