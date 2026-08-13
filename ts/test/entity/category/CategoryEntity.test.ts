@@ -26,8 +26,8 @@ import {
 describe('CategoryEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when MAGIC8BALL_TEST_LIVE=TRUE.
-  afterEach(liveDelay('MAGIC8BALL_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when MAGIC8_BALL_TEST_LIVE=TRUE.
+  afterEach(liveDelay('MAGIC8_BALL_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = Magic8BallSDK.test()
@@ -38,7 +38,7 @@ describe('CategoryEntity', async () => {
 
   test('basic', async (t) => {
 
-    const live = 'TRUE' === process.env.MAGIC__BALL_TEST_LIVE
+    const live = 'TRUE' === process.env.MAGIC8_BALL_TEST_LIVE
     for (const op of ['list']) {
       if (maybeSkipControl(t, 'entityOp', 'category.' + op, live)) return
     }
@@ -48,7 +48,7 @@ describe('CategoryEntity', async () => {
     // fixture (entity TestData.json). Those don't exist on the live API.
     // Skip live runs unless the user provided a real ENTID env override.
     if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set MAGIC__BALL_TEST_CATEGORY_ENTID JSON to run live')
+      t.skip('live entity test uses synthetic IDs from fixture — set MAGIC8_BALL_TEST_CATEGORY_ENTID JSON to run live')
       return
     }
     const client = setup.client
@@ -63,7 +63,7 @@ describe('CategoryEntity', async () => {
     const category_ref01_ent = client.Category()
     const category_ref01_match: any = {}
 
-    const category_ref01_list = await category_ref01_ent.list(category_ref01_match)
+    const category_ref01_list = (await category_ref01_ent.list(category_ref01_match)).map((e: any) => e.data())
 
 
   })
@@ -106,18 +106,18 @@ function basicSetup(extra?: any) {
   // basic flow consumes synthetic IDs from the fixture file; without an
   // override those synthetic IDs reach the live API and 4xx. Surface this
   // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['MAGIC__BALL_TEST_CATEGORY_ENTID']
+  const idmapEnvVal = process.env['MAGIC8_BALL_TEST_CATEGORY_ENTID']
   const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
 
   const env = envOverride({
-    'MAGIC__BALL_TEST_CATEGORY_ENTID': idmap,
-    'MAGIC__BALL_TEST_LIVE': 'FALSE',
-    'MAGIC__BALL_TEST_EXPLAIN': 'FALSE',
+    'MAGIC8_BALL_TEST_CATEGORY_ENTID': idmap,
+    'MAGIC8_BALL_TEST_LIVE': 'FALSE',
+    'MAGIC8_BALL_TEST_EXPLAIN': 'FALSE',
   })
 
-  idmap = env['MAGIC__BALL_TEST_CATEGORY_ENTID']
+  idmap = env['MAGIC8_BALL_TEST_CATEGORY_ENTID']
 
-  const live = 'TRUE' === env.MAGIC__BALL_TEST_LIVE
+  const live = 'TRUE' === env.MAGIC8_BALL_TEST_LIVE
 
   if (live) {
     client = new Magic8BallSDK(merge([
@@ -134,7 +134,7 @@ function basicSetup(extra?: any) {
     client,
     struct,
     data: entityData,
-    explain: 'TRUE' === env.MAGIC__BALL_TEST_EXPLAIN,
+    explain: 'TRUE' === env.MAGIC8_BALL_TEST_EXPLAIN,
     live,
     syntheticOnly: live && !idmapOverridden,
     now: Date.now(),

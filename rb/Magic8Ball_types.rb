@@ -10,30 +10,11 @@
 
 # Biased entity data model.
 #
-# @!attribute [rw] locale
-#   @return [String]
+# @!attribute [rw] calculation
+#   @return [Array]
 #
-# @!attribute [rw] lucky
-#   @return [Boolean]
-#
-# @!attribute [rw] question
-#   @return [String]
-#
-# @!attribute [rw] reading
-#   @return [String]
-#
-# @!attribute [rw] sentiment
-#   @return [Hash]
-Biased = Struct.new(
-  :locale,
-  :lucky,
-  :question,
-  :reading,
-  :sentiment,
-  keyword_init: true
-)
-
-# Request payload for Biased#load.
+# @!attribute [rw] comparative
+#   @return [Float]
 #
 # @!attribute [rw] locale
 #   @return [String, nil]
@@ -41,45 +22,124 @@ Biased = Struct.new(
 # @!attribute [rw] lucky
 #   @return [Boolean, nil]
 #
+# @!attribute [rw] negative
+#   @return [Array]
+#
+# @!attribute [rw] positive
+#   @return [Array]
+#
+# @!attribute [rw] question
+#   @return [String]
+#
+# @!attribute [rw] score
+#   @return [Float]
+#
+# @!attribute [rw] tokens
+#   @return [Array]
+#
+# @!attribute [rw] words
+#   @return [Array]
+Biased = Struct.new(
+  :calculation,
+  :comparative,
+  :locale,
+  :lucky,
+  :negative,
+  :positive,
+  :question,
+  :score,
+  :tokens,
+  :words,
+  keyword_init: true
+)
+
+# Request payload for Biased#load.
+#
+# @!attribute [rw] calculation
+#   @return [Array, nil]
+#
+# @!attribute [rw] comparative
+#   @return [Float, nil]
+#
+# @!attribute [rw] locale
+#   @return [String, nil]
+#
+# @!attribute [rw] lucky
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] negative
+#   @return [Array, nil]
+#
+# @!attribute [rw] positive
+#   @return [Array, nil]
+#
 # @!attribute [rw] question
 #   @return [String, nil]
 #
-# @!attribute [rw] reading
-#   @return [String, nil]
+# @!attribute [rw] score
+#   @return [Float, nil]
 #
-# @!attribute [rw] sentiment
-#   @return [Hash, nil]
+# @!attribute [rw] tokens
+#   @return [Array, nil]
+#
+# @!attribute [rw] words
+#   @return [Array, nil]
 BiasedLoadMatch = Struct.new(
+  :calculation,
+  :comparative,
   :locale,
   :lucky,
+  :negative,
+  :positive,
   :question,
-  :reading,
-  :sentiment,
+  :score,
+  :tokens,
+  :words,
   keyword_init: true
 )
 
 # Request payload for Biased#create.
 #
+# @!attribute [rw] calculation
+#   @return [Array]
+#
+# @!attribute [rw] comparative
+#   @return [Float]
+#
 # @!attribute [rw] locale
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] lucky
-#   @return [Boolean]
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] negative
+#   @return [Array]
+#
+# @!attribute [rw] positive
+#   @return [Array]
 #
 # @!attribute [rw] question
 #   @return [String]
 #
-# @!attribute [rw] reading
-#   @return [String]
+# @!attribute [rw] score
+#   @return [Float]
 #
-# @!attribute [rw] sentiment
-#   @return [Hash]
+# @!attribute [rw] tokens
+#   @return [Array]
+#
+# @!attribute [rw] words
+#   @return [Array]
 BiasedCreateData = Struct.new(
+  :calculation,
+  :comparative,
   :locale,
   :lucky,
+  :negative,
+  :positive,
   :question,
-  :reading,
-  :sentiment,
+  :score,
+  :tokens,
+  :words,
   keyword_init: true
 )
 

@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Magic8Ball SDK exists test
 
 import pytest
 from magic8ball_sdk import Magic8BallSDK

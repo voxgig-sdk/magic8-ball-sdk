@@ -49,13 +49,16 @@ try {
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Biased
+// Create — returns the created Biased ENTITY (.data() for the record)
 const created = await client.Biased().create({
-  locale: 'example_locale',
-  lucky: true,
+  calculation: [],
+  comparative: 1,
+  negative: [],
+  positive: [],
   question: 'example_question',
-  reading: 'example_reading',
-  sentiment: {},
+  score: 1,
+  tokens: [],
+  words: [],
 })
 
 ```
@@ -67,10 +70,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const biased = await client.Biased().load()
-  console.log(biased)
+  const categorys = await client.Category().list()
+  console.log(categorys)
 } catch (err) {
-  console.error('load failed:', err)
+  console.error('list failed:', err)
 }
 ```
 
@@ -134,9 +137,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = Magic8BallSDK.test()
 
-const biased = await client.Biased().load()
-// biased is a bare entity populated with mock response data
-console.log(biased)
+const category = await client.Category().list()
+// category is the entity, populated with mock response data
+// — call category.data() for the record itself
+console.log(category)
 ```
 
 You can also use the instance method:
@@ -151,10 +155,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Biased()
+const entity = client.Category()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -305,11 +309,16 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
+| `calculation` |  |
+| `comparative` |  |
 | `locale` |  |
 | `lucky` |  |
+| `negative` |  |
+| `positive` |  |
 | `question` |  |
-| `reading` |  |
-| `sentiment` |  |
+| `score` |  |
+| `tokens` |  |
+| `words` |  |
 
 Operations: create, load.
 
@@ -369,11 +378,16 @@ Create an instance: `const biased = client.Biased()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `calculation` | `any[]` |  |
+| `comparative` | `number` |  |
 | `locale` | `string` |  |
 | `lucky` | `boolean` |  |
+| `negative` | `any[]` |  |
+| `positive` | `any[]` |  |
 | `question` | `string` |  |
-| `reading` | `string` |  |
-| `sentiment` | `Record<string, any>` |  |
+| `score` | `number` |  |
+| `tokens` | `any[]` |  |
+| `words` | `any[]` |  |
 
 #### Example: Load
 
@@ -385,11 +399,14 @@ const biased = await client.Biased().load()
 
 ```ts
 const biased = await client.Biased().create({
-  locale: 'example_locale',
-  lucky: true,
+  calculation: [],
+  comparative: 1,
+  negative: [],
+  positive: [],
   question: 'example_question',
-  reading: 'example_reading',
-  sentiment: {},
+  score: 1,
+  tokens: [],
+  words: [],
 })
 ```
 
@@ -514,16 +531,16 @@ import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const biased = client.Biased()
-await biased.load()
+const category = client.Category()
+await category.list()
 
-// biased.data() now returns the biased data from the last `load`
-// biased.match() returns the last match criteria
+// category.data() now returns the category data from the last `list`
+// category.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

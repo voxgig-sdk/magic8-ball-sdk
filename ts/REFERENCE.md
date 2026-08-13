@@ -152,21 +152,16 @@ const biased = client.Biased()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `string` | Yes |  |
-| `lucky` | `boolean` | Yes |  |
+| `calculation` | `any[]` | Yes |  |
+| `comparative` | `number` | Yes |  |
+| `locale` | `string` | No |  |
+| `lucky` | `boolean` | No |  |
+| `negative` | `any[]` | Yes |  |
+| `positive` | `any[]` | Yes |  |
 | `question` | `string` | Yes |  |
-| `reading` | `string` | Yes |  |
-| `sentiment` | `Record<string, any>` | Yes |  |
-
-### Field Usage by Operation
-
-| Field | load | create |
-| --- | --- | --- |
-| `locale` | - | Yes |
-| `lucky` | - | Yes |
-| `question` | - | - |
-| `reading` | - | - |
-| `sentiment` | - | - |
+| `score` | `number` | Yes |  |
+| `tokens` | `any[]` | Yes |  |
+| `words` | `any[]` | Yes |  |
 
 ### Operations
 
@@ -176,11 +171,14 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Biased().create({
-  locale: 'example_locale',
-  lucky: true,
+  calculation: [],
+  comparative: 1,
+  negative: [],
+  positive: [],
   question: 'example_question',
-  reading: 'example_reading',
-  sentiment: {},
+  score: 1,
+  tokens: [],
+  words: [],
 })
 ```
 

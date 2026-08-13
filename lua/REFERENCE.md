@@ -102,21 +102,16 @@ local biased = client:Biased(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `string` | Yes |  |
-| `lucky` | `boolean` | Yes |  |
+| `calculation` | `table` | Yes |  |
+| `comparative` | `number` | Yes |  |
+| `locale` | `string` | No |  |
+| `lucky` | `boolean` | No |  |
+| `negative` | `table` | Yes |  |
+| `positive` | `table` | Yes |  |
 | `question` | `string` | Yes |  |
-| `reading` | `string` | Yes |  |
-| `sentiment` | `table` | Yes |  |
-
-### Field Usage by Operation
-
-| Field | load | create |
-| --- | --- | --- |
-| `locale` | - | Yes |
-| `lucky` | - | Yes |
-| `question` | - | - |
-| `reading` | - | - |
-| `sentiment` | - | - |
+| `score` | `number` | Yes |  |
+| `tokens` | `table` | Yes |  |
+| `words` | `table` | Yes |  |
 
 ### Operations
 
@@ -126,11 +121,14 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Biased():create({
-  locale = --[[ string ]],
-  lucky = --[[ boolean ]],
+  calculation = --[[ table ]],
+  comparative = --[[ number ]],
+  negative = --[[ table ]],
+  positive = --[[ table ]],
   question = --[[ string ]],
-  reading = --[[ string ]],
-  sentiment = --[[ table ]],
+  score = --[[ number ]],
+  tokens = --[[ table ]],
+  words = --[[ table ]],
 })
 ```
 

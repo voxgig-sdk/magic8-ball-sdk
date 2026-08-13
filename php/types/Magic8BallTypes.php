@@ -15,31 +15,46 @@ declare(strict_types=1);
 /** Biased entity data model. */
 class Biased
 {
-    public string $locale;
-    public bool $lucky;
+    public array $calculation;
+    public float $comparative;
+    public ?string $locale = null;
+    public ?bool $lucky = null;
+    public array $negative;
+    public array $positive;
     public string $question;
-    public string $reading;
-    public array $sentiment;
+    public float $score;
+    public array $tokens;
+    public array $words;
 }
 
 /** Request payload for Biased#load. */
 class BiasedLoadMatch
 {
+    public ?array $calculation = null;
+    public ?float $comparative = null;
     public ?string $locale = null;
     public ?bool $lucky = null;
+    public ?array $negative = null;
+    public ?array $positive = null;
     public ?string $question = null;
-    public ?string $reading = null;
-    public ?array $sentiment = null;
+    public ?float $score = null;
+    public ?array $tokens = null;
+    public ?array $words = null;
 }
 
 /** Request payload for Biased#create. */
 class BiasedCreateData
 {
-    public string $locale;
-    public bool $lucky;
+    public array $calculation;
+    public float $comparative;
+    public ?string $locale = null;
+    public ?bool $lucky = null;
+    public array $negative;
+    public array $positive;
     public string $question;
-    public string $reading;
-    public array $sentiment;
+    public float $score;
+    public array $tokens;
+    public array $words;
 }
 
 /** Category entity data model. */

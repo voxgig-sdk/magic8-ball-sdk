@@ -99,21 +99,16 @@ biased = client.Biased()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `str` | Yes |  |
-| `lucky` | `bool` | Yes |  |
+| `calculation` | `list` | Yes |  |
+| `comparative` | `float` | Yes |  |
+| `locale` | `str` | No |  |
+| `lucky` | `bool` | No |  |
+| `negative` | `list` | Yes |  |
+| `positive` | `list` | Yes |  |
 | `question` | `str` | Yes |  |
-| `reading` | `str` | Yes |  |
-| `sentiment` | `dict` | Yes |  |
-
-### Field Usage by Operation
-
-| Field | load | create |
-| --- | --- | --- |
-| `locale` | - | Yes |
-| `lucky` | - | Yes |
-| `question` | - | - |
-| `reading` | - | - |
-| `sentiment` | - | - |
+| `score` | `float` | Yes |  |
+| `tokens` | `list` | Yes |  |
+| `words` | `list` | Yes |  |
 
 ### Operations
 
@@ -123,11 +118,14 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Biased().create({
-    "locale": "example_locale",  # str
-    "lucky": True,  # bool
+    "calculation": [],  # list
+    "comparative": 1,  # float
+    "negative": [],  # list
+    "positive": [],  # list
     "question": "example_question",  # str
-    "reading": "example_reading",  # str
-    "sentiment": {},  # dict
+    "score": 1,  # float
+    "tokens": [],  # list
+    "words": [],  # list
 })
 ```
 

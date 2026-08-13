@@ -29,50 +29,73 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "locale",
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": false,
-								"type": "`$STRING`",
-							},
-						},
+						"name": "calculation",
 						"req": true,
-						"type": "`$STRING`",
+						"type": "`$ARRAY`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "lucky",
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": false,
-								"type": "`$BOOLEAN`",
-							},
-						},
+						"name": "comparative",
 						"req": true,
-						"type": "`$BOOLEAN`",
+						"type": "`$NUMBER`",
 						"index$": 1,
+					},
+					map[string]any{
+						"active": true,
+						"name": "locale",
+						"req": false,
+						"type": "`$STRING`",
+						"index$": 2,
+					},
+					map[string]any{
+						"active": true,
+						"name": "lucky",
+						"req": false,
+						"type": "`$BOOLEAN`",
+						"index$": 3,
+					},
+					map[string]any{
+						"active": true,
+						"name": "negative",
+						"req": true,
+						"type": "`$ARRAY`",
+						"index$": 4,
+					},
+					map[string]any{
+						"active": true,
+						"name": "positive",
+						"req": true,
+						"type": "`$ARRAY`",
+						"index$": 5,
 					},
 					map[string]any{
 						"active": true,
 						"name": "question",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 2,
+						"index$": 6,
 					},
 					map[string]any{
 						"active": true,
-						"name": "reading",
+						"name": "score",
 						"req": true,
-						"type": "`$STRING`",
-						"index$": 3,
+						"type": "`$NUMBER`",
+						"index$": 7,
 					},
 					map[string]any{
 						"active": true,
-						"name": "sentiment",
+						"name": "tokens",
 						"req": true,
-						"type": "`$OBJECT`",
-						"index$": 4,
+						"type": "`$ARRAY`",
+						"index$": 8,
+					},
+					map[string]any{
+						"active": true,
+						"name": "words",
+						"req": true,
+						"type": "`$ARRAY`",
+						"index$": 9,
 					},
 				},
 				"name": "biased",
@@ -84,6 +107,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/api/biased",
 								"parts": []any{
@@ -93,12 +117,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.sentiment`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -137,6 +160,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api/biased",
 								"parts": []any{
@@ -152,12 +176,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.sentiment`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -216,6 +239,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api/categories",
 								"parts": []any{
@@ -234,7 +258,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -303,6 +326,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api/{category}",
 								"parts": []any{
@@ -336,6 +360,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api",
 								"parts": []any{
@@ -353,7 +378,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

@@ -6,26 +6,34 @@ main: kit: entity: biased: {
 
   fields: [
     {
-      name: "locale"
-      op: {
-        create: {
-          req: false
-          type: "`$STRING`"
-        }
-      }
+      name: "calculation"
       req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "comparative"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "locale"
+      req: false
       type: "`$STRING`"
     }
     {
       name: "lucky"
-      op: {
-        create: {
-          req: false
-          type: "`$BOOLEAN`"
-        }
-      }
-      req: true
+      req: false
       type: "`$BOOLEAN`"
+    }
+    {
+      name: "negative"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "positive"
+      req: true
+      type: "`$ARRAY`"
     }
     {
       name: "question"
@@ -33,14 +41,19 @@ main: kit: entity: biased: {
       type: "`$STRING`"
     }
     {
-      name: "reading"
+      name: "score"
       req: true
-      type: "`$STRING`"
+      type: "`$NUMBER`"
     }
     {
-      name: "sentiment"
+      name: "tokens"
       req: true
-      type: "`$OBJECT`"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "words"
+      req: true
+      type: "`$ARRAY`"
     }
   ]
 
@@ -58,7 +71,7 @@ main: kit: entity: biased: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.sentiment`"
           }
         }
       ]
@@ -110,7 +123,7 @@ main: kit: entity: biased: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.sentiment`"
           }
         }
       ]

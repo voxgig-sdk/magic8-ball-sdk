@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import Magic8BallSDK
-from core.error import Magic8BallError
-from core.result import Magic8BallResult
-from core.response import Magic8BallResponse
-from core.spec import Magic8BallSpec
-from feature.base_feature import Magic8BallBaseFeature
+from projectname_sdk.core.error import Magic8BallError
+from projectname_sdk.core.result import Magic8BallResult
+from projectname_sdk.core.response import Magic8BallResponse
+from projectname_sdk.core.spec import Magic8BallSpec
+from projectname_sdk.feature.base_feature import Magic8BallBaseFeature
 
 
 def _client():

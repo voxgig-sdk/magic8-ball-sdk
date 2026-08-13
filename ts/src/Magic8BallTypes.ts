@@ -6,27 +6,42 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Biased {
-  locale: string
-  lucky: boolean
+  calculation: any[]
+  comparative: number
+  locale?: string
+  lucky?: boolean
+  negative: any[]
+  positive: any[]
   question: string
-  reading: string
-  sentiment: Record<string, any>
+  score: number
+  tokens: any[]
+  words: any[]
 }
 
 export interface BiasedLoadMatch {
+  calculation?: any[]
+  comparative?: number
   locale?: string
   lucky?: boolean
+  negative?: any[]
+  positive?: any[]
   question?: string
-  reading?: string
-  sentiment?: Record<string, any>
+  score?: number
+  tokens?: any[]
+  words?: any[]
 }
 
 export interface BiasedCreateData {
-  locale: string
-  lucky: boolean
+  calculation: any[]
+  comparative: number
+  locale?: string
+  lucky?: boolean
+  negative: any[]
+  positive: any[]
   question: string
-  reading: string
-  sentiment: Record<string, any>
+  score: number
+  tokens: any[]
+  words: any[]
 }
 
 export interface Category {

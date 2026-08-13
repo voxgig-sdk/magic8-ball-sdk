@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = Magic8BallSDK.test()
-const biased = await client.Biased().load()
-// biased is a bare Biased populated with mock data
-console.log(biased)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = Magic8BallSDK.test({
+  entity: {
+    category: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const categorys = await client.Category().list()
+// categorys is an array of Category entities, populated with mock data
+// — call categorys[0].data() for the record itself
+console.log(categorys)
 ```
 
 ### Python
 
 ```python
 client = Magic8BallSDK.test()
-biased = client.Biased().load()
-print(biased)
+categorys = client.Category().list()
+print(categorys)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(biased)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = Magic8BallSDK::test([
-    "entity" => ["biased" => ["test01" => []]],
+    "entity" => ["category" => ["test01" => []]],
 ]);
-$biased = $client->Biased()->load();
+$categorys = $client->Category()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Biased(nil).Load(
+result, err := client.Category(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Biased(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = Magic8BallSDK.test({
-  "entity" => { "biased" => { "test01" => {} } },
+  "entity" => { "category" => { "test01" => {} } },
 })
-biased = client.Biased.load()
+categorys = client.Category.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Biased():load()
+local results, err = client:Category():list()
 ```
 
 ## Packages
@@ -185,7 +194,7 @@ require_once 'magic8ball_sdk.php';
 $client = new Magic8BallSDK();
 
 
-// Load a specific biased (returns the bare record; throws on error)
+// Load a specific biased (returns the ENTITY; call data_get() for the record; throws on error)
 $biased = $client->Biased()->load();
 print_r($biased);
 ```
@@ -213,7 +222,7 @@ require_relative "Magic8Ball_sdk"
 client = Magic8BallSDK.new
 
 
-# Load a specific biased (returns the bare record; raises on error)
+# Load a specific biased (returns the ENTITY; call data_get for the record)
 biased = client.Biased.load()
 puts biased
 ```
@@ -347,6 +356,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://www.eightballapi.com/docs](https://www.eightballapi.com/docs)
 

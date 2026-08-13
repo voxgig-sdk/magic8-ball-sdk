@@ -35,7 +35,7 @@ $client = new Magic8BallSDK();
 
 ```php
 try {
-    // load() returns the bare Biased record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Biased record (throws on error).
     $biased = $client->Biased()->load();
     print_r($biased);
 } catch (\Throwable $err) {
@@ -46,8 +46,8 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Biased record.
-$created = $client->Biased()->create(["locale" => "example_locale", "lucky" => true, "question" => "example_question", "reading" => "example_reading", "sentiment" => []]);
+// create() returns the ENTITY — call data_get() for the created Biased record.
+$created = $client->Biased()->create(["calculation" => [], "comparative" => 1, "negative" => [], "positive" => [], "question" => "example_question", "score" => 1, "tokens" => [], "words" => []]);
 
 ```
 
@@ -59,7 +59,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $biased = $client->Biased()->load();
+    $categorys = $client->Category()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -131,9 +131,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = Magic8BallSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$biased = $client->Biased()->load();
-print_r($biased);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$category = $client->Category()->list();
+print_r($category);
 ```
 
 ### Use a custom fetch function
@@ -235,7 +236,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -257,11 +258,16 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
+| `calculation` |  |
+| `comparative` |  |
 | `locale` |  |
 | `lucky` |  |
+| `negative` |  |
+| `positive` |  |
 | `question` |  |
-| `reading` |  |
-| `sentiment` |  |
+| `score` |  |
+| `tokens` |  |
+| `words` |  |
 
 Operations: Create, Load.
 
@@ -321,16 +327,21 @@ Create an instance: `$biased = $client->Biased();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `calculation` | `array` |  |
+| `comparative` | `float` |  |
 | `locale` | `string` |  |
 | `lucky` | `bool` |  |
+| `negative` | `array` |  |
+| `positive` | `array` |  |
 | `question` | `string` |  |
-| `reading` | `string` |  |
-| `sentiment` | `array` |  |
+| `score` | `float` |  |
+| `tokens` | `array` |  |
+| `words` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Biased record (throws on error).
+// load() returns the ENTITY — call data_get() for the Biased record (throws on error).
 $biased = $client->Biased()->load();
 ```
 
@@ -338,11 +349,14 @@ $biased = $client->Biased()->load();
 
 ```php
 $biased = $client->Biased()->create([
-    "locale" => null, // string
-    "lucky" => null, // bool
+    "calculation" => null, // array
+    "comparative" => null, // float
+    "negative" => null, // array
+    "positive" => null, // array
     "question" => null, // string
-    "reading" => null, // string
-    "sentiment" => null, // array
+    "score" => null, // float
+    "tokens" => null, // array
+    "words" => null, // array
 ]);
 ```
 
@@ -395,7 +409,7 @@ Create an instance: `$category_fortune = $client->CategoryFortune();`
 #### Example: Load
 
 ```php
-// load() returns the bare CategoryFortune record (throws on error).
+// load() returns the ENTITY — call data_get() for the CategoryFortune record (throws on error).
 $category_fortune = $client->CategoryFortune()->load();
 ```
 
@@ -477,15 +491,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$biased = $client->Biased();
-$biased->load();
+$category = $client->Category();
+$category->list();
 
-// $biased->data_get() now returns the biased data from the last load
-// $biased->match_get() returns the last match criteria
+// $category->data_get() now returns the category data from the last list
+// $category->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

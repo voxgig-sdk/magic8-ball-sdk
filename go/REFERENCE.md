@@ -110,21 +110,16 @@ fmt.Println(biased.GetName()) // "biased"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `string` | Yes |  |
-| `lucky` | `bool` | Yes |  |
+| `calculation` | `[]any` | Yes |  |
+| `comparative` | `float64` | Yes |  |
+| `locale` | `string` | No |  |
+| `lucky` | `bool` | No |  |
+| `negative` | `[]any` | Yes |  |
+| `positive` | `[]any` | Yes |  |
 | `question` | `string` | Yes |  |
-| `reading` | `string` | Yes |  |
-| `sentiment` | `map[string]any` | Yes |  |
-
-### Field Usage by Operation
-
-| Field | load | create |
-| --- | --- | --- |
-| `locale` | - | Yes |
-| `lucky` | - | Yes |
-| `question` | - | - |
-| `reading` | - | - |
-| `sentiment` | - | - |
+| `score` | `float64` | Yes |  |
+| `tokens` | `[]any` | Yes |  |
+| `words` | `[]any` | Yes |  |
 
 ### Operations
 
@@ -146,11 +141,14 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Biased(nil).Create(map[string]any{
-    "locale": "example_locale",
-    "lucky": true,
+    "calculation": []any{},
+    "comparative": 1,
+    "negative": []any{},
+    "positive": []any{},
     "question": "example_question",
-    "reading": "example_reading",
-    "sentiment": map[string]any{},
+    "score": 1,
+    "tokens": []any{},
+    "words": []any{},
 }, nil)
 if err != nil {
     panic(err)

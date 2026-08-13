@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ Magic8BallUtility.registrar = ->(u) {
   u.prepare_params = Magic8BallUtilities::PrepareParams
   u.prepare_path = Magic8BallUtilities::PreparePath
   u.prepare_query = Magic8BallUtilities::PrepareQuery
+  u.graphql_body = Magic8BallUtilities::GraphqlBody
+  u.graphql_errors = Magic8BallUtilities::GraphqlErrors
   u.result_basic = Magic8BallUtilities::ResultBasic
   u.result_body = Magic8BallUtilities::ResultBody
   u.result_headers = Magic8BallUtilities::ResultHeaders

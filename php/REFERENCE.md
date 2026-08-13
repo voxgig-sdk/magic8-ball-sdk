@@ -104,21 +104,16 @@ $biased = $client->Biased();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `string` | Yes |  |
-| `lucky` | `bool` | Yes |  |
+| `calculation` | `array` | Yes |  |
+| `comparative` | `float` | Yes |  |
+| `locale` | `string` | No |  |
+| `lucky` | `bool` | No |  |
+| `negative` | `array` | Yes |  |
+| `positive` | `array` | Yes |  |
 | `question` | `string` | Yes |  |
-| `reading` | `string` | Yes |  |
-| `sentiment` | `array` | Yes |  |
-
-### Field Usage by Operation
-
-| Field | load | create |
-| --- | --- | --- |
-| `locale` | - | Yes |
-| `lucky` | - | Yes |
-| `question` | - | - |
-| `reading` | - | - |
-| `sentiment` | - | - |
+| `score` | `float` | Yes |  |
+| `tokens` | `array` | Yes |  |
+| `words` | `array` | Yes |  |
 
 ### Operations
 
@@ -128,11 +123,14 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Biased()->create([
-  "locale" => null, // string
-  "lucky" => null, // bool
+  "calculation" => null, // array
+  "comparative" => null, // float
+  "negative" => null, // array
+  "positive" => null, // array
   "question" => null, // string
-  "reading" => null, // string
-  "sentiment" => null, // array
+  "score" => null, // float
+  "tokens" => null, // array
+  "words" => null, // array
 ]);
 ```
 

@@ -58,7 +58,7 @@ func main() {
     fmt.Println(biased)
 
     // Create a biased.
-    created, err := client.Biased(nil).Create(map[string]any{"locale": "example_locale", "lucky": true, "question": "example_question", "reading": "example_reading", "sentiment": map[string]any{}}, nil)
+    created, err := client.Biased(nil).Create(map[string]any{"calculation": []any{}, "comparative": 1, "negative": []any{}, "positive": []any{}, "question": "example_question", "score": 1, "tokens": []any{}, "words": []any{}}, nil)
     if err != nil {
         panic(err)
     }
@@ -73,12 +73,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-biased, err := client.Biased(nil).Load(nil, nil)
+categorys, err := client.Category(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = biased
+_ = categorys
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -142,13 +142,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-biased, err := client.Biased(nil).Load(
+category, err := client.Category(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(biased) // the returned mock data
+fmt.Println(category) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -271,11 +271,16 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
+| `"calculation"` |  |
+| `"comparative"` |  |
 | `"locale"` |  |
 | `"lucky"` |  |
+| `"negative"` |  |
+| `"positive"` |  |
 | `"question"` |  |
-| `"reading"` |  |
-| `"sentiment"` |  |
+| `"score"` |  |
+| `"tokens"` |  |
+| `"words"` |  |
 
 Operations: Create, Load.
 
@@ -335,11 +340,16 @@ Create an instance: `biased := client.Biased(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `calculation` | `[]any` |  |
+| `comparative` | `float64` |  |
 | `locale` | `string` |  |
 | `lucky` | `bool` |  |
+| `negative` | `[]any` |  |
+| `positive` | `[]any` |  |
 | `question` | `string` |  |
-| `reading` | `string` |  |
-| `sentiment` | `map[string]any` |  |
+| `score` | `float64` |  |
+| `tokens` | `[]any` |  |
+| `words` | `[]any` |  |
 
 #### Example: Load
 
@@ -355,11 +365,14 @@ fmt.Println(biased) // the loaded record
 
 ```go
 result, err := client.Biased(nil).Create(map[string]any{
-    "locale": "example_locale",
-    "lucky": true,
+    "calculation": []any{},
+    "comparative": 1,
+    "negative": []any{},
+    "positive": []any{},
     "question": "example_question",
-    "reading": "example_reading",
-    "sentiment": map[string]any{},
+    "score": 1,
+    "tokens": []any{},
+    "words": []any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -501,15 +514,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-biased := client.Biased(nil)
-biased.Load(nil, nil)
+category := client.Category(nil)
+category.List(nil, nil)
 
-// biased.Data() now returns the biased data from the last load
-// biased.Match() returns the last match criteria
+// category.Data() now returns the category data from the last list
+// category.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import Magic8BallControl
-from core.error import Magic8BallError
-from core.result import Magic8BallResult
-from core.spec import Magic8BallSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import Magic8BallControl
+from projectname_sdk.core.error import Magic8BallError
+from projectname_sdk.core.result import Magic8BallResult
+from projectname_sdk.core.spec import Magic8BallSpec
 
 
 # True when this SDK was generated with the named feature.

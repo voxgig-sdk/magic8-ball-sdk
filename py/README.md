@@ -38,7 +38,7 @@ client = Magic8BallSDK()
 
 ### 3. Load a biased
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -51,8 +51,8 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
-created = client.Biased().create({"locale": "example_locale", "lucky": True, "question": "example_question", "reading": "example_reading", "sentiment": {}})
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.Biased().create({"calculation": [], "comparative": 1, "negative": [], "positive": [], "question": "example_question", "score": 1, "tokens": [], "words": []})
 
 ```
 
@@ -63,10 +63,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    biased = client.Biased().load()
-    print(biased)
+    categorys = client.Category().list()
+    print(categorys)
 except Exception as err:
-    print(f"load failed: {err}")
+    print(f"list failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -130,9 +130,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = Magic8BallSDK.test()
 
-# Entity ops return the bare record and raise on error.
-biased = client.Biased().load()
-# biased contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+category = client.Category().list()
+# category contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -231,7 +232,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -253,11 +254,16 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
+| `calculation` |  |
+| `comparative` |  |
 | `locale` |  |
 | `lucky` |  |
+| `negative` |  |
+| `positive` |  |
 | `question` |  |
-| `reading` |  |
-| `sentiment` |  |
+| `score` |  |
+| `tokens` |  |
+| `words` |  |
 
 Operations: Create, Load.
 
@@ -317,11 +323,16 @@ Create an instance: `biased = client.Biased()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `calculation` | `list` |  |
+| `comparative` | `float` |  |
 | `locale` | `str` |  |
 | `lucky` | `bool` |  |
+| `negative` | `list` |  |
+| `positive` | `list` |  |
 | `question` | `str` |  |
-| `reading` | `str` |  |
-| `sentiment` | `dict` |  |
+| `score` | `float` |  |
+| `tokens` | `list` |  |
+| `words` | `list` |  |
 
 #### Example: Load
 
@@ -333,11 +344,14 @@ biased = client.Biased().load()
 
 ```python
 biased = client.Biased().create({
-    "locale": "example_locale",  # str
-    "lucky": True,  # bool
+    "calculation": [],  # list
+    "comparative": 1,  # float
+    "negative": [],  # list
+    "positive": [],  # list
     "question": "example_question",  # str
-    "reading": "example_reading",  # str
-    "sentiment": {},  # dict
+    "score": 1,  # float
+    "tokens": [],  # list
+    "words": [],  # list
 })
 ```
 
@@ -469,15 +483,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-biased = client.Biased()
-biased.load()
+category = client.Category()
+category.list()
 
-# biased.data_get() now returns the biased data from the last load
-# biased.match_get() returns the last match criteria
+# category.data_get() now returns the category data from the last list
+# category.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

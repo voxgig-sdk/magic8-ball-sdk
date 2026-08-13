@@ -30,50 +30,73 @@ module Magic8BallConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "locale",
-              "op" => {
-                "create" => {
-                  "req" => false,
-                  "type" => "`$STRING`",
-                },
-              },
+              "name" => "calculation",
               "req" => true,
-              "type" => "`$STRING`",
+              "type" => "`$ARRAY`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "lucky",
-              "op" => {
-                "create" => {
-                  "req" => false,
-                  "type" => "`$BOOLEAN`",
-                },
-              },
+              "name" => "comparative",
               "req" => true,
-              "type" => "`$BOOLEAN`",
+              "type" => "`$NUMBER`",
               "index$" => 1,
+            },
+            {
+              "active" => true,
+              "name" => "locale",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 2,
+            },
+            {
+              "active" => true,
+              "name" => "lucky",
+              "req" => false,
+              "type" => "`$BOOLEAN`",
+              "index$" => 3,
+            },
+            {
+              "active" => true,
+              "name" => "negative",
+              "req" => true,
+              "type" => "`$ARRAY`",
+              "index$" => 4,
+            },
+            {
+              "active" => true,
+              "name" => "positive",
+              "req" => true,
+              "type" => "`$ARRAY`",
+              "index$" => 5,
             },
             {
               "active" => true,
               "name" => "question",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 2,
+              "index$" => 6,
             },
             {
               "active" => true,
-              "name" => "reading",
+              "name" => "score",
               "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 3,
+              "type" => "`$NUMBER`",
+              "index$" => 7,
             },
             {
               "active" => true,
-              "name" => "sentiment",
+              "name" => "tokens",
               "req" => true,
-              "type" => "`$OBJECT`",
-              "index$" => 4,
+              "type" => "`$ARRAY`",
+              "index$" => 8,
+            },
+            {
+              "active" => true,
+              "name" => "words",
+              "req" => true,
+              "type" => "`$ARRAY`",
+              "index$" => 9,
             },
           ],
           "name" => "biased",
@@ -85,6 +108,7 @@ module Magic8BallConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/biased",
                   "parts" => [
@@ -94,7 +118,7 @@ module Magic8BallConfig
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.sentiment`",
                   },
                   "index$" => 0,
                 },
@@ -138,6 +162,7 @@ module Magic8BallConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/biased",
                   "parts" => [
@@ -153,7 +178,7 @@ module Magic8BallConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.sentiment`",
                   },
                   "index$" => 0,
                 },
@@ -217,6 +242,7 @@ module Magic8BallConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/categories",
                   "parts" => [
@@ -304,6 +330,7 @@ module Magic8BallConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/{category}",
                   "parts" => [
@@ -337,6 +364,7 @@ module Magic8BallConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api",
                   "parts" => [

@@ -61,11 +61,11 @@ function category_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["MAGIC_BALL_TEST_CATEGORY_ENTID"] = {},
-    ["MAGIC_BALL_TEST_LIVE"] = "FALSE",
+    ["MAGIC8_BALL_TEST_CATEGORY_ENTID"] = {},
+    ["MAGIC8_BALL_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["MAGIC_BALL_TEST_LIVE"] == "TRUE"
+  local live = env["MAGIC8_BALL_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

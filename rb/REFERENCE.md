@@ -105,21 +105,16 @@ biased = client.Biased
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `String` | Yes |  |
-| `lucky` | `Boolean` | Yes |  |
+| `calculation` | `Array` | Yes |  |
+| `comparative` | `Float` | Yes |  |
+| `locale` | `String` | No |  |
+| `lucky` | `Boolean` | No |  |
+| `negative` | `Array` | Yes |  |
+| `positive` | `Array` | Yes |  |
 | `question` | `String` | Yes |  |
-| `reading` | `String` | Yes |  |
-| `sentiment` | `Hash` | Yes |  |
-
-### Field Usage by Operation
-
-| Field | load | create |
-| --- | --- | --- |
-| `locale` | - | Yes |
-| `lucky` | - | Yes |
-| `question` | - | - |
-| `reading` | - | - |
-| `sentiment` | - | - |
+| `score` | `Float` | Yes |  |
+| `tokens` | `Array` | Yes |  |
+| `words` | `Array` | Yes |  |
 
 ### Operations
 
@@ -129,11 +124,14 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Biased.create({
-  "locale" => "example_locale", # String
-  "lucky" => true, # Boolean
+  "calculation" => [], # Array
+  "comparative" => 1, # Float
+  "negative" => [], # Array
+  "positive" => [], # Array
   "question" => "example_question", # String
-  "reading" => "example_reading", # String
-  "sentiment" => {}, # Hash
+  "score" => 1, # Float
+  "tokens" => [], # Array
+  "words" => [], # Array
 })
 ```
 

@@ -2,27 +2,42 @@
   "existing": {
     "biased": {
       "BIASED00": {
-        "locale": "s32",
+        "calculation": [],
+        "comparative": 101,
+        "locale": "s66",
         "lucky": false,
-        "question": "s34",
-        "reading": "s35",
-        "sentiment": {},
+        "negative": [],
+        "positive": [],
+        "question": "s6a",
+        "score": 107,
+        "tokens": [],
+        "words": [],
         "id": "BIASED00"
       },
       "BIASED01": {
-        "locale": "s64",
+        "calculation": [],
+        "comparative": 201,
+        "locale": "sca",
         "lucky": false,
-        "question": "s66",
-        "reading": "s67",
-        "sentiment": {},
+        "negative": [],
+        "positive": [],
+        "question": "sce",
+        "score": 207,
+        "tokens": [],
+        "words": [],
         "id": "BIASED01"
       },
       "BIASED02": {
-        "locale": "s96",
+        "calculation": [],
+        "comparative": 301,
+        "locale": "s12e",
         "lucky": false,
-        "question": "s98",
-        "reading": "s99",
-        "sentiment": {},
+        "negative": [],
+        "positive": [],
+        "question": "s132",
+        "score": 307,
+        "tokens": [],
+        "words": [],
         "id": "BIASED02"
       }
     }
@@ -30,11 +45,16 @@
   "new": {
     "biased": {
       "biased_ref01": {
-        "locale": "sc8",
+        "calculation": [],
+        "comparative": 401,
+        "locale": "s192",
         "lucky": false,
-        "question": "sca",
-        "reading": "scb",
-        "sentiment": {}
+        "negative": [],
+        "positive": [],
+        "question": "s196",
+        "score": 407,
+        "tokens": [],
+        "words": []
       }
     }
   }

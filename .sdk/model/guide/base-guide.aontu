@@ -8,7 +8,9 @@ guide: {
   entity: biased: {
     path: "/api/biased": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.sentiment`")|top
       op: load: method: *GET
+      op: load: transform: res: *("`body.sentiment`")|top
     }
   }
 

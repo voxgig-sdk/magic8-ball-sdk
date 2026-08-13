@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from magic8ball_sdk.utility.voxgig_struct import voxgig_struct as vs
 from magic8ball_sdk import Magic8BallSDK
-from core import helpers
+from magic8ball_sdk.core import helpers
 from test import runner
 
 
@@ -66,11 +66,11 @@ def _category_fortune_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "MAGIC_BALL_TEST_CATEGORY_FORTUNE_ENTID": {},
-        "MAGIC_BALL_TEST_LIVE": "FALSE",
+        "MAGIC8_BALL_TEST_CATEGORY_FORTUNE_ENTID": {},
+        "MAGIC8_BALL_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("MAGIC_BALL_TEST_LIVE") == "TRUE"
+    live = env.get("MAGIC8_BALL_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

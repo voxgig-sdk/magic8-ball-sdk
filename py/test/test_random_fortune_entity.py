@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from magic8ball_sdk.utility.voxgig_struct import voxgig_struct as vs
 from magic8ball_sdk import Magic8BallSDK
-from core import helpers
+from magic8ball_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -36,7 +36,7 @@ class TestRandomFortuneEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set MAGIC_BALL_TEST_RANDOM_FORTUNE_ENTID JSON to run live")
+                        "set MAGIC8_BALL_TEST_RANDOM_FORTUNE_ENTID JSON to run live")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -77,21 +77,21 @@ def _random_fortune_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "MAGIC_BALL_TEST_RANDOM_FORTUNE_ENTID")
+        "MAGIC8_BALL_TEST_RANDOM_FORTUNE_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "MAGIC_BALL_TEST_RANDOM_FORTUNE_ENTID": idmap,
-        "MAGIC_BALL_TEST_LIVE": "FALSE",
-        "MAGIC_BALL_TEST_EXPLAIN": "FALSE",
+        "MAGIC8_BALL_TEST_RANDOM_FORTUNE_ENTID": idmap,
+        "MAGIC8_BALL_TEST_LIVE": "FALSE",
+        "MAGIC8_BALL_TEST_EXPLAIN": "FALSE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("MAGIC_BALL_TEST_RANDOM_FORTUNE_ENTID"))
+        env.get("MAGIC8_BALL_TEST_RANDOM_FORTUNE_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("MAGIC_BALL_TEST_LIVE") == "TRUE":
+    if env.get("MAGIC8_BALL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
             },
@@ -99,13 +99,13 @@ def _random_fortune_basic_setup(extra):
         ])
         client = Magic8BallSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("MAGIC_BALL_TEST_LIVE") == "TRUE"
+    _live = env.get("MAGIC8_BALL_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("MAGIC_BALL_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("MAGIC8_BALL_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

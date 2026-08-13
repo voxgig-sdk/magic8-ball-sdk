@@ -7,25 +7,40 @@
 -- edit by hand.
 
 ---@class Biased
----@field locale string
----@field lucky boolean
----@field question string
----@field reading string
----@field sentiment table
-
----@class BiasedLoadMatch
+---@field calculation table
+---@field comparative number
 ---@field locale? string
 ---@field lucky? boolean
+---@field negative table
+---@field positive table
+---@field question string
+---@field score number
+---@field tokens table
+---@field words table
+
+---@class BiasedLoadMatch
+---@field calculation? table
+---@field comparative? number
+---@field locale? string
+---@field lucky? boolean
+---@field negative? table
+---@field positive? table
 ---@field question? string
----@field reading? string
----@field sentiment? table
+---@field score? number
+---@field tokens? table
+---@field words? table
 
 ---@class BiasedCreateData
----@field locale string
----@field lucky boolean
+---@field calculation table
+---@field comparative number
+---@field locale? string
+---@field lucky? boolean
+---@field negative table
+---@field positive table
 ---@field question string
----@field reading string
----@field sentiment table
+---@field score number
+---@field tokens table
+---@field words table
 
 ---@class Category
 ---@field locale string

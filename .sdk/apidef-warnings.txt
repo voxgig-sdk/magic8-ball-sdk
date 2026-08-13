@@ -1,6 +1,6 @@
 {
   point: "warning"
-  when: 1784312260200
+  when: 1786647478359
   note: "No paths defined for entity=random_fortune"
   entm: {
     name: "random_fortune"

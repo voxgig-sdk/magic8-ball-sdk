@@ -34,7 +34,7 @@ client = Magic8BallSDK.new
 
 ```ruby
 begin
-  # load returns the bare Biased record (raises on error).
+  # load returns the ENTITY — call data_get for the Biased record (raises on error).
   biased = client.Biased.load()
   puts biased
 rescue => err
@@ -45,8 +45,8 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Biased record.
-created = client.Biased.create({ "locale" => "example_locale", "lucky" => true, "question" => "example_question", "reading" => "example_reading", "sentiment" => {} })
+# create returns the ENTITY — call data_get for the created Biased record.
+created = client.Biased.create({ "calculation" => [], "comparative" => 1, "negative" => [], "positive" => [], "question" => "example_question", "score" => 1, "tokens" => [], "words" => [] })
 
 ```
 
@@ -57,9 +57,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  biased = client.Biased.load()
+  categorys = client.Category.list()
 rescue => err
-  warn "load failed: #{err}"
+  warn "list failed: #{err}"
 end
 ```
 
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = Magic8BallSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-biased = client.Biased.load()
-puts biased
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+category = client.Category.list()
+puts category
 ```
 
 ### Use a custom fetch function
@@ -247,11 +248,16 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
+| `calculation` |  |
+| `comparative` |  |
 | `locale` |  |
 | `lucky` |  |
+| `negative` |  |
+| `positive` |  |
 | `question` |  |
-| `reading` |  |
-| `sentiment` |  |
+| `score` |  |
+| `tokens` |  |
+| `words` |  |
 
 Operations: Create, Load.
 
@@ -311,16 +317,21 @@ Create an instance: `biased = client.Biased`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `calculation` | `Array` |  |
+| `comparative` | `Float` |  |
 | `locale` | `String` |  |
 | `lucky` | `Boolean` |  |
+| `negative` | `Array` |  |
+| `positive` | `Array` |  |
 | `question` | `String` |  |
-| `reading` | `String` |  |
-| `sentiment` | `Hash` |  |
+| `score` | `Float` |  |
+| `tokens` | `Array` |  |
+| `words` | `Array` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Biased record (raises on error).
+# load returns the ENTITY — call data_get for the Biased record (raises on error).
 biased = client.Biased.load()
 ```
 
@@ -328,11 +339,14 @@ biased = client.Biased.load()
 
 ```ruby
 biased = client.Biased.create({
-  "locale" => "example_locale", # String
-  "lucky" => true, # Boolean
+  "calculation" => [], # Array
+  "comparative" => 1, # Float
+  "negative" => [], # Array
+  "positive" => [], # Array
   "question" => "example_question", # String
-  "reading" => "example_reading", # String
-  "sentiment" => {}, # Hash
+  "score" => 1, # Float
+  "tokens" => [], # Array
+  "words" => [], # Array
 })
 ```
 
@@ -385,7 +399,7 @@ Create an instance: `category_fortune = client.CategoryFortune`
 #### Example: Load
 
 ```ruby
-# load returns the bare CategoryFortune record (raises on error).
+# load returns the ENTITY — call data_get for the CategoryFortune record (raises on error).
 category_fortune = client.CategoryFortune.load()
 ```
 
@@ -467,15 +481,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-biased = client.Biased
-biased.load()
+category = client.Category
+category.list()
 
-# biased.data_get now returns the biased data from the last load
-# biased.match_get returns the last match criteria
+# category.data_get now returns the category data from the last list
+# category.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

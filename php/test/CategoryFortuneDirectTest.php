@@ -75,11 +75,11 @@ function category_fortune_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "MAGIC_BALL_TEST_CATEGORY_FORTUNE_ENTID" => [],
-        "MAGIC_BALL_TEST_LIVE" => "FALSE",
+        "MAGIC8_BALL_TEST_CATEGORY_FORTUNE_ENTID" => [],
+        "MAGIC8_BALL_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["MAGIC_BALL_TEST_LIVE"] === "TRUE";
+    $live = $env["MAGIC8_BALL_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

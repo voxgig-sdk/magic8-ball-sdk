@@ -45,7 +45,7 @@ print(biased)
 
 ```lua
 -- Create
-local created, err = client:Biased():create({ locale = "example_locale", lucky = true, question = "example_question", reading = "example_reading", sentiment = {} })
+local created, err = client:Biased():create({ calculation = {}, comparative = 1, negative = {}, positive = {}, question = "example_question", score = 1, tokens = {}, words = {} })
 if err then error(err) end
 
 ```
@@ -57,7 +57,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local biased, err = client:Biased():load()
+local categorys, err = client:Category():list()
 if err then error(err) end
 ```
 
@@ -115,7 +115,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Biased():load()
+local result, err = client:Category():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -240,11 +240,16 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
+| `calculation` |  |
+| `comparative` |  |
 | `locale` |  |
 | `lucky` |  |
+| `negative` |  |
+| `positive` |  |
 | `question` |  |
-| `reading` |  |
-| `sentiment` |  |
+| `score` |  |
+| `tokens` |  |
+| `words` |  |
 
 Operations: Create, Load.
 
@@ -304,11 +309,16 @@ Create an instance: `local biased = client:Biased(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `calculation` | `table` |  |
+| `comparative` | `number` |  |
 | `locale` | `string` |  |
 | `lucky` | `boolean` |  |
+| `negative` | `table` |  |
+| `positive` | `table` |  |
 | `question` | `string` |  |
-| `reading` | `string` |  |
-| `sentiment` | `table` |  |
+| `score` | `number` |  |
+| `tokens` | `table` |  |
+| `words` | `table` |  |
 
 #### Example: Load
 
@@ -320,11 +330,14 @@ local biased, err = client:Biased():load()
 
 ```lua
 local biased, err = client:Biased():create({
-  locale = "example_locale", -- string
-  lucky = true, -- boolean
+  calculation = {}, -- table
+  comparative = 1, -- number
+  negative = {}, -- table
+  positive = {}, -- table
   question = "example_question", -- string
-  reading = "example_reading", -- string
-  sentiment = {}, -- table
+  score = 1, -- number
+  tokens = {}, -- table
+  words = {}, -- table
 })
 ```
 
@@ -457,15 +470,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local biased = client:Biased()
-biased:load()
+local category = client:Category()
+category:list()
 
--- biased:data_get() now returns the biased data from the last load
--- biased:match_get() returns the last match criteria
+-- category:data_get() now returns the category data from the last list
+-- category:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
