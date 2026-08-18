@@ -254,7 +254,7 @@ local category_fortune = client:CategoryFortune(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:CategoryFortune():load()
+local result, err = client:CategoryFortune():load({ category = "category" })
 ```
 
 ### Common Methods

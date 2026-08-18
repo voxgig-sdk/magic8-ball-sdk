@@ -1,7 +1,30 @@
 # Magic8Ball SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "Magic8Ball",
@@ -29,74 +52,52 @@ def make_config():
       "biased": {
         "fields": [
           {
-            "active": True,
             "name": "calculation",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "comparative",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "locale",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "lucky",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "negative",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "positive",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "question",
             "req": True,
             "type": "`$STRING`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "score",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "tokens",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "words",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 9,
           },
         ],
         "name": "biased",
@@ -106,7 +107,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -120,39 +120,31 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.sentiment`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "create",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "locale",
                       "orig": "locale",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "lucky",
                       "orig": "lucky",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "example": "Will I win the lottery?",
                       "kind": "query",
                       "name": "question",
@@ -180,10 +172,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.sentiment`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -193,32 +183,24 @@ def make_config():
       "category": {
         "fields": [
           {
-            "active": True,
             "name": "locale",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "negative",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "neutral",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "positive",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 3,
           },
         ],
         "name": "category",
@@ -228,16 +210,13 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "locale",
                       "orig": "locale",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -258,10 +237,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -271,31 +248,24 @@ def make_config():
       "category_fortune": {
         "fields": [
           {
-            "active": True,
             "name": "category",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "locale",
             "op": {
               "load": {
-                "req": False,
                 "type": "`$STRING`",
               },
             },
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "reading",
             "req": True,
             "type": "`$STRING`",
-            "index$": 2,
           },
         ],
         "name": "category_fortune",
@@ -305,27 +275,22 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "category",
                       "orig": "category",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "locale",
                       "orig": "locale",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -347,19 +312,15 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "locale",
                       "orig": "locale",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -379,10 +340,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {

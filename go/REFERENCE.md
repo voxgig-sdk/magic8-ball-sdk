@@ -264,7 +264,7 @@ fmt.Println(categoryFortune.GetName()) // "category_fortune"
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.CategoryFortune(nil).Load(nil, nil)
+result, err := client.CategoryFortune(nil).Load(map[string]any{"category": "category"}, nil)
 if err != nil {
     panic(err)
 }

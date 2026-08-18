@@ -256,7 +256,7 @@ $category_fortune = $client->CategoryFortune();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->CategoryFortune()->load();
+$result = $client->CategoryFortune()->load(["category" => "category"]);
 ```
 
 ### Common Methods

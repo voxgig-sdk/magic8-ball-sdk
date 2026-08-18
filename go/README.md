@@ -432,7 +432,7 @@ Create an instance: `categoryFortune := client.CategoryFortune(nil)`
 #### Example: Load
 
 ```go
-categoryFortune, err := client.CategoryFortune(nil).Load(nil, nil)
+categoryFortune, err := client.CategoryFortune(nil).Load(map[string]any{"category": "category"}, nil)
 if err != nil {
     panic(err)
 }

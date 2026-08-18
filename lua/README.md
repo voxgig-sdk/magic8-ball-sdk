@@ -33,12 +33,14 @@ local sdk = require("magic8-ball_sdk")
 local client = sdk.new()
 ```
 
-### 3. Load a biased
+### 3. Load a categoryfortune
+
+CategoryFortune is nested under category, so provide the `category`.
 
 ```lua
-local biased, err = client:Biased():load()
+local categoryfortune, err = client:CategoryFortune():load({ category = "example_category" })
 if err then error(err) end
-print(biased)
+print(categoryfortune)
 ```
 
 ### 4. Create, update, and remove
@@ -389,7 +391,7 @@ Create an instance: `local category_fortune = client:CategoryFortune(nil)`
 #### Example: Load
 
 ```lua
-local category_fortune, err = client:CategoryFortune():load()
+local category_fortune, err = client:CategoryFortune():load({ category = "category" })
 ```
 
 

@@ -40,7 +40,7 @@ class Magic8BallSDK
         $utility = new Magic8BallUtility();
         $this->_utility = $utility;
 
-        $config = Magic8BallConfig::make_config();
+        $config = Magic8BallConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

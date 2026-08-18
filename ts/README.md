@@ -33,14 +33,17 @@ import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball'
 const client = new Magic8BallSDK()
 ```
 
-### 3. Load a biased
+### 3. Load a categoryfortune
 
+CategoryFortune is nested under category, so provide the `category`.
 `load()` returns the entity directly and throws on failure:
 
 ```ts
 try {
-  const biased = await client.Biased().load()
-  console.log(biased)
+  const categoryfortune = await client.CategoryFortune().load({
+    category: 'example_category',
+  })
+  console.log(categoryfortune)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -458,7 +461,7 @@ Create an instance: `const category_fortune = client.CategoryFortune()`
 #### Example: Load
 
 ```ts
-const category_fortune = await client.CategoryFortune().load()
+const category_fortune = await client.CategoryFortune().load({ category: 'category' })
 ```
 
 

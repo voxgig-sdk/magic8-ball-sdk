@@ -28,7 +28,7 @@ class Magic8BallSDK
     utility = Magic8BallUtility.new
     @_utility = utility
 
-    config = Magic8BallConfig.make_config
+    config = Magic8BallConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

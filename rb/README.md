@@ -30,13 +30,15 @@ require_relative "Magic8Ball_sdk"
 client = Magic8BallSDK.new
 ```
 
-### 3. Load a biased
+### 3. Load a categoryfortune
+
+CategoryFortune is nested under category, so provide the `category`.
 
 ```ruby
 begin
-  # load returns the ENTITY — call data_get for the Biased record (raises on error).
-  biased = client.Biased.load()
-  puts biased
+  # load returns the ENTITY — call data_get for the CategoryFortune record (raises on error).
+  categoryfortune = client.CategoryFortune.load({ "category" => "example_category" })
+  puts categoryfortune
 rescue => err
   warn "load failed: #{err}"
 end
@@ -400,7 +402,7 @@ Create an instance: `category_fortune = client.CategoryFortune`
 
 ```ruby
 # load returns the ENTITY — call data_get for the CategoryFortune record (raises on error).
-category_fortune = client.CategoryFortune.load()
+category_fortune = client.CategoryFortune.load({ "category" => "category" })
 ```
 
 

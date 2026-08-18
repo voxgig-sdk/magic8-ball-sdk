@@ -60,7 +60,7 @@
 ---@field reading string
 
 ---@class CategoryFortuneLoadMatch
----@field category? string
+---@field category string
 
 ---@class RandomFortune
 

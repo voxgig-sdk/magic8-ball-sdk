@@ -23,6 +23,7 @@ build = {
   modules = {
     ["magic8-ball_sdk"] = "magic8-ball_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

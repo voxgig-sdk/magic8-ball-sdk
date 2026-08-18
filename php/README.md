@@ -31,13 +31,15 @@ require_once 'magic8ball_sdk.php';
 $client = new Magic8BallSDK();
 ```
 
-### 3. Load a biased
+### 3. Load a categoryfortune
+
+CategoryFortune is nested under category, so provide the `category`.
 
 ```php
 try {
-    // load() returns the ENTITY — call data_get() for the Biased record (throws on error).
-    $biased = $client->Biased()->load();
-    print_r($biased);
+    // load() returns the ENTITY — call data_get() for the CategoryFortune record (throws on error).
+    $categoryfortune = $client->CategoryFortune()->load(["category" => "example_category"]);
+    print_r($categoryfortune);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -410,7 +412,7 @@ Create an instance: `$category_fortune = $client->CategoryFortune();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the CategoryFortune record (throws on error).
-$category_fortune = $client->CategoryFortune()->load();
+$category_fortune = $client->CategoryFortune()->load(["category" => "category"]);
 ```
 
 

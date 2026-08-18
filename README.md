@@ -119,9 +119,12 @@ import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball'
 
 const client = new Magic8BallSDK()
 
-// Load biased data (returns a Biased)
-const biased = await client.Biased().load()
-console.log(biased)
+
+// Load a specific categoryfortune (returns a CategoryFortune)
+const categoryfortune = await client.CategoryFortune().load({
+  category: 'example_category',
+})
+console.log(categoryfortune)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -206,12 +209,15 @@ import sdk "github.com/voxgig-sdk/magic8-ball-sdk/go"
 
 client := sdk.New()
 
-// Load biased data
-biased, err := client.Biased(nil).Load(nil, nil)
+
+// Load a specific categoryfortune
+categoryFortune, err := client.CategoryFortune(nil).Load(
+    map[string]any{"category": "example_category"}, nil,
+)
 if err != nil {
     panic(err)
 }
-fmt.Println(biased)
+fmt.Println(categoryFortune)
 ```
 
 ### Ruby

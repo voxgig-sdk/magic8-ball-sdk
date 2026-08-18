@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class Magic8BallConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -34,74 +57,52 @@ class Magic8BallConfig
         'biased' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'calculation',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'comparative',
               'req' => true,
               'type' => '`$NUMBER`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'locale',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'lucky',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'negative',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'positive',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'question',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'score',
               'req' => true,
               'type' => '`$NUMBER`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'tokens',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 8,
             ],
             [
-              'active' => true,
               'name' => 'words',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 9,
             ],
           ],
           'name' => 'biased',
@@ -111,7 +112,6 @@ class Magic8BallConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -125,39 +125,31 @@ class Magic8BallConfig
                     'req' => '`reqdata`',
                     'res' => '`body.sentiment`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
             'load' => [
               'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 'en',
                         'kind' => 'query',
                         'name' => 'locale',
                         'orig' => 'locale',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => false,
                         'kind' => 'query',
                         'name' => 'lucky',
                         'orig' => 'lucky',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'Will I win the lottery?',
                         'kind' => 'query',
                         'name' => 'question',
@@ -185,10 +177,8 @@ class Magic8BallConfig
                     'req' => '`reqdata`',
                     'res' => '`body.sentiment`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -198,32 +188,24 @@ class Magic8BallConfig
         'category' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'locale',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'negative',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'neutral',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'positive',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 3,
             ],
           ],
           'name' => 'category',
@@ -233,16 +215,13 @@ class Magic8BallConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 'en',
                         'kind' => 'query',
                         'name' => 'locale',
                         'orig' => 'locale',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -263,10 +242,8 @@ class Magic8BallConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -276,31 +253,24 @@ class Magic8BallConfig
         'category_fortune' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'category',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'locale',
               'op' => [
                 'load' => [
-                  'req' => false,
                   'type' => '`$STRING`',
                 ],
               ],
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'reading',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
           ],
           'name' => 'category_fortune',
@@ -310,27 +280,22 @@ class Magic8BallConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'params' => [
                       [
-                        'active' => true,
                         'kind' => 'param',
                         'name' => 'category',
                         'orig' => 'category',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'index$' => 0,
                       ],
                     ],
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 'en',
                         'kind' => 'query',
                         'name' => 'locale',
                         'orig' => 'locale',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -352,19 +317,15 @@ class Magic8BallConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 'en',
                         'kind' => 'query',
                         'name' => 'locale',
                         'orig' => 'locale',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -384,10 +345,8 @@ class Magic8BallConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 1,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [

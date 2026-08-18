@@ -15,7 +15,7 @@ require_relative "../Magic8Ball_sdk"
 module Magic8BallFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = Magic8BallConfig.make_config["feature"]
+    f = Magic8BallConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

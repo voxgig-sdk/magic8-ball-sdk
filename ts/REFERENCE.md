@@ -300,7 +300,7 @@ const category_fortune = client.CategoryFortune()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.CategoryFortune().load()
+const result = await client.CategoryFortune().load({ category: 'category' })
 ```
 
 ### Common Methods

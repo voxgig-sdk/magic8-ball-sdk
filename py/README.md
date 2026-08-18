@@ -36,14 +36,15 @@ from magic8ball_sdk import Magic8BallSDK
 client = Magic8BallSDK()
 ```
 
-### 3. Load a biased
+### 3. Load a categoryfortune
 
+CategoryFortune is nested under category, so provide the `category`.
 `load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
-    biased = client.Biased().load()
-    print(biased)
+    categoryfortune = client.CategoryFortune().load({"category": "example_category"})
+    print(categoryfortune)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -403,7 +404,7 @@ Create an instance: `category_fortune = client.CategoryFortune()`
 #### Example: Load
 
 ```python
-category_fortune = client.CategoryFortune().load()
+category_fortune = client.CategoryFortune().load({"category": "category"})
 ```
 
 

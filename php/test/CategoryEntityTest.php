@@ -40,7 +40,7 @@ class CategoryEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = Magic8BallConfig::make_config();
+        $cfg = Magic8BallConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = Magic8BallSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
