@@ -255,16 +255,16 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `calculation` |  |
-| `comparative` |  |
-| `locale` |  |
-| `lucky` |  |
-| `negative` |  |
-| `positive` |  |
-| `question` |  |
-| `score` |  |
-| `tokens` |  |
-| `words` |  |
+| `calculation` | Calculation breakdown for sentiment |
+| `comparative` | The comparative sentiment value |
+| `locale` | The language code for response localization |
+| `lucky` | Whether to give a lucky response |
+| `negative` | Negative sentiment words |
+| `positive` | Positive sentiment words |
+| `question` | The question to analyze for sentiment |
+| `score` | The sentiment score |
+| `tokens` | Tokenized words from the question |
+| `words` | Sentiment-bearing words |
 
 Operations: Create, Load.
 
@@ -274,10 +274,10 @@ API path: `/api/biased`
 
 | Field | Description |
 | --- | --- |
-| `locale` |  |
-| `negative` |  |
-| `neutral` |  |
-| `positive` |  |
+| `locale` | The language code |
+| `negative` | List of negative responses |
+| `neutral` | List of neutral responses |
+| `positive` | List of positive responses |
 
 Operations: List.
 
@@ -287,9 +287,9 @@ API path: `/api/categories`
 
 | Field | Description |
 | --- | --- |
-| `category` |  |
-| `locale` |  |
-| `reading` |  |
+| `category` | The category of the response |
+| `locale` | The language code |
+| `reading` | The Magic 8 Ball response from the specified category |
 
 Operations: Load.
 
@@ -324,16 +324,16 @@ Create an instance: `biased = client.Biased()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `calculation` | `list` |  |
-| `comparative` | `float` |  |
-| `locale` | `str` |  |
-| `lucky` | `bool` |  |
-| `negative` | `list` |  |
-| `positive` | `list` |  |
-| `question` | `str` |  |
-| `score` | `float` |  |
-| `tokens` | `list` |  |
-| `words` | `list` |  |
+| `calculation` | `list` | Calculation breakdown for sentiment |
+| `comparative` | `float` | The comparative sentiment value |
+| `locale` | `str` | The language code for response localization |
+| `lucky` | `bool` | Whether to give a lucky response |
+| `negative` | `list` | Negative sentiment words |
+| `positive` | `list` | Positive sentiment words |
+| `question` | `str` | The question to analyze for sentiment |
+| `score` | `float` | The sentiment score |
+| `tokens` | `list` | Tokenized words from the question |
+| `words` | `list` | Sentiment-bearing words |
 
 #### Example: Load
 
@@ -371,10 +371,10 @@ Create an instance: `category = client.Category()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `locale` | `str` |  |
-| `negative` | `list` |  |
-| `neutral` | `list` |  |
-| `positive` | `list` |  |
+| `locale` | `str` | The language code |
+| `negative` | `list` | List of negative responses |
+| `neutral` | `list` | List of neutral responses |
+| `positive` | `list` | List of positive responses |
 
 #### Example: List
 
@@ -397,9 +397,9 @@ Create an instance: `category_fortune = client.CategoryFortune()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `str` |  |
-| `locale` | `str` |  |
-| `reading` | `str` |  |
+| `category` | `str` | The category of the response |
+| `locale` | `str` | The language code |
+| `reading` | `str` | The Magic 8 Ball response from the specified category |
 
 #### Example: Load
 

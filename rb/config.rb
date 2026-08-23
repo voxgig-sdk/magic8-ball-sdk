@@ -19,6 +19,9 @@ module Magic8BallConfig
     {
       "main" => {
         "name" => "Magic8Ball",
+        "slug" => "magic8-ball",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -45,49 +48,59 @@ module Magic8BallConfig
             {
               "name" => "calculation",
               "req" => true,
+              "short" => "Calculation breakdown for sentiment",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "comparative",
               "req" => true,
+              "short" => "The comparative sentiment value",
               "type" => "`$NUMBER`",
             },
             {
               "name" => "locale",
+              "short" => "The language code for response localization",
               "type" => "`$STRING`",
             },
             {
               "name" => "lucky",
+              "short" => "Whether to give a lucky response",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "negative",
               "req" => true,
+              "short" => "Negative sentiment words",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "positive",
               "req" => true,
+              "short" => "Positive sentiment words",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "question",
               "req" => true,
+              "short" => "The question to analyze for sentiment",
               "type" => "`$STRING`",
             },
             {
               "name" => "score",
               "req" => true,
+              "short" => "The sentiment score",
               "type" => "`$NUMBER`",
             },
             {
               "name" => "tokens",
               "req" => true,
+              "short" => "Tokenized words from the question",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "words",
               "req" => true,
+              "short" => "Sentiment-bearing words",
               "type" => "`$ARRAY`",
             },
           ],
@@ -176,21 +189,25 @@ module Magic8BallConfig
             {
               "name" => "locale",
               "req" => true,
+              "short" => "The language code",
               "type" => "`$STRING`",
             },
             {
               "name" => "negative",
               "req" => true,
+              "short" => "List of negative responses",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "neutral",
               "req" => true,
+              "short" => "List of neutral responses",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "positive",
               "req" => true,
+              "short" => "List of positive responses",
               "type" => "`$ARRAY`",
             },
           ],
@@ -241,6 +258,7 @@ module Magic8BallConfig
             {
               "name" => "category",
               "req" => true,
+              "short" => "The category of the response",
               "type" => "`$STRING`",
             },
             {
@@ -251,11 +269,13 @@ module Magic8BallConfig
                 },
               },
               "req" => true,
+              "short" => "The language code",
               "type" => "`$STRING`",
             },
             {
               "name" => "reading",
               "req" => true,
+              "short" => "The Magic 8 Ball response from the specified category",
               "type" => "`$STRING`",
             },
           ],

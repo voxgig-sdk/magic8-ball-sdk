@@ -8,6 +8,7 @@ main: kit: entity: category_fortune: {
     {
       name: "category"
       req: true
+      short: "The category of the response"
       type: "`$STRING`"
     }
     {
@@ -19,11 +20,13 @@ main: kit: entity: category_fortune: {
         }
       }
       req: true
+      short: "The language code"
       type: "`$STRING`"
     }
     {
       name: "reading"
       req: true
+      short: "The Magic 8 Ball response from the specified category"
       type: "`$STRING`"
     }
   ]

@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "Magic8Ball",
+            "slug": "magic8-ball",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -54,49 +57,59 @@ def make_config():
           {
             "name": "calculation",
             "req": True,
+            "short": "Calculation breakdown for sentiment",
             "type": "`$ARRAY`",
           },
           {
             "name": "comparative",
             "req": True,
+            "short": "The comparative sentiment value",
             "type": "`$NUMBER`",
           },
           {
             "name": "locale",
+            "short": "The language code for response localization",
             "type": "`$STRING`",
           },
           {
             "name": "lucky",
+            "short": "Whether to give a lucky response",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "negative",
             "req": True,
+            "short": "Negative sentiment words",
             "type": "`$ARRAY`",
           },
           {
             "name": "positive",
             "req": True,
+            "short": "Positive sentiment words",
             "type": "`$ARRAY`",
           },
           {
             "name": "question",
             "req": True,
+            "short": "The question to analyze for sentiment",
             "type": "`$STRING`",
           },
           {
             "name": "score",
             "req": True,
+            "short": "The sentiment score",
             "type": "`$NUMBER`",
           },
           {
             "name": "tokens",
             "req": True,
+            "short": "Tokenized words from the question",
             "type": "`$ARRAY`",
           },
           {
             "name": "words",
             "req": True,
+            "short": "Sentiment-bearing words",
             "type": "`$ARRAY`",
           },
         ],
@@ -185,21 +198,25 @@ def make_config():
           {
             "name": "locale",
             "req": True,
+            "short": "The language code",
             "type": "`$STRING`",
           },
           {
             "name": "negative",
             "req": True,
+            "short": "List of negative responses",
             "type": "`$ARRAY`",
           },
           {
             "name": "neutral",
             "req": True,
+            "short": "List of neutral responses",
             "type": "`$ARRAY`",
           },
           {
             "name": "positive",
             "req": True,
+            "short": "List of positive responses",
             "type": "`$ARRAY`",
           },
         ],
@@ -250,6 +267,7 @@ def make_config():
           {
             "name": "category",
             "req": True,
+            "short": "The category of the response",
             "type": "`$STRING`",
           },
           {
@@ -260,11 +278,13 @@ def make_config():
               },
             },
             "req": True,
+            "short": "The language code",
             "type": "`$STRING`",
           },
           {
             "name": "reading",
             "req": True,
+            "short": "The Magic 8 Ball response from the specified category",
             "type": "`$STRING`",
           },
         ],

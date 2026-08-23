@@ -99,16 +99,16 @@ biased = client.Biased()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `calculation` | `list` | Yes |  |
-| `comparative` | `float` | Yes |  |
-| `locale` | `str` | No |  |
-| `lucky` | `bool` | No |  |
-| `negative` | `list` | Yes |  |
-| `positive` | `list` | Yes |  |
-| `question` | `str` | Yes |  |
-| `score` | `float` | Yes |  |
-| `tokens` | `list` | Yes |  |
-| `words` | `list` | Yes |  |
+| `calculation` | `list` | Yes | Calculation breakdown for sentiment |
+| `comparative` | `float` | Yes | The comparative sentiment value |
+| `locale` | `str` | No | The language code for response localization |
+| `lucky` | `bool` | No | Whether to give a lucky response |
+| `negative` | `list` | Yes | Negative sentiment words |
+| `positive` | `list` | Yes | Positive sentiment words |
+| `question` | `str` | Yes | The question to analyze for sentiment |
+| `score` | `float` | Yes | The sentiment score |
+| `tokens` | `list` | Yes | Tokenized words from the question |
+| `words` | `list` | Yes | Sentiment-bearing words |
 
 ### Operations
 
@@ -176,10 +176,10 @@ category = client.Category()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `str` | Yes |  |
-| `negative` | `list` | Yes |  |
-| `neutral` | `list` | Yes |  |
-| `positive` | `list` | Yes |  |
+| `locale` | `str` | Yes | The language code |
+| `negative` | `list` | Yes | List of negative responses |
+| `neutral` | `list` | Yes | List of neutral responses |
+| `positive` | `list` | Yes | List of positive responses |
 
 ### Operations
 
@@ -232,9 +232,9 @@ category_fortune = client.CategoryFortune()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `str` | Yes |  |
-| `locale` | `str` | Yes |  |
-| `reading` | `str` | Yes |  |
+| `category` | `str` | Yes | The category of the response |
+| `locale` | `str` | Yes | The language code |
+| `reading` | `str` | Yes | The Magic 8 Ball response from the specified category |
 
 ### Field Usage by Operation
 

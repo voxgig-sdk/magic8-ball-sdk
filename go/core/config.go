@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "Magic8Ball",
+			"slug": "magic8-ball",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -37,49 +40,59 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "calculation",
 						"req": true,
+						"short": "Calculation breakdown for sentiment",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "comparative",
 						"req": true,
+						"short": "The comparative sentiment value",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "locale",
+						"short": "The language code for response localization",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "lucky",
+						"short": "Whether to give a lucky response",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "negative",
 						"req": true,
+						"short": "Negative sentiment words",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "positive",
 						"req": true,
+						"short": "Positive sentiment words",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "question",
 						"req": true,
+						"short": "The question to analyze for sentiment",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "score",
 						"req": true,
+						"short": "The sentiment score",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "tokens",
 						"req": true,
+						"short": "Tokenized words from the question",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "words",
 						"req": true,
+						"short": "Sentiment-bearing words",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -168,21 +181,25 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "locale",
 						"req": true,
+						"short": "The language code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "negative",
 						"req": true,
+						"short": "List of negative responses",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "neutral",
 						"req": true,
+						"short": "List of neutral responses",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "positive",
 						"req": true,
+						"short": "List of positive responses",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -233,6 +250,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "category",
 						"req": true,
+						"short": "The category of the response",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -243,11 +261,13 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"req": true,
+						"short": "The language code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "reading",
 						"req": true,
+						"short": "The Magic 8 Ball response from the specified category",
 						"type": "`$STRING`",
 					},
 				},

@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -312,16 +312,16 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `calculation` |  |
-| `comparative` |  |
-| `locale` |  |
-| `lucky` |  |
-| `negative` |  |
-| `positive` |  |
-| `question` |  |
-| `score` |  |
-| `tokens` |  |
-| `words` |  |
+| `calculation` | Calculation breakdown for sentiment |
+| `comparative` | The comparative sentiment value |
+| `locale` | The language code for response localization |
+| `lucky` | Whether to give a lucky response |
+| `negative` | Negative sentiment words |
+| `positive` | Positive sentiment words |
+| `question` | The question to analyze for sentiment |
+| `score` | The sentiment score |
+| `tokens` | Tokenized words from the question |
+| `words` | Sentiment-bearing words |
 
 Operations: create, load.
 
@@ -331,10 +331,10 @@ API path: `/api/biased`
 
 | Field | Description |
 | --- | --- |
-| `locale` |  |
-| `negative` |  |
-| `neutral` |  |
-| `positive` |  |
+| `locale` | The language code |
+| `negative` | List of negative responses |
+| `neutral` | List of neutral responses |
+| `positive` | List of positive responses |
 
 Operations: list.
 
@@ -344,9 +344,9 @@ API path: `/api/categories`
 
 | Field | Description |
 | --- | --- |
-| `category` |  |
-| `locale` |  |
-| `reading` |  |
+| `category` | The category of the response |
+| `locale` | The language code |
+| `reading` | The Magic 8 Ball response from the specified category |
 
 Operations: load.
 
@@ -381,16 +381,16 @@ Create an instance: `const biased = client.Biased()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `calculation` | `any[]` |  |
-| `comparative` | `number` |  |
-| `locale` | `string` |  |
-| `lucky` | `boolean` |  |
-| `negative` | `any[]` |  |
-| `positive` | `any[]` |  |
-| `question` | `string` |  |
-| `score` | `number` |  |
-| `tokens` | `any[]` |  |
-| `words` | `any[]` |  |
+| `calculation` | `any[]` | Calculation breakdown for sentiment |
+| `comparative` | `number` | The comparative sentiment value |
+| `locale` | `string` | The language code for response localization |
+| `lucky` | `boolean` | Whether to give a lucky response |
+| `negative` | `any[]` | Negative sentiment words |
+| `positive` | `any[]` | Positive sentiment words |
+| `question` | `string` | The question to analyze for sentiment |
+| `score` | `number` | The sentiment score |
+| `tokens` | `any[]` | Tokenized words from the question |
+| `words` | `any[]` | Sentiment-bearing words |
 
 #### Example: Load
 
@@ -428,10 +428,10 @@ Create an instance: `const category = client.Category()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `locale` | `string` |  |
-| `negative` | `any[]` |  |
-| `neutral` | `any[]` |  |
-| `positive` | `any[]` |  |
+| `locale` | `string` | The language code |
+| `negative` | `any[]` | List of negative responses |
+| `neutral` | `any[]` | List of neutral responses |
+| `positive` | `any[]` | List of positive responses |
 
 #### Example: List
 
@@ -454,9 +454,9 @@ Create an instance: `const category_fortune = client.CategoryFortune()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `string` |  |
-| `locale` | `string` |  |
-| `reading` | `string` |  |
+| `category` | `string` | The category of the response |
+| `locale` | `string` | The language code |
+| `reading` | `string` | The Magic 8 Ball response from the specified category |
 
 #### Example: Load
 

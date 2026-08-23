@@ -104,16 +104,16 @@ $biased = $client->Biased();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `calculation` | `array` | Yes |  |
-| `comparative` | `float` | Yes |  |
-| `locale` | `string` | No |  |
-| `lucky` | `bool` | No |  |
-| `negative` | `array` | Yes |  |
-| `positive` | `array` | Yes |  |
-| `question` | `string` | Yes |  |
-| `score` | `float` | Yes |  |
-| `tokens` | `array` | Yes |  |
-| `words` | `array` | Yes |  |
+| `calculation` | `array` | Yes | Calculation breakdown for sentiment |
+| `comparative` | `float` | Yes | The comparative sentiment value |
+| `locale` | `string` | No | The language code for response localization |
+| `lucky` | `bool` | No | Whether to give a lucky response |
+| `negative` | `array` | Yes | Negative sentiment words |
+| `positive` | `array` | Yes | Positive sentiment words |
+| `question` | `string` | Yes | The question to analyze for sentiment |
+| `score` | `float` | Yes | The sentiment score |
+| `tokens` | `array` | Yes | Tokenized words from the question |
+| `words` | `array` | Yes | Sentiment-bearing words |
 
 ### Operations
 
@@ -182,10 +182,10 @@ $category = $client->Category();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `string` | Yes |  |
-| `negative` | `array` | Yes |  |
-| `neutral` | `array` | Yes |  |
-| `positive` | `array` | Yes |  |
+| `locale` | `string` | Yes | The language code |
+| `negative` | `array` | Yes | List of negative responses |
+| `neutral` | `array` | Yes | List of neutral responses |
+| `positive` | `array` | Yes | List of positive responses |
 
 ### Operations
 
@@ -237,9 +237,9 @@ $category_fortune = $client->CategoryFortune();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | Yes |  |
-| `locale` | `string` | Yes |  |
-| `reading` | `string` | Yes |  |
+| `category` | `string` | Yes | The category of the response |
+| `locale` | `string` | Yes | The language code |
+| `reading` | `string` | Yes | The Magic 8 Ball response from the specified category |
 
 ### Field Usage by Operation
 

@@ -152,16 +152,16 @@ const biased = client.Biased()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `calculation` | `any[]` | Yes |  |
-| `comparative` | `number` | Yes |  |
-| `locale` | `string` | No |  |
-| `lucky` | `boolean` | No |  |
-| `negative` | `any[]` | Yes |  |
-| `positive` | `any[]` | Yes |  |
-| `question` | `string` | Yes |  |
-| `score` | `number` | Yes |  |
-| `tokens` | `any[]` | Yes |  |
-| `words` | `any[]` | Yes |  |
+| `calculation` | `any[]` | Yes | Calculation breakdown for sentiment |
+| `comparative` | `number` | Yes | The comparative sentiment value |
+| `locale` | `string` | No | The language code for response localization |
+| `lucky` | `boolean` | No | Whether to give a lucky response |
+| `negative` | `any[]` | Yes | Negative sentiment words |
+| `positive` | `any[]` | Yes | Positive sentiment words |
+| `question` | `string` | Yes | The question to analyze for sentiment |
+| `score` | `number` | Yes | The sentiment score |
+| `tokens` | `any[]` | Yes | Tokenized words from the question |
+| `words` | `any[]` | Yes | Sentiment-bearing words |
 
 ### Operations
 
@@ -228,10 +228,10 @@ const category = client.Category()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `string` | Yes |  |
-| `negative` | `any[]` | Yes |  |
-| `neutral` | `any[]` | Yes |  |
-| `positive` | `any[]` | Yes |  |
+| `locale` | `string` | Yes | The language code |
+| `negative` | `any[]` | Yes | List of negative responses |
+| `neutral` | `any[]` | Yes | List of neutral responses |
+| `positive` | `any[]` | Yes | List of positive responses |
 
 ### Operations
 
@@ -281,9 +281,9 @@ const category_fortune = client.CategoryFortune()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | Yes |  |
-| `locale` | `string` | Yes |  |
-| `reading` | `string` | Yes |  |
+| `category` | `string` | Yes | The category of the response |
+| `locale` | `string` | Yes | The language code |
+| `reading` | `string` | Yes | The Magic 8 Ball response from the specified category |
 
 ### Field Usage by Operation
 

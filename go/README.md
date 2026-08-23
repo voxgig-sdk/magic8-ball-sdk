@@ -6,7 +6,7 @@ The Golang SDK for the Magic8Ball API — an entity-oriented client using standa
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Biased(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -271,16 +271,16 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"calculation"` |  |
-| `"comparative"` |  |
-| `"locale"` |  |
-| `"lucky"` |  |
-| `"negative"` |  |
-| `"positive"` |  |
-| `"question"` |  |
-| `"score"` |  |
-| `"tokens"` |  |
-| `"words"` |  |
+| `"calculation"` | Calculation breakdown for sentiment |
+| `"comparative"` | The comparative sentiment value |
+| `"locale"` | The language code for response localization |
+| `"lucky"` | Whether to give a lucky response |
+| `"negative"` | Negative sentiment words |
+| `"positive"` | Positive sentiment words |
+| `"question"` | The question to analyze for sentiment |
+| `"score"` | The sentiment score |
+| `"tokens"` | Tokenized words from the question |
+| `"words"` | Sentiment-bearing words |
 
 Operations: Create, Load.
 
@@ -290,10 +290,10 @@ API path: `/api/biased`
 
 | Field | Description |
 | --- | --- |
-| `"locale"` |  |
-| `"negative"` |  |
-| `"neutral"` |  |
-| `"positive"` |  |
+| `"locale"` | The language code |
+| `"negative"` | List of negative responses |
+| `"neutral"` | List of neutral responses |
+| `"positive"` | List of positive responses |
 
 Operations: List.
 
@@ -303,9 +303,9 @@ API path: `/api/categories`
 
 | Field | Description |
 | --- | --- |
-| `"category"` |  |
-| `"locale"` |  |
-| `"reading"` |  |
+| `"category"` | The category of the response |
+| `"locale"` | The language code |
+| `"reading"` | The Magic 8 Ball response from the specified category |
 
 Operations: Load.
 
@@ -340,16 +340,16 @@ Create an instance: `biased := client.Biased(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `calculation` | `[]any` |  |
-| `comparative` | `float64` |  |
-| `locale` | `string` |  |
-| `lucky` | `bool` |  |
-| `negative` | `[]any` |  |
-| `positive` | `[]any` |  |
-| `question` | `string` |  |
-| `score` | `float64` |  |
-| `tokens` | `[]any` |  |
-| `words` | `[]any` |  |
+| `calculation` | `[]any` | Calculation breakdown for sentiment |
+| `comparative` | `float64` | The comparative sentiment value |
+| `locale` | `string` | The language code for response localization |
+| `lucky` | `bool` | Whether to give a lucky response |
+| `negative` | `[]any` | Negative sentiment words |
+| `positive` | `[]any` | Positive sentiment words |
+| `question` | `string` | The question to analyze for sentiment |
+| `score` | `float64` | The sentiment score |
+| `tokens` | `[]any` | Tokenized words from the question |
+| `words` | `[]any` | Sentiment-bearing words |
 
 #### Example: Load
 
@@ -395,10 +395,10 @@ Create an instance: `category := client.Category(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `locale` | `string` |  |
-| `negative` | `[]any` |  |
-| `neutral` | `[]any` |  |
-| `positive` | `[]any` |  |
+| `locale` | `string` | The language code |
+| `negative` | `[]any` | List of negative responses |
+| `neutral` | `[]any` | List of neutral responses |
+| `positive` | `[]any` | List of positive responses |
 
 #### Example: List
 
@@ -425,9 +425,9 @@ Create an instance: `categoryFortune := client.CategoryFortune(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `string` |  |
-| `locale` | `string` |  |
-| `reading` | `string` |  |
+| `category` | `string` | The category of the response |
+| `locale` | `string` | The language code |
+| `reading` | `string` | The Magic 8 Ball response from the specified category |
 
 #### Example: Load
 

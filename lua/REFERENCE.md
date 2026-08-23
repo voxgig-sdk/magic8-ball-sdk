@@ -102,16 +102,16 @@ local biased = client:Biased(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `calculation` | `table` | Yes |  |
-| `comparative` | `number` | Yes |  |
-| `locale` | `string` | No |  |
-| `lucky` | `boolean` | No |  |
-| `negative` | `table` | Yes |  |
-| `positive` | `table` | Yes |  |
-| `question` | `string` | Yes |  |
-| `score` | `number` | Yes |  |
-| `tokens` | `table` | Yes |  |
-| `words` | `table` | Yes |  |
+| `calculation` | `table` | Yes | Calculation breakdown for sentiment |
+| `comparative` | `number` | Yes | The comparative sentiment value |
+| `locale` | `string` | No | The language code for response localization |
+| `lucky` | `boolean` | No | Whether to give a lucky response |
+| `negative` | `table` | Yes | Negative sentiment words |
+| `positive` | `table` | Yes | Positive sentiment words |
+| `question` | `string` | Yes | The question to analyze for sentiment |
+| `score` | `number` | Yes | The sentiment score |
+| `tokens` | `table` | Yes | Tokenized words from the question |
+| `words` | `table` | Yes | Sentiment-bearing words |
 
 ### Operations
 
@@ -180,10 +180,10 @@ local category = client:Category(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `string` | Yes |  |
-| `negative` | `table` | Yes |  |
-| `neutral` | `table` | Yes |  |
-| `positive` | `table` | Yes |  |
+| `locale` | `string` | Yes | The language code |
+| `negative` | `table` | Yes | List of negative responses |
+| `neutral` | `table` | Yes | List of neutral responses |
+| `positive` | `table` | Yes | List of positive responses |
 
 ### Operations
 
@@ -235,9 +235,9 @@ local category_fortune = client:CategoryFortune(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | Yes |  |
-| `locale` | `string` | Yes |  |
-| `reading` | `string` | Yes |  |
+| `category` | `string` | Yes | The category of the response |
+| `locale` | `string` | Yes | The language code |
+| `reading` | `string` | Yes | The Magic 8 Ball response from the specified category |
 
 ### Field Usage by Operation
 

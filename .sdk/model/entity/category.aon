@@ -8,21 +8,25 @@ main: kit: entity: category: {
     {
       name: "locale"
       req: true
+      short: "The language code"
       type: "`$STRING`"
     }
     {
       name: "negative"
       req: true
+      short: "List of negative responses"
       type: "`$ARRAY`"
     }
     {
       name: "neutral"
       req: true
+      short: "List of neutral responses"
       type: "`$ARRAY`"
     }
     {
       name: "positive"
       req: true
+      short: "List of positive responses"
       type: "`$ARRAY`"
     }
   ]

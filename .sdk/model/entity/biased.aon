@@ -8,51 +8,61 @@ main: kit: entity: biased: {
     {
       name: "calculation"
       req: true
+      short: "Calculation breakdown for sentiment"
       type: "`$ARRAY`"
     }
     {
       name: "comparative"
       req: true
+      short: "The comparative sentiment value"
       type: "`$NUMBER`"
     }
     {
       name: "locale"
       req: false
+      short: "The language code for response localization"
       type: "`$STRING`"
     }
     {
       name: "lucky"
       req: false
+      short: "Whether to give a lucky response"
       type: "`$BOOLEAN`"
     }
     {
       name: "negative"
       req: true
+      short: "Negative sentiment words"
       type: "`$ARRAY`"
     }
     {
       name: "positive"
       req: true
+      short: "Positive sentiment words"
       type: "`$ARRAY`"
     }
     {
       name: "question"
       req: true
+      short: "The question to analyze for sentiment"
       type: "`$STRING`"
     }
     {
       name: "score"
       req: true
+      short: "The sentiment score"
       type: "`$NUMBER`"
     }
     {
       name: "tokens"
       req: true
+      short: "Tokenized words from the question"
       type: "`$ARRAY`"
     }
     {
       name: "words"
       req: true
+      short: "Sentiment-bearing words"
       type: "`$ARRAY`"
     }
   ]

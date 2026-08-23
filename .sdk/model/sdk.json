@@ -36,60 +36,70 @@
               "active": true,
               "name": "calculation",
               "req": true,
+              "short": "Calculation breakdown for sentiment",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "comparative",
               "req": true,
+              "short": "The comparative sentiment value",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "locale",
               "req": false,
+              "short": "The language code for response localization",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "lucky",
               "req": false,
+              "short": "Whether to give a lucky response",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "negative",
               "req": true,
+              "short": "Negative sentiment words",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "positive",
               "req": true,
+              "short": "Positive sentiment words",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "question",
               "req": true,
+              "short": "The question to analyze for sentiment",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "score",
               "req": true,
+              "short": "The sentiment score",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "tokens",
               "req": true,
+              "short": "Tokenized words from the question",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "words",
               "req": true,
+              "short": "Sentiment-bearing words",
               "type": "`$ARRAY`"
             }
           ],
@@ -190,24 +200,28 @@
               "active": true,
               "name": "locale",
               "req": true,
+              "short": "The language code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "negative",
               "req": true,
+              "short": "List of negative responses",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "neutral",
               "req": true,
+              "short": "List of neutral responses",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "positive",
               "req": true,
+              "short": "List of positive responses",
               "type": "`$ARRAY`"
             }
           ],
@@ -266,6 +280,7 @@
               "active": true,
               "name": "category",
               "req": true,
+              "short": "The category of the response",
               "type": "`$STRING`"
             },
             {
@@ -278,12 +293,14 @@
                 }
               },
               "req": true,
+              "short": "The language code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "reading",
               "req": true,
+              "short": "The Magic 8 Ball response from the specified category",
               "type": "`$STRING`"
             }
           ],

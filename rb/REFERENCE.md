@@ -105,16 +105,16 @@ biased = client.Biased
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `calculation` | `Array` | Yes |  |
-| `comparative` | `Float` | Yes |  |
-| `locale` | `String` | No |  |
-| `lucky` | `Boolean` | No |  |
-| `negative` | `Array` | Yes |  |
-| `positive` | `Array` | Yes |  |
-| `question` | `String` | Yes |  |
-| `score` | `Float` | Yes |  |
-| `tokens` | `Array` | Yes |  |
-| `words` | `Array` | Yes |  |
+| `calculation` | `Array` | Yes | Calculation breakdown for sentiment |
+| `comparative` | `Float` | Yes | The comparative sentiment value |
+| `locale` | `String` | No | The language code for response localization |
+| `lucky` | `Boolean` | No | Whether to give a lucky response |
+| `negative` | `Array` | Yes | Negative sentiment words |
+| `positive` | `Array` | Yes | Positive sentiment words |
+| `question` | `String` | Yes | The question to analyze for sentiment |
+| `score` | `Float` | Yes | The sentiment score |
+| `tokens` | `Array` | Yes | Tokenized words from the question |
+| `words` | `Array` | Yes | Sentiment-bearing words |
 
 ### Operations
 
@@ -183,10 +183,10 @@ category = client.Category
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `locale` | `String` | Yes |  |
-| `negative` | `Array` | Yes |  |
-| `neutral` | `Array` | Yes |  |
-| `positive` | `Array` | Yes |  |
+| `locale` | `String` | Yes | The language code |
+| `negative` | `Array` | Yes | List of negative responses |
+| `neutral` | `Array` | Yes | List of neutral responses |
+| `positive` | `Array` | Yes | List of positive responses |
 
 ### Operations
 
@@ -238,9 +238,9 @@ category_fortune = client.CategoryFortune
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `String` | Yes |  |
-| `locale` | `String` | Yes |  |
-| `reading` | `String` | Yes |  |
+| `category` | `String` | Yes | The category of the response |
+| `locale` | `String` | Yes | The language code |
+| `reading` | `String` | Yes | The Magic 8 Ball response from the specified category |
 
 ### Field Usage by Operation
 
