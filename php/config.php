@@ -42,6 +42,7 @@ class Magic8BallConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
