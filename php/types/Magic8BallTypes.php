@@ -30,16 +30,9 @@ class Biased
 /** Request payload for Biased#load. */
 class BiasedLoadMatch
 {
-    public ?array $calculation = null;
-    public ?float $comparative = null;
     public ?string $locale = null;
     public ?bool $lucky = null;
-    public ?array $negative = null;
-    public ?array $positive = null;
-    public ?string $question = null;
-    public ?float $score = null;
-    public ?array $tokens = null;
-    public ?array $words = null;
+    public string $question;
 }
 
 /** Request payload for Biased#create. */
@@ -70,9 +63,6 @@ class Category
 class CategoryListMatch
 {
     public ?string $locale = null;
-    public ?array $negative = null;
-    public ?array $neutral = null;
-    public ?array $positive = null;
 }
 
 /** CategoryFortune entity data model. */
@@ -87,6 +77,7 @@ class CategoryFortune
 class CategoryFortuneLoadMatch
 {
     public string $category;
+    public ?string $locale = null;
 }
 
 /** RandomFortune entity data model. */

@@ -19,16 +19,9 @@ export interface Biased {
 }
 
 export interface BiasedLoadMatch {
-  calculation?: any[]
-  comparative?: number
   locale?: string
   lucky?: boolean
-  negative?: any[]
-  positive?: any[]
-  question?: string
-  score?: number
-  tokens?: any[]
-  words?: any[]
+  question: string
 }
 
 export interface BiasedCreateData {
@@ -53,9 +46,6 @@ export interface Category {
 
 export interface CategoryListMatch {
   locale?: string
-  negative?: any[]
-  neutral?: any[]
-  positive?: any[]
 }
 
 export interface CategoryFortune {
@@ -66,6 +56,7 @@ export interface CategoryFortune {
 
 export interface CategoryFortuneLoadMatch {
   category: string
+  locale?: string
 }
 
 export interface RandomFortune {

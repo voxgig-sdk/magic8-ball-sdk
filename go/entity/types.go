@@ -28,16 +28,9 @@ type Biased struct {
 
 // BiasedLoadMatch is the typed request payload for Biased.LoadTyped.
 type BiasedLoadMatch struct {
-	Calculation *[]any `json:"calculation,omitempty"`
-	Comparative *float64 `json:"comparative,omitempty"`
 	Locale *string `json:"locale,omitempty"`
 	Lucky *bool `json:"lucky,omitempty"`
-	Negative *[]any `json:"negative,omitempty"`
-	Positive *[]any `json:"positive,omitempty"`
-	Question *string `json:"question,omitempty"`
-	Score *float64 `json:"score,omitempty"`
-	Tokens *[]any `json:"tokens,omitempty"`
-	Words *[]any `json:"words,omitempty"`
+	Question string `json:"question"`
 }
 
 // BiasedCreateData is the typed request payload for Biased.CreateTyped.
@@ -65,9 +58,6 @@ type Category struct {
 // CategoryListMatch is the typed request payload for Category.ListTyped.
 type CategoryListMatch struct {
 	Locale *string `json:"locale,omitempty"`
-	Negative *[]any `json:"negative,omitempty"`
-	Neutral *[]any `json:"neutral,omitempty"`
-	Positive *[]any `json:"positive,omitempty"`
 }
 
 // CategoryFortune is the typed data model for the category_fortune entity.
@@ -80,6 +70,7 @@ type CategoryFortune struct {
 // CategoryFortuneLoadMatch is the typed request payload for CategoryFortune.LoadTyped.
 type CategoryFortuneLoadMatch struct {
 	Category string `json:"category"`
+	Locale *string `json:"locale,omitempty"`
 }
 
 // RandomFortune is the typed data model for the random_fortune entity.

@@ -32,17 +32,13 @@ class Biased(BiasedRequired, total=False):
     lucky: bool
 
 
-class BiasedLoadMatch(TypedDict, total=False):
-    calculation: list
-    comparative: float
+class BiasedLoadMatchRequired(TypedDict):
+    question: str
+
+
+class BiasedLoadMatch(BiasedLoadMatchRequired, total=False):
     locale: str
     lucky: bool
-    negative: list
-    positive: list
-    question: str
-    score: float
-    tokens: list
-    words: list
 
 
 class BiasedCreateDataRequired(TypedDict):
@@ -70,9 +66,6 @@ class Category(TypedDict):
 
 class CategoryListMatch(TypedDict, total=False):
     locale: str
-    negative: list
-    neutral: list
-    positive: list
 
 
 class CategoryFortune(TypedDict):
@@ -81,8 +74,12 @@ class CategoryFortune(TypedDict):
     reading: str
 
 
-class CategoryFortuneLoadMatch(TypedDict):
+class CategoryFortuneLoadMatchRequired(TypedDict):
     category: str
+
+
+class CategoryFortuneLoadMatch(CategoryFortuneLoadMatchRequired, total=False):
+    locale: str
 
 
 class RandomFortune(TypedDict):

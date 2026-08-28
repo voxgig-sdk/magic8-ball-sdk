@@ -55,46 +55,18 @@ Biased = Struct.new(
 
 # Request payload for Biased#load.
 #
-# @!attribute [rw] calculation
-#   @return [Array, nil]
-#
-# @!attribute [rw] comparative
-#   @return [Float, nil]
-#
 # @!attribute [rw] locale
 #   @return [String, nil]
 #
 # @!attribute [rw] lucky
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] negative
-#   @return [Array, nil]
-#
-# @!attribute [rw] positive
-#   @return [Array, nil]
-#
 # @!attribute [rw] question
-#   @return [String, nil]
-#
-# @!attribute [rw] score
-#   @return [Float, nil]
-#
-# @!attribute [rw] tokens
-#   @return [Array, nil]
-#
-# @!attribute [rw] words
-#   @return [Array, nil]
+#   @return [String]
 BiasedLoadMatch = Struct.new(
-  :calculation,
-  :comparative,
   :locale,
   :lucky,
-  :negative,
-  :positive,
   :question,
-  :score,
-  :tokens,
-  :words,
   keyword_init: true
 )
 
@@ -168,20 +140,8 @@ Category = Struct.new(
 #
 # @!attribute [rw] locale
 #   @return [String, nil]
-#
-# @!attribute [rw] negative
-#   @return [Array, nil]
-#
-# @!attribute [rw] neutral
-#   @return [Array, nil]
-#
-# @!attribute [rw] positive
-#   @return [Array, nil]
 CategoryListMatch = Struct.new(
   :locale,
-  :negative,
-  :neutral,
-  :positive,
   keyword_init: true
 )
 
@@ -206,8 +166,12 @@ CategoryFortune = Struct.new(
 #
 # @!attribute [rw] category
 #   @return [String]
+#
+# @!attribute [rw] locale
+#   @return [String, nil]
 CategoryFortuneLoadMatch = Struct.new(
   :category,
+  :locale,
   keyword_init: true
 )
 

@@ -19,16 +19,9 @@
 ---@field words table
 
 ---@class BiasedLoadMatch
----@field calculation? table
----@field comparative? number
 ---@field locale? string
 ---@field lucky? boolean
----@field negative? table
----@field positive? table
----@field question? string
----@field score? number
----@field tokens? table
----@field words? table
+---@field question string
 
 ---@class BiasedCreateData
 ---@field calculation table
@@ -50,9 +43,6 @@
 
 ---@class CategoryListMatch
 ---@field locale? string
----@field negative? table
----@field neutral? table
----@field positive? table
 
 ---@class CategoryFortune
 ---@field category string
@@ -61,6 +51,7 @@
 
 ---@class CategoryFortuneLoadMatch
 ---@field category string
+---@field locale? string
 
 ---@class RandomFortune
 

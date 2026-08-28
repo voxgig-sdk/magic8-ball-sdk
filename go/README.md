@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single biased — the value is the loaded record.
-    biased, err := client.Biased(nil).Load(nil, nil)
+    biased, err := client.Biased(nil).Load(map[string]any{"question": "example_question"}, nil)
     if err != nil {
         panic(err)
     }
@@ -354,7 +354,7 @@ Create an instance: `biased := client.Biased(nil)`
 #### Example: Load
 
 ```go
-biased, err := client.Biased(nil).Load(nil, nil)
+biased, err := client.Biased(nil).Load(map[string]any{"question": "question"}, nil)
 if err != nil {
     panic(err)
 }
@@ -443,6 +443,29 @@ fmt.Println(categoryFortune) // the loaded record
 ### RandomFortune
 
 Create an instance: `randomFortune := client.RandomFortune(nil)`
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
