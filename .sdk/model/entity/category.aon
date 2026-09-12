@@ -51,9 +51,13 @@ main: kit: entity: category: {
           }
           method: "GET"
           orig: "/api/categories"
-          parts: [
-            "api"
-            "categories"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "categories"
+            }
           ]
           select: {
             exist: [

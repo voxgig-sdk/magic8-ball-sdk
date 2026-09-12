@@ -1,6 +1,14 @@
 # Magic8Ball SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -125,15 +133,23 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/biased",
-                "parts": [
-                  "api",
-                  "biased",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "biased",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.sentiment`",
                 },
+                "parts": [
+                  "api",
+                  "biased",
+                ],
               },
             ],
           },
@@ -171,9 +187,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/biased",
-                "parts": [
-                  "api",
-                  "biased",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "biased",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -186,6 +206,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.sentiment`",
                 },
+                "parts": [
+                  "api",
+                  "biased",
+                ],
               },
             ],
           },
@@ -242,9 +266,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/categories",
-                "parts": [
-                  "api",
-                  "categories",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "categories",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -255,6 +283,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "categories",
+                ],
               },
             ],
           },
@@ -319,9 +351,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/{category}",
-                "parts": [
-                  "api",
-                  "{category}",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "var": "category",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -333,6 +369,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "{category}",
+                ],
               },
               {
                 "args": {
@@ -349,8 +389,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api",
-                "parts": [
-                  "api",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -361,6 +403,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                ],
               },
             ],
           },

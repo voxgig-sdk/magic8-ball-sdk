@@ -116,15 +116,23 @@ module Magic8BallConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/biased",
-                  "parts" => [
-                    "api",
-                    "biased",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "biased",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.sentiment`",
                   },
+                  "parts" => [
+                    "api",
+                    "biased",
+                  ],
                 },
               ],
             },
@@ -162,9 +170,13 @@ module Magic8BallConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/biased",
-                  "parts" => [
-                    "api",
-                    "biased",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "biased",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -177,6 +189,10 @@ module Magic8BallConfig
                     "req" => "`reqdata`",
                     "res" => "`body.sentiment`",
                   },
+                  "parts" => [
+                    "api",
+                    "biased",
+                  ],
                 },
               ],
             },
@@ -233,9 +249,13 @@ module Magic8BallConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/categories",
-                  "parts" => [
-                    "api",
-                    "categories",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -246,6 +266,10 @@ module Magic8BallConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "categories",
+                  ],
                 },
               ],
             },
@@ -310,9 +334,13 @@ module Magic8BallConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/{category}",
-                  "parts" => [
-                    "api",
-                    "{category}",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "var" => "category",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -324,6 +352,10 @@ module Magic8BallConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "{category}",
+                  ],
                 },
                 {
                   "args" => {
@@ -340,8 +372,10 @@ module Magic8BallConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api",
-                  "parts" => [
-                    "api",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -352,6 +386,9 @@ module Magic8BallConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                  ],
                 },
               ],
             },

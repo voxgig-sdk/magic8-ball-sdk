@@ -104,14 +104,22 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/biased",
-                ["parts"] = {
-                  "api",
-                  "biased",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "biased",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.sentiment`",
+                },
+                ["parts"] = {
+                  "api",
+                  "biased",
                 },
               },
             },
@@ -150,9 +158,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/biased",
-                ["parts"] = {
-                  "api",
-                  "biased",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "biased",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -164,6 +176,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.sentiment`",
+                },
+                ["parts"] = {
+                  "api",
+                  "biased",
                 },
               },
             },
@@ -221,9 +237,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/categories",
-                ["parts"] = {
-                  "api",
-                  "categories",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -233,6 +253,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "categories",
                 },
               },
             },
@@ -298,9 +322,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/{category}",
-                ["parts"] = {
-                  "api",
-                  "{category}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["var"] = "category",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -311,6 +339,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "{category}",
                 },
               },
               {
@@ -328,8 +360,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api",
-                ["parts"] = {
-                  "api",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -339,6 +373,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
                 },
               },
             },

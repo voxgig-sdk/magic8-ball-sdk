@@ -60,9 +60,13 @@ main: kit: entity: category_fortune: {
           }
           method: "GET"
           orig: "/api/{category}"
-          parts: [
-            "api"
-            "{category}"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              var: "category"
+            }
           ]
           select: {
             exist: [
@@ -90,8 +94,10 @@ main: kit: entity: category_fortune: {
           }
           method: "GET"
           orig: "/api"
-          parts: [
-            "api"
+          segments: [
+            {
+              lit: "api"
+            }
           ]
           select: {
             exist: [

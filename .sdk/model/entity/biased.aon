@@ -75,9 +75,13 @@ main: kit: entity: biased: {
         {
           method: "POST"
           orig: "/api/biased"
-          parts: [
-            "api"
-            "biased"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "biased"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -120,9 +124,13 @@ main: kit: entity: biased: {
           }
           method: "GET"
           orig: "/api/biased"
-          parts: [
-            "api"
-            "biased"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "biased"
+            }
           ]
           select: {
             exist: [
