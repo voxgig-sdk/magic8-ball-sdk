@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "biased": {
           "active": true,
@@ -112,6 +176,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /api/biased",
+                    "json": "{\"operationId\":\"getBiasedFortunePost\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"fr\",\"lucky\":true,\"question\":\"Will I succeed?\"}}},\"schema\":{\"properties\":{\"locale\":{\"default\":\"en\",\"description\":\"The language code for response localization\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"example\":\"fr\",\"type\":\"string\"},\"lucky\":{\"default\":false,\"description\":\"Whether to give a lucky response\",\"example\":true,\"type\":\"boolean\"},\"question\":{\"description\":\"The question to analyze for sentiment\",\"example\":\"Will I succeed?\",\"type\":\"string\"}},\"required\":[\"question\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"localized\":{\"value\":{\"locale\":\"fr\",\"lucky\":true,\"question\":\"Will I succeed?\",\"reading\":\"Ma réponse est non.\",\"sentiment\":{\"calculation\":[{\"succeed\":2}],\"comparative\":0.6667,\"negative\":[],\"positive\":[\"succeed\"],\"score\":2,\"tokens\":[\"Will\",\"I\",\"succeed?\"],\"words\":[\"succeed\"]}}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"lucky\":{\"description\":\"Whether the lucky mode was enabled\",\"example\":false,\"type\":\"boolean\"},\"question\":{\"description\":\"The original question submitted\",\"example\":\"Will I win the lottery?\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response based on sentiment\",\"example\":\"My reply is no.\",\"type\":\"string\"},\"sentiment\":{\"description\":\"Sentiment analysis details\",\"properties\":{\"calculation\":{\"description\":\"Calculation breakdown for sentiment\",\"example\":[{\"win\":4}],\"items\":{\"type\":\"object\"},\"type\":\"array\"},\"comparative\":{\"description\":\"The comparative sentiment value\",\"example\":0.8,\"type\":\"number\"},\"negative\":{\"description\":\"Negative sentiment words\",\"example\":[],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"Positive sentiment words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"score\":{\"description\":\"The sentiment score\",\"example\":4,\"type\":\"number\"},\"tokens\":{\"description\":\"Tokenized words from the question\",\"example\":[\"Will\",\"I\",\"win\",\"the\",\"lottery?\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"words\":{\"description\":\"Sentiment-bearing words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"score\",\"comparative\",\"calculation\",\"tokens\",\"words\",\"positive\",\"negative\"],\"type\":\"object\"}},\"required\":[\"reading\",\"question\",\"sentiment\",\"locale\",\"lucky\"],\"type\":\"object\"}}},\"description\":\"Successful response with a biased fortune based on sentiment analysis\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid request body or missing required question parameter\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/api/biased",
@@ -167,6 +237,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /api/biased",
+                    "json": "{\"operationId\":\"getBiasedFortuneGet\",\"parameters\":[{\"description\":\"The question to analyze for sentiment\",\"example\":\"Will I win the lottery?\",\"in\":\"query\",\"name\":\"question\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Whether to give a lucky response\",\"in\":\"query\",\"name\":\"lucky\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"en\",\"lucky\":false,\"question\":\"Will I win the lottery?\",\"reading\":\"My reply is no.\",\"sentiment\":{\"calculation\":[{\"win\":4}],\"comparative\":0.8,\"negative\":[],\"positive\":[\"Win\"],\"score\":4,\"tokens\":[\"Will\",\"I\",\"win\",\"the\",\"lottery?\"],\"words\":[\"Win\"]}}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"lucky\":{\"description\":\"Whether the lucky mode was enabled\",\"example\":false,\"type\":\"boolean\"},\"question\":{\"description\":\"The original question submitted\",\"example\":\"Will I win the lottery?\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response based on sentiment\",\"example\":\"My reply is no.\",\"type\":\"string\"},\"sentiment\":{\"description\":\"Sentiment analysis details\",\"properties\":{\"calculation\":{\"description\":\"Calculation breakdown for sentiment\",\"example\":[{\"win\":4}],\"items\":{\"type\":\"object\"},\"type\":\"array\"},\"comparative\":{\"description\":\"The comparative sentiment value\",\"example\":0.8,\"type\":\"number\"},\"negative\":{\"description\":\"Negative sentiment words\",\"example\":[],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"Positive sentiment words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"score\":{\"description\":\"The sentiment score\",\"example\":4,\"type\":\"number\"},\"tokens\":{\"description\":\"Tokenized words from the question\",\"example\":[\"Will\",\"I\",\"win\",\"the\",\"lottery?\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"words\":{\"description\":\"Sentiment-bearing words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"score\",\"comparative\",\"calculation\",\"tokens\",\"words\",\"positive\",\"negative\"],\"type\":\"object\"}},\"required\":[\"reading\",\"question\",\"sentiment\",\"locale\",\"lucky\"],\"type\":\"object\"}}},\"description\":\"Successful response with a biased fortune based on sentiment analysis\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Missing required question parameter\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -253,6 +329,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /api/categories",
+                    "json": "{\"operationId\":\"getCategories\",\"parameters\":[{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"en\",\"negative\":[\"Don't count on it.\",\"My reply is no.\"],\"neutral\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"positive\":[\"It is Certain.\",\"It is decidedly so.\"]}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"negative\":{\"description\":\"List of negative responses\",\"example\":[\"Don't count on it.\",\"My reply is no.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"neutral\":{\"description\":\"List of neutral responses\",\"example\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"List of positive responses\",\"example\":[\"It is Certain.\",\"It is decidedly so.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"positive\",\"neutral\",\"negative\",\"locale\"],\"type\":\"object\"}}},\"description\":\"Successful response with categorized fortunes\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -347,6 +429,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /api/{category}",
+                    "json": "{\"operationId\":\"getSpecificCategory\",\"parameters\":[{\"description\":\"The category of response\",\"in\":\"path\",\"name\":\"category\",\"required\":true,\"schema\":{\"enum\":[\"positive\",\"negative\",\"neutral\"],\"type\":\"string\"}},{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"negative\":{\"value\":{\"category\":\"negative\",\"locale\":\"en\",\"reading\":\"Don't count on it.\"}},\"positive\":{\"value\":{\"category\":\"positive\",\"locale\":\"en\",\"reading\":\"It is Certain.\"}}},\"schema\":{\"properties\":{\"category\":{\"description\":\"The category of the response\",\"enum\":[\"positive\",\"negative\",\"neutral\"],\"example\":\"positive\",\"type\":\"string\"},\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response from the specified category\",\"example\":\"It is Certain.\",\"type\":\"string\"}},\"required\":[\"reading\",\"category\",\"locale\"],\"type\":\"object\"}}},\"description\":\"Successful response with a fortune from the specified category\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid category specified\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/api/{category}",
@@ -383,6 +471,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /api",
+                    "json": "{\"operationId\":\"getRandomFortune\",\"parameters\":[{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"reading\":\"Outlook good\"}},\"localized\":{\"value\":{\"locale\":\"es\",\"reading\":\"Las perspectivas son buenas\"}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code (only included for non-default locale)\",\"example\":\"en\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response\",\"example\":\"Outlook good\",\"type\":\"string\"}},\"required\":[\"reading\"],\"type\":\"object\"}}},\"description\":\"Successful response with a random fortune\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded (100 requests per minute per IP)\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -427,13 +521,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -523,6 +827,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -657,6 +1057,48 @@
         "website": "https://www.eightballapi.com/docs"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -1211,6 +1653,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -1252,7 +1695,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

@@ -57,5 +57,505 @@
         "words": []
       }
     }
+  },
+  "requests": {
+    "POST /api/biased": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getBiasedFortunePost",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "default": {
+                  "value": {
+                    "locale": "fr",
+                    "lucky": true,
+                    "question": "Will I succeed?"
+                  }
+                }
+              },
+              "schema": {
+                "properties": {
+                  "locale": {
+                    "default": "en",
+                    "description": "The language code for response localization",
+                    "enum": [
+                      "en",
+                      "es",
+                      "fr",
+                      "de",
+                      "hi",
+                      "ru"
+                    ],
+                    "example": "fr",
+                    "type": "string"
+                  },
+                  "lucky": {
+                    "default": false,
+                    "description": "Whether to give a lucky response",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "question": {
+                    "description": "The question to analyze for sentiment",
+                    "example": "Will I succeed?",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "question"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "localized": {
+                    "value": {
+                      "locale": "fr",
+                      "lucky": true,
+                      "question": "Will I succeed?",
+                      "reading": "Ma réponse est non.",
+                      "sentiment": {
+                        "calculation": [
+                          {
+                            "succeed": 2
+                          }
+                        ],
+                        "comparative": 0.6667,
+                        "negative": [],
+                        "positive": [
+                          "succeed"
+                        ],
+                        "score": 2,
+                        "tokens": [
+                          "Will",
+                          "I",
+                          "succeed?"
+                        ],
+                        "words": [
+                          "succeed"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "locale": {
+                      "description": "The language code",
+                      "example": "en",
+                      "type": "string"
+                    },
+                    "lucky": {
+                      "description": "Whether the lucky mode was enabled",
+                      "example": false,
+                      "type": "boolean"
+                    },
+                    "question": {
+                      "description": "The original question submitted",
+                      "example": "Will I win the lottery?",
+                      "type": "string"
+                    },
+                    "reading": {
+                      "description": "The Magic 8 Ball response based on sentiment",
+                      "example": "My reply is no.",
+                      "type": "string"
+                    },
+                    "sentiment": {
+                      "description": "Sentiment analysis details",
+                      "properties": {
+                        "calculation": {
+                          "description": "Calculation breakdown for sentiment",
+                          "example": [
+                            {
+                              "win": 4
+                            }
+                          ],
+                          "items": {
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "comparative": {
+                          "description": "The comparative sentiment value",
+                          "example": 0.8,
+                          "type": "number"
+                        },
+                        "negative": {
+                          "description": "Negative sentiment words",
+                          "example": [],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "positive": {
+                          "description": "Positive sentiment words",
+                          "example": [
+                            "Win"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "score": {
+                          "description": "The sentiment score",
+                          "example": 4,
+                          "type": "number"
+                        },
+                        "tokens": {
+                          "description": "Tokenized words from the question",
+                          "example": [
+                            "Will",
+                            "I",
+                            "win",
+                            "the",
+                            "lottery?"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "words": {
+                          "description": "Sentiment-bearing words",
+                          "example": [
+                            "Win"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "score",
+                        "comparative",
+                        "calculation",
+                        "tokens",
+                        "words",
+                        "positive",
+                        "negative"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "reading",
+                    "question",
+                    "sentiment",
+                    "locale",
+                    "lucky"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with a biased fortune based on sentiment analysis"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "example": "Rate limit exceeded",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "example": "You have exceeded the rate limit of 100 requests per minute",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Invalid request body or missing required question parameter"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "example": "Rate limit exceeded",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "example": "You have exceeded the rate limit of 100 requests per minute",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /api/biased": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getBiasedFortuneGet",
+        "parameters": [
+          {
+            "description": "The question to analyze for sentiment",
+            "example": "Will I win the lottery?",
+            "in": "query",
+            "name": "question",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether to give a lucky response",
+            "in": "query",
+            "name": "lucky",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The language code for response localization",
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "default": "en",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "hi",
+                "ru"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "default": {
+                    "value": {
+                      "locale": "en",
+                      "lucky": false,
+                      "question": "Will I win the lottery?",
+                      "reading": "My reply is no.",
+                      "sentiment": {
+                        "calculation": [
+                          {
+                            "win": 4
+                          }
+                        ],
+                        "comparative": 0.8,
+                        "negative": [],
+                        "positive": [
+                          "Win"
+                        ],
+                        "score": 4,
+                        "tokens": [
+                          "Will",
+                          "I",
+                          "win",
+                          "the",
+                          "lottery?"
+                        ],
+                        "words": [
+                          "Win"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "locale": {
+                      "description": "The language code",
+                      "example": "en",
+                      "type": "string"
+                    },
+                    "lucky": {
+                      "description": "Whether the lucky mode was enabled",
+                      "example": false,
+                      "type": "boolean"
+                    },
+                    "question": {
+                      "description": "The original question submitted",
+                      "example": "Will I win the lottery?",
+                      "type": "string"
+                    },
+                    "reading": {
+                      "description": "The Magic 8 Ball response based on sentiment",
+                      "example": "My reply is no.",
+                      "type": "string"
+                    },
+                    "sentiment": {
+                      "description": "Sentiment analysis details",
+                      "properties": {
+                        "calculation": {
+                          "description": "Calculation breakdown for sentiment",
+                          "example": [
+                            {
+                              "win": 4
+                            }
+                          ],
+                          "items": {
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "comparative": {
+                          "description": "The comparative sentiment value",
+                          "example": 0.8,
+                          "type": "number"
+                        },
+                        "negative": {
+                          "description": "Negative sentiment words",
+                          "example": [],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "positive": {
+                          "description": "Positive sentiment words",
+                          "example": [
+                            "Win"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "score": {
+                          "description": "The sentiment score",
+                          "example": 4,
+                          "type": "number"
+                        },
+                        "tokens": {
+                          "description": "Tokenized words from the question",
+                          "example": [
+                            "Will",
+                            "I",
+                            "win",
+                            "the",
+                            "lottery?"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "words": {
+                          "description": "Sentiment-bearing words",
+                          "example": [
+                            "Win"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "score",
+                        "comparative",
+                        "calculation",
+                        "tokens",
+                        "words",
+                        "positive",
+                        "negative"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "reading",
+                    "question",
+                    "sentiment",
+                    "locale",
+                    "lucky"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with a biased fortune based on sentiment analysis"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "example": "Rate limit exceeded",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "example": "You have exceeded the rate limit of 100 requests per minute",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Missing required question parameter"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "example": "Rate limit exceeded",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "example": "You have exceeded the rate limit of 100 requests per minute",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

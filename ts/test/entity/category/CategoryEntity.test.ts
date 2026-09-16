@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { Magic8BallSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('CategoryEntity', async () => {
 
     const live = 'TRUE' === process.env.MAGIC8_BALL_TEST_LIVE
     for (const op of ['list']) {
-      if (maybeSkipControl(t, 'entityOp', 'category.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'category.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set MAGIC8_BALL_TEST_CATEGORY_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"locale","req":true,"short":"The language code","type":"`$STRING`","index$":0},{"active":true,"name":"negative","req":true,"short":"List of negative responses","type":"`$ARRAY`","index$":1},{"active":true,"name":"neutral","req":true,"short":"List of neutral responses","type":"`$ARRAY`","index$":2},{"active":true,"name":"positive","req":true,"short":"List of positive responses","type":"`$ARRAY`","index$":3}],"name":"category","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"example":"en","kind":"query","name":"locale","orig":"locale","reqd":false,"type":"`$STRING`","index$":0}]},"contract":{"id":"GET /api/categories","json":"{\"operationId\":\"getCategories\",\"parameters\":[{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"en\",\"negative\":[\"Don't count on it.\",\"My reply is no.\"],\"neutral\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"positive\":[\"It is Certain.\",\"It is decidedly so.\"]}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"negative\":{\"description\":\"List of negative responses\",\"example\":[\"Don't count on it.\",\"My reply is no.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"neutral\":{\"description\":\"List of neutral responses\",\"example\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"List of positive responses\",\"example\":[\"It is Certain.\",\"It is decidedly so.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"positive\",\"neutral\",\"negative\",\"locale\"],\"type\":\"object\"}}},\"description\":\"Successful response with categorized fortunes\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/api/categories","segments":[{"lit":"api"},{"lit":"categories"}],"select":{"exist":["locale"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"category","name__orig":"category","Name":"Category","name_":"category","name-":"category","NAME":"CATEGORY","index$":1}, {"active":true,"entity":"category","key$":"BasicCategoryFlow","kind":"basic","name":"BasicCategoryFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"category_ref01"}}],"index$":0}]}, 'Category')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['MAGIC8_BALL_TEST_CATEGORY_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'MAGIC8_BALL_TEST_CATEGORY_ENTID': idmap,
     'MAGIC8_BALL_TEST_LIVE': 'FALSE',
@@ -126,7 +118,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.MAGIC8_BALL_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['MAGIC8_BALL_TEST_CATEGORY_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new Magic8BallSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -138,7 +136,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -151,7 +150,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.MAGIC8_BALL_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

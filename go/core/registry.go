@@ -4,7 +4,13 @@ var UtilityRegistrar func(u *Utility)
 
 var NewBaseFeatureFunc func() Feature
 
+var NewRatelimitFeatureFunc func() Feature
+
+var NewRetryFeatureFunc func() Feature
+
 var NewTestFeatureFunc func() Feature
+
+var NewTimeoutFeatureFunc func() Feature
 
 var NewBiasedEntityFunc func(client *Magic8BallSDK, entopts map[string]any) Magic8BallEntity
 

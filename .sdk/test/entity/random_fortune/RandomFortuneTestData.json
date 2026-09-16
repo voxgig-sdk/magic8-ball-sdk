@@ -10,5 +10,6 @@
     "random_fortune": {
       "random_fortune_ref01": {}
     }
-  }
+  },
+  "requests": {}
 }

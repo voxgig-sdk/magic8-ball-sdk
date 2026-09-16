@@ -49,6 +49,12 @@ main: kit: entity: category: {
               }
             ]
           }
+          contract: {
+            id: "GET /api/categories"
+            json: "{\"operationId\":\"getCategories\",\"parameters\":[{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"en\",\"negative\":[\"Don't count on it.\",\"My reply is no.\"],\"neutral\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"positive\":[\"It is Certain.\",\"It is decidedly so.\"]}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"negative\":{\"description\":\"List of negative responses\",\"example\":[\"Don't count on it.\",\"My reply is no.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"neutral\":{\"description\":\"List of neutral responses\",\"example\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"List of positive responses\",\"example\":[\"It is Certain.\",\"It is decidedly so.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"positive\",\"neutral\",\"negative\",\"locale\"],\"type\":\"object\"}}},\"description\":\"Successful response with categorized fortunes\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/api/categories"
           segments: [

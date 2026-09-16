@@ -29,5 +29,238 @@
         "reading": "s7a"
       }
     }
+  },
+  "requests": {
+    "GET /api/{category}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getSpecificCategory",
+        "parameters": [
+          {
+            "description": "The category of response",
+            "in": "path",
+            "name": "category",
+            "required": true,
+            "schema": {
+              "enum": [
+                "positive",
+                "negative",
+                "neutral"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The language code for response localization",
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "default": "en",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "hi",
+                "ru"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "negative": {
+                    "value": {
+                      "category": "negative",
+                      "locale": "en",
+                      "reading": "Don't count on it."
+                    }
+                  },
+                  "positive": {
+                    "value": {
+                      "category": "positive",
+                      "locale": "en",
+                      "reading": "It is Certain."
+                    }
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "category": {
+                      "description": "The category of the response",
+                      "enum": [
+                        "positive",
+                        "negative",
+                        "neutral"
+                      ],
+                      "example": "positive",
+                      "type": "string"
+                    },
+                    "locale": {
+                      "description": "The language code",
+                      "example": "en",
+                      "type": "string"
+                    },
+                    "reading": {
+                      "description": "The Magic 8 Ball response from the specified category",
+                      "example": "It is Certain.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "reading",
+                    "category",
+                    "locale"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with a fortune from the specified category"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "example": "Rate limit exceeded",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "example": "You have exceeded the rate limit of 100 requests per minute",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Invalid category specified"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "example": "Rate limit exceeded",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "example": "You have exceeded the rate limit of 100 requests per minute",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /api": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getRandomFortune",
+        "parameters": [
+          {
+            "description": "The language code for response localization",
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "default": "en",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "hi",
+                "ru"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "default": {
+                    "value": {
+                      "reading": "Outlook good"
+                    }
+                  },
+                  "localized": {
+                    "value": {
+                      "locale": "es",
+                      "reading": "Las perspectivas son buenas"
+                    }
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "locale": {
+                      "description": "The language code (only included for non-default locale)",
+                      "example": "en",
+                      "type": "string"
+                    },
+                    "reading": {
+                      "description": "The Magic 8 Ball response",
+                      "example": "Outlook good",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "reading"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with a random fortune"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "example": "Rate limit exceeded",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "example": "You have exceeded the rate limit of 100 requests per minute",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Rate limit exceeded (100 requests per minute per IP)"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

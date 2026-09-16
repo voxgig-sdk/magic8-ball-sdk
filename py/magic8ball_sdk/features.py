@@ -1,12 +1,18 @@
 # Magic8Ball SDK feature factory
 
 from magic8ball_sdk.feature.base_feature import Magic8BallBaseFeature
+from magic8ball_sdk.feature.ratelimit_feature import Magic8BallRatelimitFeature
+from magic8ball_sdk.feature.retry_feature import Magic8BallRetryFeature
 from magic8ball_sdk.feature.test_feature import Magic8BallTestFeature
+from magic8ball_sdk.feature.timeout_feature import Magic8BallTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: Magic8BallBaseFeature(),
+    "ratelimit": lambda: Magic8BallRatelimitFeature(),
+    "retry": lambda: Magic8BallRetryFeature(),
     "test": lambda: Magic8BallTestFeature(),
+    "timeout": lambda: Magic8BallTimeoutFeature(),
 }
 
 
