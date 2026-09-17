@@ -127,18 +127,18 @@ class Config {
 
     entity: {
       
-      biased: {
-      },
-
-      category: {
-      },
-
-      category_fortune: {
-      },
-
-      random_fortune: {
-      },
-
+        biased: {
+        },
+  
+        category: {
+        },
+  
+        category_fortune: {
+        },
+  
+        random_fortune: {
+        },
+  
     }
   }
 

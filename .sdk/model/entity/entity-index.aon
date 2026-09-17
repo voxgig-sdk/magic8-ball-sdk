@@ -1,6 +1,6 @@
 # Entity Models
 
-@"biased.aon"
-@"category.aon"
-@"category_fortune.aon"
-@"random_fortune.aon"
+@"./biased.aon"
+@"./category.aon"
+@"./category_fortune.aon"
+@"./random_fortune.aon"

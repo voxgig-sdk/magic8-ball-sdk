@@ -105,12 +105,12 @@ local results, err = client:Category():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/magic8-ball-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/releases) |
-| Python | `voxgig-sdk-magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/releases) |
-| PHP | `voxgig-sdk/magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/releases) |
+| TypeScript | `@voxgig-sdk/magic8-ball-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/tags) |
+| Python | `voxgig-sdk-magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/tags) |
+| PHP | `voxgig-sdk/magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/magic8-ball-sdk/go` | `go get github.com/voxgig-sdk/magic8-ball-sdk/go@latest` |
-| Ruby | `voxgig-sdk-magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/releases) |
-| Lua | `voxgig-sdk-magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/releases) |
+| Ruby | `voxgig-sdk-magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/tags) |
+| Lua | `voxgig-sdk-magic8-ball` | publish pending — [install from git tag](https://github.com/voxgig-sdk/magic8-ball-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/magic8-ball-sdk/go-cli` | `go install github.com/voxgig-sdk/magic8-ball-sdk/go-cli/cmd/magic8-ball@latest` |
 | Go MCP server | `github.com/voxgig-sdk/magic8-ball-sdk/go-mcp` | `go get github.com/voxgig-sdk/magic8-ball-sdk/go-mcp@latest` |
 
