@@ -1,0 +1,131 @@
+# Entity: category_fortune
+
+main: kit: entity: category_fortune: {
+
+  alias: field: {}
+
+  fields: {
+    category: {
+      h: "Category"
+      n: "category"
+      r: true
+      sh: "The category of the response"
+      t: "`$STRING`"
+    }
+    locale: {
+      h: "Locale"
+      n: "locale"
+      op: {
+        load: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The language code"
+      t: "`$STRING`"
+    }
+    reading: {
+      h: "Reading"
+      n: "reading"
+      r: true
+      sh: "The Magic 8 Ball response from the specified category"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "category_fortune"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/{category}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "category"
+                or: "category"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "en"
+                k: "query"
+                n: "locale"
+                or: "locale"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/{category}"
+          q: {
+            exist: [
+              "category"
+              "locale"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              var: "category"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "en"
+                k: "query"
+                n: "locale"
+                or: "locale"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api"
+          q: {
+            exist: [
+              "locale"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

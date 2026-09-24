@@ -79,7 +79,6 @@ _ENTITIES = {
     "Biased": "biased",
     "Category": "category",
     "CategoryFortune": "category_fortune",
-    "RandomFortune": "random_fortune",
 }
 
 # The three documents held to the gate, tagged by human label.

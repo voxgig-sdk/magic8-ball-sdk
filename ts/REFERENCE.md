@@ -84,18 +84,6 @@ Create a new `CategoryFortune` entity instance.
 
 **Returns:** `CategoryFortuneEntity` instance.
 
-#### `RandomFortune(data?: object)`
-
-Create a new `RandomFortune` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `RandomFortuneEntity` instance.
-
 #### `options()`
 
 Return a deep copy of the current SDK options.
@@ -318,40 +306,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `CategoryFortuneEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `Magic8BallSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## RandomFortuneEntity
-
-```ts
-const random_fortune = client.RandomFortune()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `RandomFortuneEntity` instance with the same client and
 options.
 
 #### `client()`

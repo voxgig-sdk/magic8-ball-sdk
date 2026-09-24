@@ -36,15 +36,14 @@ from magic8ball_sdk import Magic8BallSDK
 client = Magic8BallSDK()
 ```
 
-### 3. Load a categoryfortune
+### 3. Load a biased
 
-CategoryFortune is nested under category, so provide the `category`.
 `load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
-    categoryfortune = client.CategoryFortune().load({"category": "example_category"})
-    print(categoryfortune)
+    biased = client.Biased().load({"question": "example_question"})
+    print(biased)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -213,7 +212,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `Biased` | `(data) -> BiasedEntity` | Create a Biased entity instance. |
 | `Category` | `(data) -> CategoryEntity` | Create a Category entity instance. |
 | `CategoryFortune` | `(data) -> CategoryFortuneEntity` | Create a CategoryFortune entity instance. |
-| `RandomFortune` | `(data) -> RandomFortuneEntity` | Create a RandomFortune entity instance. |
 
 ### Entity interface
 
@@ -294,15 +292,6 @@ API path: `/api/categories`
 Operations: Load.
 
 API path: `/api/{category}`
-
-#### RandomFortune
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 
 
@@ -406,11 +395,6 @@ Create an instance: `category_fortune = client.CategoryFortune()`
 ```python
 category_fortune = client.CategoryFortune().load({"category": "category"})
 ```
-
-
-### RandomFortune
-
-Create an instance: `random_fortune = client.RandomFortune()`
 
 ## Features
 

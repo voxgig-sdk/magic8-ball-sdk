@@ -14,13 +14,13 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
+> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as a small set of **semantic entities** — Biased, Category, CategoryFortune and RandomFortune — that you
+This SDK exposes the API as a small set of **semantic entities** — Biased, Category and CategoryFortune — that you
 call directly, instead of assembling URL paths and query strings. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`, `create`):
@@ -123,12 +123,9 @@ import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball-sdk'
 
 const client = new Magic8BallSDK()
 
-
-// Load a specific categoryfortune (returns a CategoryFortune)
-const categoryfortune = await client.CategoryFortune().load({
-  category: 'example_category',
-})
-console.log(categoryfortune)
+// Load biased data (returns a Biased)
+const biased = await client.Biased().load()
+console.log(biased)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -165,14 +162,13 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 4 entities:
+The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
 | **Biased** | The Biased entity (create, load). | `/api/biased` |
 | **Category** | The Category entity (list). | `/api/categories` |
 | **CategoryFortune** | The CategoryFortune entity (load). | `/api/{category}` |
-| **RandomFortune** | The RandomFortune entity. | `` |
 
 The operations available across these entities are **load**, **list**, **create** — see each entity's
 own list above for exactly which it supports.
@@ -213,15 +209,12 @@ import sdk "github.com/voxgig-sdk/magic8-ball-sdk/go"
 
 client := sdk.New()
 
-
-// Load a specific categoryfortune
-categoryFortune, err := client.CategoryFortune(nil).Load(
-    map[string]any{"category": "example_category"}, nil,
-)
+// Load biased data
+biased, err := client.Biased(nil).Load(map[string]any{"question": "example_question"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(categoryFortune)
+fmt.Println(biased)
 ```
 
 ### Ruby

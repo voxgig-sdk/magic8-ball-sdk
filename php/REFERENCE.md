@@ -53,10 +53,6 @@ Create a new `CategoryEntity` instance. Pass `null` for no initial data.
 
 Create a new `CategoryFortuneEntity` instance. Pass `null` for no initial data.
 
-#### `RandomFortune($data = null)`
-
-Create a new `RandomFortuneEntity` instance. Pass `null` for no initial data.
-
 #### `options_map(): array`
 
 Return a deep copy of the current SDK options.
@@ -280,42 +276,6 @@ Set the entity match criteria.
 #### `make(): CategoryFortuneEntity`
 
 Create a new `CategoryFortuneEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## RandomFortuneEntity
-
-```php
-$random_fortune = $client->RandomFortune();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): RandomFortuneEntity`
-
-Create a new `RandomFortuneEntity` instance with the same client and
 options.
 
 #### `get_name(): string`

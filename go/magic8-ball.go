@@ -50,9 +50,6 @@ func init() {
 	core.NewCategoryFortuneEntityFunc = func(client *core.Magic8BallSDK, entopts map[string]any) core.Magic8BallEntity {
 		return entity.NewCategoryFortuneEntity(client, entopts)
 	}
-	core.NewRandomFortuneEntityFunc = func(client *core.Magic8BallSDK, entopts map[string]any) core.Magic8BallEntity {
-		return entity.NewRandomFortuneEntity(client, entopts)
-	}
 }
 
 // Constructor re-exports.

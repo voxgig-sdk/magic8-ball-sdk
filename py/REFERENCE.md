@@ -53,10 +53,6 @@ Create a new `CategoryEntity` instance. Pass `None` for no initial data.
 
 Create a new `CategoryFortuneEntity` instance. Pass `None` for no initial data.
 
-#### `RandomFortune(data=None)`
-
-Create a new `RandomFortuneEntity` instance. Pass `None` for no initial data.
-
 #### `options_map() -> dict`
 
 Return a deep copy of the current SDK options.
@@ -275,41 +271,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CategoryFortuneEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## RandomFortuneEntity
-
-```python
-random_fortune = client.RandomFortune()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `RandomFortuneEntity` instance with the same options.
 
 #### `get_name() -> str`
 

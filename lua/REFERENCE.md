@@ -52,10 +52,6 @@ Create a new `Category` entity instance. Pass `nil` for no initial data.
 
 Create a new `CategoryFortune` entity instance. Pass `nil` for no initial data.
 
-#### `RandomFortune(data)`
-
-Create a new `RandomFortune` entity instance. Pass `nil` for no initial data.
-
 #### `options_map() -> table`
 
 Return a deep copy of the current SDK options.
@@ -278,42 +274,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CategoryFortuneEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## RandomFortuneEntity
-
-```lua
-local random_fortune = client:RandomFortune(nil)
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `RandomFortuneEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`

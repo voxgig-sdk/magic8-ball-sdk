@@ -33,17 +33,14 @@ import { Magic8BallSDK } from '@voxgig-sdk/magic8-ball-sdk'
 const client = new Magic8BallSDK()
 ```
 
-### 3. Load a categoryfortune
+### 3. Load a biased
 
-CategoryFortune is nested under category, so provide the `category`.
 `load()` returns the entity directly and throws on failure:
 
 ```ts
 try {
-  const categoryfortune = await client.CategoryFortune().load({
-    category: 'example_category',
-  })
-  console.log(categoryfortune)
+  const biased = await client.Biased().load({ question: 'example_question' })
+  console.log(biased)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -244,7 +241,6 @@ new Magic8BallSDK(options?: {
 | `Biased(data?)` | `BiasedEntity` | Create a Biased entity instance. |
 | `Category(data?)` | `CategoryEntity` | Create a Category entity instance. |
 | `CategoryFortune(data?)` | `CategoryFortuneEntity` | Create a CategoryFortune entity instance. |
-| `RandomFortune(data?)` | `RandomFortuneEntity` | Create a RandomFortune entity instance. |
 | `tester(testopts?, sdkopts?)` | `Magic8BallSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -357,15 +353,6 @@ Operations: load.
 
 API path: `/api/{category}`
 
-#### RandomFortune
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
 
 
 ## Entities
@@ -468,11 +455,6 @@ Create an instance: `const category_fortune = client.CategoryFortune()`
 ```ts
 const category_fortune = await client.CategoryFortune().load({ category: 'category' })
 ```
-
-
-### RandomFortune
-
-Create an instance: `const random_fortune = client.RandomFortune()`
 
 ## Features
 

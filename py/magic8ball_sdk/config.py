@@ -111,7 +111,6 @@ def make_config():
                 "biased": {},
                 "category": {},
                 "category_fortune": {},
-                "random_fortune": {},
             },
         },
         "entity": {
@@ -119,61 +118,71 @@ def make_config():
         "fields": [
           {
             "name": "calculation",
+            "title": "Calculation",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "Calculation breakdown for sentiment",
-            "type": "`$ARRAY`",
           },
           {
             "name": "comparative",
+            "title": "Comparative",
+            "type": "`$NUMBER`",
             "req": True,
             "short": "The comparative sentiment value",
-            "type": "`$NUMBER`",
           },
           {
             "name": "locale",
-            "short": "The language code for response localization",
+            "title": "Locale",
             "type": "`$STRING`",
+            "short": "The language code for response localization",
           },
           {
             "name": "lucky",
-            "short": "Whether to give a lucky response",
+            "title": "Lucky",
             "type": "`$BOOLEAN`",
+            "short": "Whether to give a lucky response",
           },
           {
             "name": "negative",
+            "title": "Negative",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "Negative sentiment words",
-            "type": "`$ARRAY`",
           },
           {
             "name": "positive",
+            "title": "Positive",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "Positive sentiment words",
-            "type": "`$ARRAY`",
           },
           {
             "name": "question",
+            "title": "Question",
+            "type": "`$STRING`",
             "req": True,
             "short": "The question to analyze for sentiment",
-            "type": "`$STRING`",
           },
           {
             "name": "score",
+            "title": "Score",
+            "type": "`$NUMBER`",
             "req": True,
             "short": "The sentiment score",
-            "type": "`$NUMBER`",
           },
           {
             "name": "tokens",
+            "title": "Tokens",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "Tokenized words from the question",
-            "type": "`$ARRAY`",
           },
           {
             "name": "words",
+            "title": "Words",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "Sentiment-bearing words",
-            "type": "`$ARRAY`",
           },
         ],
         "name": "biased",
@@ -183,7 +192,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/biased",
@@ -195,15 +203,17 @@ def make_config():
                     "lit": "biased",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.sentiment`",
-                },
                 "parts": [
                   "api",
                   "biased",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.sentiment`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -212,32 +222,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "locale",
-                      "orig": "locale",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": False,
-                      "kind": "query",
-                      "name": "lucky",
-                      "orig": "lucky",
-                      "type": "`$BOOLEAN`",
-                    },
-                    {
-                      "example": "Will I win the lottery?",
-                      "kind": "query",
-                      "name": "question",
-                      "orig": "question",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/biased",
@@ -249,6 +233,41 @@ def make_config():
                     "lit": "biased",
                   },
                 ],
+                "parts": [
+                  "api",
+                  "biased",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.sentiment`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "locale",
+                      "orig": "locale",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                    {
+                      "name": "lucky",
+                      "orig": "lucky",
+                      "type": "`$BOOLEAN`",
+                      "kind": "query",
+                      "example": False,
+                    },
+                    {
+                      "name": "question",
+                      "orig": "question",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "Will I win the lottery?",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "locale",
@@ -256,14 +275,6 @@ def make_config():
                     "question",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.sentiment`",
-                },
-                "parts": [
-                  "api",
-                  "biased",
-                ],
               },
             ],
           },
@@ -276,27 +287,31 @@ def make_config():
         "fields": [
           {
             "name": "locale",
+            "title": "Locale",
+            "type": "`$STRING`",
             "req": True,
             "short": "The language code",
-            "type": "`$STRING`",
           },
           {
             "name": "negative",
+            "title": "Negative",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "List of negative responses",
-            "type": "`$ARRAY`",
           },
           {
             "name": "neutral",
+            "title": "Neutral",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "List of neutral responses",
-            "type": "`$ARRAY`",
           },
           {
             "name": "positive",
+            "title": "Positive",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "List of positive responses",
-            "type": "`$ARRAY`",
           },
         ],
         "name": "category",
@@ -306,17 +321,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "locale",
-                      "orig": "locale",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/categories",
@@ -328,19 +332,31 @@ def make_config():
                     "lit": "categories",
                   },
                 ],
+                "parts": [
+                  "api",
+                  "categories",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "locale",
+                      "orig": "locale",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "locale",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "api",
-                  "categories",
-                ],
               },
             ],
           },
@@ -353,26 +369,29 @@ def make_config():
         "fields": [
           {
             "name": "category",
+            "title": "Category",
+            "type": "`$STRING`",
             "req": True,
             "short": "The category of the response",
-            "type": "`$STRING`",
           },
           {
             "name": "locale",
+            "title": "Locale",
+            "type": "`$STRING`",
+            "req": True,
             "op": {
               "load": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
             "short": "The language code",
-            "type": "`$STRING`",
           },
           {
             "name": "reading",
+            "title": "Reading",
+            "type": "`$STRING`",
             "req": True,
             "short": "The Magic 8 Ball response from the specified category",
-            "type": "`$STRING`",
           },
         ],
         "name": "category_fortune",
@@ -382,26 +401,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "category",
-                      "orig": "category",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "locale",
-                      "orig": "locale",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/{category}",
@@ -413,33 +412,43 @@ def make_config():
                     "var": "category",
                   },
                 ],
+                "parts": [
+                  "api",
+                  "{category}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "category",
+                      "orig": "category",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "locale",
+                      "orig": "locale",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "category",
                     "locale",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "api",
-                  "{category}",
-                ],
               },
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "locale",
-                      "orig": "locale",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api",
@@ -448,34 +457,34 @@ def make_config():
                     "lit": "api",
                   },
                 ],
+                "parts": [
+                  "api",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "locale",
+                      "orig": "locale",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "locale",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "api",
-                ],
               },
             ],
           },
         },
-        "relations": {
-          "ancestors": [
-            [
-              "api",
-            ],
-          ],
-        },
-      },
-      "random_fortune": {
-        "fields": [],
-        "name": "random_fortune",
-        "op": {},
         "relations": {
           "ancestors": [],
         },

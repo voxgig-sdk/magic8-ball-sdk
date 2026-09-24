@@ -45,5 +45,3 @@ export interface CategoryFortuneLoadMatch {
     category: string;
     locale?: string;
 }
-export interface RandomFortune {
-}

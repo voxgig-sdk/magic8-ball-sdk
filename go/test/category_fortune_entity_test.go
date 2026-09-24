@@ -98,7 +98,7 @@ func category_fortuneBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"category_fortune01", "category_fortune02", "category_fortune03", "api01", "api02", "api03"},
+		[]any{"category_fortune01", "category_fortune02", "category_fortune03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

@@ -391,20 +391,6 @@ function Magic8BallSDK:CategoryFortune(data)
 end
 
 
--- Idiomatic facade: client:RandomFortune():list() / client:RandomFortune():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function Magic8BallSDK:RandomFortune(data)
-  local EntityMod = require("entity.random_fortune_entity")
-  if data == nil then
-    if self._random_fortune == nil then
-      self._random_fortune = EntityMod.new(self, nil)
-    end
-    return self._random_fortune
-  end
-  return EntityMod.new(self, data)
-end
-
-
 
 
 function Magic8BallSDK.test(testopts, sdkopts)

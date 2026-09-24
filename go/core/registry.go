@@ -18,5 +18,3 @@ var NewCategoryEntityFunc func(client *Magic8BallSDK, entopts map[string]any) Ma
 
 var NewCategoryFortuneEntityFunc func(client *Magic8BallSDK, entopts map[string]any) Magic8BallEntity
 
-var NewRandomFortuneEntityFunc func(client *Magic8BallSDK, entopts map[string]any) Magic8BallEntity
-

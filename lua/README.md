@@ -33,14 +33,12 @@ local sdk = require("magic8-ball_sdk")
 local client = sdk.new()
 ```
 
-### 3. Load a categoryfortune
-
-CategoryFortune is nested under category, so provide the `category`.
+### 3. Load a biased
 
 ```lua
-local categoryfortune, err = client:CategoryFortune():load({ category = "example_category" })
+local biased, err = client:Biased():load({ question = "example_question" })
 if err then error(err) end
-print(categoryfortune)
+print(biased)
 ```
 
 ### 4. Create, update, and remove
@@ -199,7 +197,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Biased` | `(data) -> BiasedEntity` | Create a Biased entity instance. |
 | `Category` | `(data) -> CategoryEntity` | Create a Category entity instance. |
 | `CategoryFortune` | `(data) -> CategoryFortuneEntity` | Create a CategoryFortune entity instance. |
-| `RandomFortune` | `(data) -> RandomFortuneEntity` | Create a RandomFortune entity instance. |
 
 ### Entity interface
 
@@ -281,15 +278,6 @@ API path: `/api/categories`
 Operations: Load.
 
 API path: `/api/{category}`
-
-#### RandomFortune
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 
 
@@ -393,11 +381,6 @@ Create an instance: `local category_fortune = client:CategoryFortune(nil)`
 ```lua
 local category_fortune, err = client:CategoryFortune():load({ category = "category" })
 ```
-
-
-### RandomFortune
-
-Create an instance: `local random_fortune = client:RandomFortune(nil)`
 
 ## Features
 

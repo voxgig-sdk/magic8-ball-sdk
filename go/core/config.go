@@ -86,7 +86,6 @@ func MakeConfig() map[string]any {
 				"biased": map[string]any{},
 				"category": map[string]any{},
 				"category_fortune": map[string]any{},
-				"random_fortune": map[string]any{},
 			},
 		},
 		"entity": map[string]any{
@@ -94,61 +93,71 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "calculation",
+						"title": "Calculation",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "Calculation breakdown for sentiment",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "comparative",
+						"title": "Comparative",
+						"type": "`$NUMBER`",
 						"req": true,
 						"short": "The comparative sentiment value",
-						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "locale",
-						"short": "The language code for response localization",
+						"title": "Locale",
 						"type": "`$STRING`",
+						"short": "The language code for response localization",
 					},
 					map[string]any{
 						"name": "lucky",
-						"short": "Whether to give a lucky response",
+						"title": "Lucky",
 						"type": "`$BOOLEAN`",
+						"short": "Whether to give a lucky response",
 					},
 					map[string]any{
 						"name": "negative",
+						"title": "Negative",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "Negative sentiment words",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "positive",
+						"title": "Positive",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "Positive sentiment words",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "question",
+						"title": "Question",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The question to analyze for sentiment",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "score",
+						"title": "Score",
+						"type": "`$NUMBER`",
 						"req": true,
 						"short": "The sentiment score",
-						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "tokens",
+						"title": "Tokens",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "Tokenized words from the question",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "words",
+						"title": "Words",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "Sentiment-bearing words",
-						"type": "`$ARRAY`",
 					},
 				},
 				"name": "biased",
@@ -158,7 +167,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/api/biased",
@@ -170,15 +178,17 @@ func MakeConfig() map[string]any {
 										"lit": "biased",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.sentiment`",
-								},
 								"parts": []any{
 									"api",
 									"biased",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.sentiment`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -187,32 +197,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "locale",
-											"orig": "locale",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": false,
-											"kind": "query",
-											"name": "lucky",
-											"orig": "lucky",
-											"type": "`$BOOLEAN`",
-										},
-										map[string]any{
-											"example": "Will I win the lottery?",
-											"kind": "query",
-											"name": "question",
-											"orig": "question",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/biased",
@@ -224,20 +208,47 @@ func MakeConfig() map[string]any {
 										"lit": "biased",
 									},
 								},
+								"parts": []any{
+									"api",
+									"biased",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.sentiment`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "locale",
+											"orig": "locale",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+										map[string]any{
+											"name": "lucky",
+											"orig": "lucky",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": false,
+										},
+										map[string]any{
+											"name": "question",
+											"orig": "question",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "Will I win the lottery?",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"locale",
 										"lucky",
 										"question",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.sentiment`",
-								},
-								"parts": []any{
-									"api",
-									"biased",
 								},
 							},
 						},
@@ -251,27 +262,31 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "locale",
+						"title": "Locale",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The language code",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "negative",
+						"title": "Negative",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "List of negative responses",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "neutral",
+						"title": "Neutral",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "List of neutral responses",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "positive",
+						"title": "Positive",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "List of positive responses",
-						"type": "`$ARRAY`",
 					},
 				},
 				"name": "category",
@@ -281,17 +296,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "locale",
-											"orig": "locale",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/categories",
@@ -303,18 +307,30 @@ func MakeConfig() map[string]any {
 										"lit": "categories",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"locale",
-									},
+								"parts": []any{
+									"api",
+									"categories",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"api",
-									"categories",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "locale",
+											"orig": "locale",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"locale",
+									},
 								},
 							},
 						},
@@ -328,26 +344,29 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "category",
+						"title": "Category",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The category of the response",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "locale",
+						"title": "Locale",
+						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
 							"load": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
 						"short": "The language code",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "reading",
+						"title": "Reading",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The Magic 8 Ball response from the specified category",
-						"type": "`$STRING`",
 					},
 				},
 				"name": "category_fortune",
@@ -357,26 +376,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "category",
-											"orig": "category",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "locale",
-											"orig": "locale",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/{category}",
@@ -388,33 +387,43 @@ func MakeConfig() map[string]any {
 										"var": "category",
 									},
 								},
+								"parts": []any{
+									"api",
+									"{category}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "category",
+											"orig": "category",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "locale",
+											"orig": "locale",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"category",
 										"locale",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"api",
-									"{category}",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "locale",
-											"orig": "locale",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api",
@@ -423,34 +432,34 @@ func MakeConfig() map[string]any {
 										"lit": "api",
 									},
 								},
+								"parts": []any{
+									"api",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "locale",
+											"orig": "locale",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"locale",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"api",
-								},
 							},
 						},
 					},
 				},
-				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"api",
-						},
-					},
-				},
-			},
-			"random_fortune": map[string]any{
-				"fields": []any{},
-				"name": "random_fortune",
-				"op": map[string]any{},
 				"relations": map[string]any{
 					"ancestors": []any{},
 				},

@@ -1,0 +1,87 @@
+# Entity: category
+
+main: kit: entity: category: {
+
+  alias: field: {}
+
+  fields: {
+    locale: {
+      h: "Locale"
+      n: "locale"
+      r: true
+      sh: "The language code"
+      t: "`$STRING`"
+    }
+    negative: {
+      h: "Negative"
+      n: "negative"
+      r: true
+      sh: "List of negative responses"
+      t: "`$ARRAY`"
+    }
+    neutral: {
+      h: "Neutral"
+      n: "neutral"
+      r: true
+      sh: "List of neutral responses"
+      t: "`$ARRAY`"
+    }
+    positive: {
+      h: "Positive"
+      n: "positive"
+      r: true
+      sh: "List of positive responses"
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "category"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/categories"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "en"
+                k: "query"
+                n: "locale"
+                or: "locale"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/categories"
+          q: {
+            exist: [
+              "locale"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "categories"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -31,15 +31,13 @@ require_once 'magic8ball_sdk.php';
 $client = new Magic8BallSDK();
 ```
 
-### 3. Load a categoryfortune
-
-CategoryFortune is nested under category, so provide the `category`.
+### 3. Load a biased
 
 ```php
 try {
-    // load() returns the ENTITY — call data_get() for the CategoryFortune record (throws on error).
-    $categoryfortune = $client->CategoryFortune()->load(["category" => "example_category"]);
-    print_r($categoryfortune->data_get());
+    // load() returns the ENTITY — call data_get() for the Biased record (throws on error).
+    $biased = $client->Biased()->load(["question" => "example_question"]);
+    print_r($biased->data_get());
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -218,7 +216,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `Biased` | `($data): BiasedEntity` | Create a Biased entity instance. |
 | `Category` | `($data): CategoryEntity` | Create a Category entity instance. |
 | `CategoryFortune` | `($data): CategoryFortuneEntity` | Create a CategoryFortune entity instance. |
-| `RandomFortune` | `($data): RandomFortuneEntity` | Create a RandomFortune entity instance. |
 
 ### Entity interface
 
@@ -299,15 +296,6 @@ API path: `/api/categories`
 Operations: Load.
 
 API path: `/api/{category}`
-
-#### RandomFortune
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 
 
@@ -414,11 +402,6 @@ Create an instance: `$category_fortune = $client->CategoryFortune();`
 // load() returns the ENTITY — call data_get() for the CategoryFortune record (throws on error).
 $category_fortune = $client->CategoryFortune()->load(["category" => "category"]);
 ```
-
-
-### RandomFortune
-
-Create an instance: `$random_fortune = $client->RandomFortune();`
 
 ## Features
 

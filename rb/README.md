@@ -30,15 +30,13 @@ require_relative "Magic8Ball_sdk"
 client = Magic8BallSDK.new
 ```
 
-### 3. Load a categoryfortune
-
-CategoryFortune is nested under category, so provide the `category`.
+### 3. Load a biased
 
 ```ruby
 begin
-  # load returns the ENTITY — call data_get for the CategoryFortune record (raises on error).
-  categoryfortune = client.CategoryFortune.load({ "category" => "example_category" })
-  puts categoryfortune
+  # load returns the ENTITY — call data_get for the Biased record (raises on error).
+  biased = client.Biased.load({ "question" => "example_question" })
+  puts biased
 rescue => err
   warn "load failed: #{err}"
 end
@@ -209,7 +207,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Biased` | `(data) -> BiasedEntity` | Create a Biased entity instance. |
 | `Category` | `(data) -> CategoryEntity` | Create a Category entity instance. |
 | `CategoryFortune` | `(data) -> CategoryFortuneEntity` | Create a CategoryFortune entity instance. |
-| `RandomFortune` | `(data) -> RandomFortuneEntity` | Create a RandomFortune entity instance. |
 
 ### Entity interface
 
@@ -289,15 +286,6 @@ API path: `/api/categories`
 Operations: Load.
 
 API path: `/api/{category}`
-
-#### RandomFortune
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 
 
@@ -404,11 +392,6 @@ Create an instance: `category_fortune = client.CategoryFortune`
 # load returns the ENTITY — call data_get for the CategoryFortune record (raises on error).
 category_fortune = client.CategoryFortune.load({ "category" => "category" })
 ```
-
-
-### RandomFortune
-
-Create an instance: `random_fortune = client.RandomFortune`
 
 ## Features
 

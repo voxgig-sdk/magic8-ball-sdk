@@ -1,7 +1,6 @@
 import { BiasedEntity } from './entity/BiasedEntity';
 import { CategoryEntity } from './entity/CategoryEntity';
 import { CategoryFortuneEntity } from './entity/CategoryFortuneEntity';
-import { RandomFortuneEntity } from './entity/RandomFortuneEntity';
 export type * from './Magic8BallTypes';
 import { inspect } from 'node:util';
 import type { Context, Feature } from './types';
@@ -50,7 +49,6 @@ declare class Magic8BallSDK {
     Biased(entopts?: Record<string, any>): BiasedEntity;
     Category(entopts?: Record<string, any>): CategoryEntity;
     CategoryFortune(entopts?: Record<string, any>): CategoryFortuneEntity;
-    RandomFortune(entopts?: Record<string, any>): RandomFortuneEntity;
     static test(testoptsarg?: any, sdkoptsarg?: any): Magic8BallSDK;
     tester(testopts?: any, sdkopts?: any): Magic8BallSDK;
     toJSON(): {

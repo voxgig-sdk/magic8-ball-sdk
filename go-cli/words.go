@@ -9,18 +9,6 @@ import (
 	sdk "github.com/voxgig-sdk/magic8-ball-sdk/go"
 )
 
-// registerSDKWords installs three native boru words bound to the SDK:
-// list / load / update. Each is declared with two overloads matching
-// the signature  [query?:(Node or Scalar) entity:atom]:
-//
-//   [entity:Atom]            — no query (e.g. `list book`)
-//   [query:Any entity:Atom]  — query is any Node or Scalar (e.g.
-//                              `load {id:1} book`, `load 1 book`)
-//
-// The entity slot is /q-quoted so a bareword `book` parses as the
-// Atom "book" rather than dispatching as an undefined word. Both
-// overloads are all-forward (BarrierAllForward), so args are collected
-// from the tokens following the word.
 func registerSDKWords(r *eng.Registry, client *sdk.Magic8BallSDK) {
 	for _, op := range []string{"list", "load", "update"} {
 		op := op
@@ -95,8 +83,6 @@ func entityFor(client *sdk.Magic8BallSDK, name string) (sdk.Magic8BallEntity, er
 		return client.Category(nil), nil
 	case "category_fortune":
 		return client.CategoryFortune(nil), nil
-	case "random_fortune":
-		return client.RandomFortune(nil), nil
 
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)

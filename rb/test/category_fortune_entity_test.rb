@@ -62,7 +62,7 @@ def category_fortune_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["category_fortune01", "category_fortune02", "category_fortune03", "api01", "api02", "api03"],
+    ["category_fortune01", "category_fortune02", "category_fortune03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

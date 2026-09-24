@@ -1,0 +1,28 @@
+# BasicCategoryFortuneFlow
+
+main: kit: flow: BasicCategoryFortuneFlow:
+{
+  entity: "category_fortune",
+  kind: "basic",
+  name: "BasicCategoryFortuneFlow",
+  step: [
+    {
+      i: {
+        ref: "category_fortune_ref01",
+        srcdatavar: "category_fortune_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-category_fortune_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCategoryFortuneFlow"
+}

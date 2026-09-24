@@ -395,24 +395,6 @@ class Magic8BallSDK
     }
 
 
-    private $_random_fortune = null;
-
-    // Canonical facade: $client->RandomFortune()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->random_fortune()
-    // resolves here too.
-    public function RandomFortune($data = null)
-    {
-        require_once __DIR__ . '/entity/random_fortune_entity.php';
-        if ($data === null) {
-            if ($this->_random_fortune === null) {
-                $this->_random_fortune = new RandomFortuneEntity($this, null);
-            }
-            return $this->_random_fortune;
-        }
-        return new RandomFortuneEntity($this, $data);
-    }
-
-
 
     public static function test(?array $testopts = null, ?array $sdkopts = null): self
     {

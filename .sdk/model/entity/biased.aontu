@@ -1,0 +1,173 @@
+# Entity: biased
+
+main: kit: entity: biased: {
+
+  alias: field: {}
+
+  fields: {
+    calculation: {
+      h: "Calculation"
+      n: "calculation"
+      r: true
+      sh: "Calculation breakdown for sentiment"
+      t: "`$ARRAY`"
+    }
+    comparative: {
+      h: "Comparative"
+      n: "comparative"
+      r: true
+      sh: "The comparative sentiment value"
+      t: "`$NUMBER`"
+    }
+    locale: {
+      h: "Locale"
+      n: "locale"
+      r: false
+      sh: "The language code for response localization"
+      t: "`$STRING`"
+    }
+    lucky: {
+      h: "Lucky"
+      n: "lucky"
+      r: false
+      sh: "Whether to give a lucky response"
+      t: "`$BOOLEAN`"
+    }
+    negative: {
+      h: "Negative"
+      n: "negative"
+      r: true
+      sh: "Negative sentiment words"
+      t: "`$ARRAY`"
+    }
+    positive: {
+      h: "Positive"
+      n: "positive"
+      r: true
+      sh: "Positive sentiment words"
+      t: "`$ARRAY`"
+    }
+    question: {
+      h: "Question"
+      n: "question"
+      r: true
+      sh: "The question to analyze for sentiment"
+      t: "`$STRING`"
+    }
+    score: {
+      h: "Score"
+      n: "score"
+      r: true
+      sh: "The sentiment score"
+      t: "`$NUMBER`"
+    }
+    tokens: {
+      h: "Tokens"
+      n: "tokens"
+      r: true
+      sh: "Tokenized words from the question"
+      t: "`$ARRAY`"
+    }
+    words: {
+      h: "Words"
+      n: "words"
+      r: true
+      sh: "Sentiment-bearing words"
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "biased"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/biased"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/biased"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "biased"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.sentiment`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/biased"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "en"
+                k: "query"
+                n: "locale"
+                or: "locale"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "lucky"
+                or: "lucky"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "Will I win the lottery?"
+                k: "query"
+                n: "question"
+                or: "question"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/biased"
+          q: {
+            exist: [
+              "locale"
+              "lucky"
+              "question"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "biased"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.sentiment`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryEntity = void 0;
 const Magic8BallEntityBase_1 = require("../Magic8BallEntityBase");
-// TODO: needs Entity superclass
 class CategoryEntity extends Magic8BallEntityBase_1.Magic8BallEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

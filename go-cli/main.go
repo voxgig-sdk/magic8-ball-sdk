@@ -20,7 +20,7 @@ import (
 const prompt = "magic8-ball"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "biased category category_fortune random_fortune"
+const entitiesHelp = "biased category category_fortune"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

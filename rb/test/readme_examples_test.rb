@@ -46,7 +46,6 @@ class ReadmeExamplesTest < Minitest::Test
     "Biased" => "biased",
     "Category" => "category",
     "CategoryFortune" => "category_fortune",
-    "RandomFortune" => "random_fortune",
   }
 
   # Documented SDK method names — used only to recognise the NARROW

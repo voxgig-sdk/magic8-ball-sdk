@@ -59,10 +59,6 @@ Create a new `Category` entity instance. Pass `nil` for no initial data.
 
 Create a new `CategoryFortune` entity instance. Pass `nil` for no initial data.
 
-#### `RandomFortune(data map[string]any) Magic8BallEntity`
-
-Create a new `RandomFortune` entity instance. Pass `nil` for no initial data.
-
 #### `OptionsMap() map[string]any`
 
 Return a deep copy of the current SDK options.
@@ -286,37 +282,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `CategoryFortuneEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## RandomFortuneEntity
-
-```go
-randomFortune := client.RandomFortune(nil)
-fmt.Println(randomFortune.GetName()) // "random_fortune"
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `RandomFortuneEntity` instance with the same client and
 options.
 
 #### `GetName() string`

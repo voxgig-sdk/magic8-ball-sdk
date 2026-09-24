@@ -325,12 +325,6 @@ class Magic8BallSDK:
         return CategoryFortuneEntity(self, data)
 
 
-    def RandomFortune(self, data=None) -> "RandomFortuneEntity":
-        """Entity factory: client.RandomFortune().list() / client.RandomFortune().load({"id": ...})."""
-        from magic8ball_sdk.entity.random_fortune_entity import RandomFortuneEntity
-        return RandomFortuneEntity(self, data)
-
-
 
     @classmethod
     def test(cls, testopts=None, sdkopts=None) -> "Magic8BallSDK":
@@ -361,4 +355,3 @@ if TYPE_CHECKING:
     from magic8ball_sdk.entity.biased_entity import BiasedEntity
     from magic8ball_sdk.entity.category_entity import CategoryEntity
     from magic8ball_sdk.entity.category_fortune_entity import CategoryFortuneEntity
-    from magic8ball_sdk.entity.random_fortune_entity import RandomFortuneEntity

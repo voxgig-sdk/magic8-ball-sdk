@@ -70,7 +70,7 @@ function category_fortune_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["category_fortune01", "category_fortune02", "category_fortune03", "api01", "api02", "api03"] as $k) {
+    foreach (["category_fortune01", "category_fortune02", "category_fortune03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

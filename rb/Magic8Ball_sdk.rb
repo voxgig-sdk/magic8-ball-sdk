@@ -310,13 +310,6 @@ class Magic8BallSDK
   end
 
 
-  # Canonical facade: client.RandomFortune.list / client.RandomFortune.load({ "id" => ... })
-  def RandomFortune(data = nil)
-    require_relative 'entity/random_fortune_entity'
-    RandomFortuneEntity.new(self, data)
-  end
-
-
 
   def self.test(testopts = nil, sdkopts = nil)
     sdkopts = sdkopts || {}

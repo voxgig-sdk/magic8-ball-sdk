@@ -24,84 +24,160 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "biased": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "calculation",
-              "req": true,
-              "short": "Calculation breakdown for sentiment",
-              "type": "`$ARRAY`"
+          "fields": {
+            "calculation": {
+              "a": true,
+              "h": "Calculation",
+              "n": "calculation",
+              "r": true,
+              "sh": "Calculation breakdown for sentiment",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "comparative",
-              "req": true,
-              "short": "The comparative sentiment value",
-              "type": "`$NUMBER`"
+            "comparative": {
+              "a": true,
+              "h": "Comparative",
+              "n": "comparative",
+              "r": true,
+              "sh": "The comparative sentiment value",
+              "t": "`$NUMBER`"
             },
-            {
-              "active": true,
-              "name": "locale",
-              "req": false,
-              "short": "The language code for response localization",
-              "type": "`$STRING`"
+            "locale": {
+              "a": true,
+              "h": "Locale",
+              "n": "locale",
+              "r": false,
+              "sh": "The language code for response localization",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "lucky",
-              "req": false,
-              "short": "Whether to give a lucky response",
-              "type": "`$BOOLEAN`"
+            "lucky": {
+              "a": true,
+              "h": "Lucky",
+              "n": "lucky",
+              "r": false,
+              "sh": "Whether to give a lucky response",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "negative",
-              "req": true,
-              "short": "Negative sentiment words",
-              "type": "`$ARRAY`"
+            "negative": {
+              "a": true,
+              "h": "Negative",
+              "n": "negative",
+              "r": true,
+              "sh": "Negative sentiment words",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "positive",
-              "req": true,
-              "short": "Positive sentiment words",
-              "type": "`$ARRAY`"
+            "positive": {
+              "a": true,
+              "h": "Positive",
+              "n": "positive",
+              "r": true,
+              "sh": "Positive sentiment words",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "question",
-              "req": true,
-              "short": "The question to analyze for sentiment",
-              "type": "`$STRING`"
+            "question": {
+              "a": true,
+              "h": "Question",
+              "n": "question",
+              "r": true,
+              "sh": "The question to analyze for sentiment",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "score",
-              "req": true,
-              "short": "The sentiment score",
-              "type": "`$NUMBER`"
+            "score": {
+              "a": true,
+              "h": "Score",
+              "n": "score",
+              "r": true,
+              "sh": "The sentiment score",
+              "t": "`$NUMBER`"
             },
-            {
-              "active": true,
-              "name": "tokens",
-              "req": true,
-              "short": "Tokenized words from the question",
-              "type": "`$ARRAY`"
+            "tokens": {
+              "a": true,
+              "h": "Tokens",
+              "n": "tokens",
+              "r": true,
+              "sh": "Tokenized words from the question",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "words",
-              "req": true,
-              "short": "Sentiment-bearing words",
-              "type": "`$ARRAY`"
+            "words": {
+              "a": true,
+              "h": "Words",
+              "n": "words",
+              "r": true,
+              "sh": "Sentiment-bearing words",
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "name": "biased",
           "op": {
             "create": {
@@ -109,18 +185,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /api/biased",
-                    "json": "{\"operationId\":\"getBiasedFortunePost\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"fr\",\"lucky\":true,\"question\":\"Will I succeed?\"}}},\"schema\":{\"properties\":{\"locale\":{\"default\":\"en\",\"description\":\"The language code for response localization\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"example\":\"fr\",\"type\":\"string\"},\"lucky\":{\"default\":false,\"description\":\"Whether to give a lucky response\",\"example\":true,\"type\":\"boolean\"},\"question\":{\"description\":\"The question to analyze for sentiment\",\"example\":\"Will I succeed?\",\"type\":\"string\"}},\"required\":[\"question\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"localized\":{\"value\":{\"locale\":\"fr\",\"lucky\":true,\"question\":\"Will I succeed?\",\"reading\":\"Ma réponse est non.\",\"sentiment\":{\"calculation\":[{\"succeed\":2}],\"comparative\":0.6667,\"negative\":[],\"positive\":[\"succeed\"],\"score\":2,\"tokens\":[\"Will\",\"I\",\"succeed?\"],\"words\":[\"succeed\"]}}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"lucky\":{\"description\":\"Whether the lucky mode was enabled\",\"example\":false,\"type\":\"boolean\"},\"question\":{\"description\":\"The original question submitted\",\"example\":\"Will I win the lottery?\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response based on sentiment\",\"example\":\"My reply is no.\",\"type\":\"string\"},\"sentiment\":{\"description\":\"Sentiment analysis details\",\"properties\":{\"calculation\":{\"description\":\"Calculation breakdown for sentiment\",\"example\":[{\"win\":4}],\"items\":{\"type\":\"object\"},\"type\":\"array\"},\"comparative\":{\"description\":\"The comparative sentiment value\",\"example\":0.8,\"type\":\"number\"},\"negative\":{\"description\":\"Negative sentiment words\",\"example\":[],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"Positive sentiment words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"score\":{\"description\":\"The sentiment score\",\"example\":4,\"type\":\"number\"},\"tokens\":{\"description\":\"Tokenized words from the question\",\"example\":[\"Will\",\"I\",\"win\",\"the\",\"lottery?\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"words\":{\"description\":\"Sentiment-bearing words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"score\",\"comparative\",\"calculation\",\"tokens\",\"words\",\"positive\",\"negative\"],\"type\":\"object\"}},\"required\":[\"reading\",\"question\",\"sentiment\",\"locale\",\"lucky\"],\"type\":\"object\"}}},\"description\":\"Successful response with a biased fortune based on sentiment analysis\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid request body or missing required question parameter\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/api/biased",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/api/biased",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -128,8 +205,7 @@
                       "lit": "biased"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.sentiment`"
                   }
@@ -141,48 +217,55 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/biased",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "locale",
-                        "orig": "locale",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "locale",
+                        "or": "locale",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": false,
-                        "kind": "query",
-                        "name": "lucky",
-                        "orig": "lucky",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "ex": false,
+                        "k": "query",
+                        "n": "lucky",
+                        "or": "lucky",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "example": "Will I win the lottery?",
-                        "kind": "query",
-                        "name": "question",
-                        "orig": "question",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "Will I win the lottery?",
+                        "k": "query",
+                        "n": "question",
+                        "or": "question",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/biased",
-                    "json": "{\"operationId\":\"getBiasedFortuneGet\",\"parameters\":[{\"description\":\"The question to analyze for sentiment\",\"example\":\"Will I win the lottery?\",\"in\":\"query\",\"name\":\"question\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Whether to give a lucky response\",\"in\":\"query\",\"name\":\"lucky\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"en\",\"lucky\":false,\"question\":\"Will I win the lottery?\",\"reading\":\"My reply is no.\",\"sentiment\":{\"calculation\":[{\"win\":4}],\"comparative\":0.8,\"negative\":[],\"positive\":[\"Win\"],\"score\":4,\"tokens\":[\"Will\",\"I\",\"win\",\"the\",\"lottery?\"],\"words\":[\"Win\"]}}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"lucky\":{\"description\":\"Whether the lucky mode was enabled\",\"example\":false,\"type\":\"boolean\"},\"question\":{\"description\":\"The original question submitted\",\"example\":\"Will I win the lottery?\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response based on sentiment\",\"example\":\"My reply is no.\",\"type\":\"string\"},\"sentiment\":{\"description\":\"Sentiment analysis details\",\"properties\":{\"calculation\":{\"description\":\"Calculation breakdown for sentiment\",\"example\":[{\"win\":4}],\"items\":{\"type\":\"object\"},\"type\":\"array\"},\"comparative\":{\"description\":\"The comparative sentiment value\",\"example\":0.8,\"type\":\"number\"},\"negative\":{\"description\":\"Negative sentiment words\",\"example\":[],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"Positive sentiment words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"score\":{\"description\":\"The sentiment score\",\"example\":4,\"type\":\"number\"},\"tokens\":{\"description\":\"Tokenized words from the question\",\"example\":[\"Will\",\"I\",\"win\",\"the\",\"lottery?\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"words\":{\"description\":\"Sentiment-bearing words\",\"example\":[\"Win\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"score\",\"comparative\",\"calculation\",\"tokens\",\"words\",\"positive\",\"negative\"],\"type\":\"object\"}},\"required\":[\"reading\",\"question\",\"sentiment\",\"locale\",\"lucky\"],\"type\":\"object\"}}},\"description\":\"Successful response with a biased fortune based on sentiment analysis\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Missing required question parameter\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/biased",
+                  "q": {
+                    "exist": [
+                      "locale",
+                      "lucky",
+                      "question"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/biased",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -190,14 +273,7 @@
                       "lit": "biased"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "locale",
-                      "lucky",
-                      "question"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.sentiment`"
                   }
@@ -214,36 +290,40 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "locale",
-              "req": true,
-              "short": "The language code",
-              "type": "`$STRING`"
+          "fields": {
+            "locale": {
+              "a": true,
+              "h": "Locale",
+              "n": "locale",
+              "r": true,
+              "sh": "The language code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "negative",
-              "req": true,
-              "short": "List of negative responses",
-              "type": "`$ARRAY`"
+            "negative": {
+              "a": true,
+              "h": "Negative",
+              "n": "negative",
+              "r": true,
+              "sh": "List of negative responses",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "neutral",
-              "req": true,
-              "short": "List of neutral responses",
-              "type": "`$ARRAY`"
+            "neutral": {
+              "a": true,
+              "h": "Neutral",
+              "n": "neutral",
+              "r": true,
+              "sh": "List of neutral responses",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "positive",
-              "req": true,
-              "short": "List of positive responses",
-              "type": "`$ARRAY`"
+            "positive": {
+              "a": true,
+              "h": "Positive",
+              "n": "positive",
+              "r": true,
+              "sh": "List of positive responses",
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "name": "category",
           "op": {
             "list": {
@@ -251,30 +331,35 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/categories",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "locale",
-                        "orig": "locale",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "locale",
+                        "or": "locale",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/categories",
-                    "json": "{\"operationId\":\"getCategories\",\"parameters\":[{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"locale\":\"en\",\"negative\":[\"Don't count on it.\",\"My reply is no.\"],\"neutral\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"positive\":[\"It is Certain.\",\"It is decidedly so.\"]}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"negative\":{\"description\":\"List of negative responses\",\"example\":[\"Don't count on it.\",\"My reply is no.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"neutral\":{\"description\":\"List of neutral responses\",\"example\":[\"Reply hazy, try again.\",\"Ask again later.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"positive\":{\"description\":\"List of positive responses\",\"example\":[\"It is Certain.\",\"It is decidedly so.\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"positive\",\"neutral\",\"negative\",\"locale\"],\"type\":\"object\"}}},\"description\":\"Successful response with categorized fortunes\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/categories",
+                  "q": {
+                    "exist": [
+                      "locale"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/categories",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -282,12 +367,7 @@
                       "lit": "categories"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "locale"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -304,35 +384,38 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "category",
-              "req": true,
-              "short": "The category of the response",
-              "type": "`$STRING`"
+          "fields": {
+            "category": {
+              "a": true,
+              "h": "Category",
+              "n": "category",
+              "r": true,
+              "sh": "The category of the response",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "locale",
+            "locale": {
+              "a": true,
+              "h": "Locale",
+              "n": "locale",
               "op": {
                 "load": {
                   "req": false,
                   "type": "`$STRING`"
                 }
               },
-              "req": true,
-              "short": "The language code",
-              "type": "`$STRING`"
+              "r": true,
+              "sh": "The language code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "reading",
-              "req": true,
-              "short": "The Magic 8 Ball response from the specified category",
-              "type": "`$STRING`"
+            "reading": {
+              "a": true,
+              "h": "Reading",
+              "n": "reading",
+              "r": true,
+              "sh": "The Magic 8 Ball response from the specified category",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "category_fortune",
           "op": {
             "load": {
@@ -340,40 +423,46 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/{category}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "category",
-                        "orig": "category",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "category",
+                        "or": "category",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ],
                     "query": [
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "locale",
-                        "orig": "locale",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "locale",
+                        "or": "locale",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/{category}",
-                    "json": "{\"operationId\":\"getSpecificCategory\",\"parameters\":[{\"description\":\"The category of response\",\"in\":\"path\",\"name\":\"category\",\"required\":true,\"schema\":{\"enum\":[\"positive\",\"negative\",\"neutral\"],\"type\":\"string\"}},{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"negative\":{\"value\":{\"category\":\"negative\",\"locale\":\"en\",\"reading\":\"Don't count on it.\"}},\"positive\":{\"value\":{\"category\":\"positive\",\"locale\":\"en\",\"reading\":\"It is Certain.\"}}},\"schema\":{\"properties\":{\"category\":{\"description\":\"The category of the response\",\"enum\":[\"positive\",\"negative\",\"neutral\"],\"example\":\"positive\",\"type\":\"string\"},\"locale\":{\"description\":\"The language code\",\"example\":\"en\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response from the specified category\",\"example\":\"It is Certain.\",\"type\":\"string\"}},\"required\":[\"reading\",\"category\",\"locale\"],\"type\":\"object\"}}},\"description\":\"Successful response with a fortune from the specified category\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid category specified\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/{category}",
+                  "q": {
+                    "exist": [
+                      "category",
+                      "locale"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/{category}",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -381,52 +470,46 @@
                       "var": "category"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "category",
-                      "locale"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "locale",
-                        "orig": "locale",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "locale",
+                        "or": "locale",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api",
-                    "json": "{\"operationId\":\"getRandomFortune\",\"parameters\":[{\"description\":\"The language code for response localization\",\"in\":\"query\",\"name\":\"locale\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"en\",\"es\",\"fr\",\"de\",\"hi\",\"ru\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"default\":{\"value\":{\"reading\":\"Outlook good\"}},\"localized\":{\"value\":{\"locale\":\"es\",\"reading\":\"Las perspectivas son buenas\"}}},\"schema\":{\"properties\":{\"locale\":{\"description\":\"The language code (only included for non-default locale)\",\"example\":\"en\",\"type\":\"string\"},\"reading\":{\"description\":\"The Magic 8 Ball response\",\"example\":\"Outlook good\",\"type\":\"string\"}},\"required\":[\"reading\"],\"type\":\"object\"}}},\"description\":\"Successful response with a random fortune\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"example\":\"Rate limit exceeded\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"example\":\"You have exceeded the rate limit of 100 requests per minute\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded (100 requests per minute per IP)\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api",
-                  "segments": [
-                    {
-                      "lit": "api"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api",
+                  "q": {
                     "exist": [
                       "locale"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "api"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -434,22 +517,6 @@
               ]
             }
           },
-          "relations": {
-            "ancestors": [
-              [
-                "api"
-              ]
-            ]
-          }
-        },
-        "random_fortune": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": [],
-          "name": "random_fortune",
-          "op": {},
           "relations": {
             "ancestors": []
           }
@@ -871,28 +938,28 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "biased_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "biased_ref01",
                 "srcdatavar": "biased_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -912,13 +979,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -938,17 +1005,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "category_fortune_ref01",
                 "srcdatavar": "category_fortune_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -958,15 +1025,6 @@
               ]
             }
           ]
-        },
-        "BasicRandomFortuneFlow": {
-          "active": true,
-          "entity": "random_fortune",
-          "key$": "BasicRandomFortuneFlow",
-          "kind": "basic",
-          "name": "BasicRandomFortuneFlow",
-          "param": {},
-          "step": []
         }
       },
       "info": {

@@ -1,7 +1,7 @@
 // Typed models for the Magic8Ball SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,16 +14,6 @@ import (
 
 // Biased is the typed data model for the biased entity.
 type Biased struct {
-	Calculation []any `json:"calculation"`
-	Comparative float64 `json:"comparative"`
-	Locale *string `json:"locale,omitempty"`
-	Lucky *bool `json:"lucky,omitempty"`
-	Negative []any `json:"negative"`
-	Positive []any `json:"positive"`
-	Question string `json:"question"`
-	Score float64 `json:"score"`
-	Tokens []any `json:"tokens"`
-	Words []any `json:"words"`
 }
 
 // BiasedLoadMatch is the typed request payload for Biased.LoadTyped.
@@ -49,10 +39,6 @@ type BiasedCreateData struct {
 
 // Category is the typed data model for the category entity.
 type Category struct {
-	Locale string `json:"locale"`
-	Negative []any `json:"negative"`
-	Neutral []any `json:"neutral"`
-	Positive []any `json:"positive"`
 }
 
 // CategoryListMatch is the typed request payload for Category.ListTyped.
@@ -62,19 +48,12 @@ type CategoryListMatch struct {
 
 // CategoryFortune is the typed data model for the category_fortune entity.
 type CategoryFortune struct {
-	Category string `json:"category"`
-	Locale string `json:"locale"`
-	Reading string `json:"reading"`
 }
 
 // CategoryFortuneLoadMatch is the typed request payload for CategoryFortune.LoadTyped.
 type CategoryFortuneLoadMatch struct {
 	Category string `json:"category"`
 	Locale *string `json:"locale,omitempty"`
-}
-
-// RandomFortune is the typed data model for the random_fortune entity.
-type RandomFortune struct {
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

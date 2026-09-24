@@ -228,7 +228,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Biased` | `(data map[string]any) Magic8BallEntity` | Create a Biased entity instance. |
 | `Category` | `(data map[string]any) Magic8BallEntity` | Create a Category entity instance. |
 | `CategoryFortune` | `(data map[string]any) Magic8BallEntity` | Create a CategoryFortune entity instance. |
-| `RandomFortune` | `(data map[string]any) Magic8BallEntity` | Create a RandomFortune entity instance. |
 
 ### Entity interface (Magic8BallEntity)
 
@@ -310,15 +309,6 @@ API path: `/api/categories`
 Operations: Load.
 
 API path: `/api/{category}`
-
-#### RandomFortune
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 
 
@@ -438,11 +428,6 @@ if err != nil {
 }
 fmt.Println(categoryFortune) // the loaded record
 ```
-
-
-### RandomFortune
-
-Create an instance: `randomFortune := client.RandomFortune(nil)`
 
 ## Features
 

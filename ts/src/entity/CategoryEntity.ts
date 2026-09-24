@@ -19,7 +19,6 @@ import type {
   CategoryListMatch,
 } from '../Magic8BallTypes'
 
-// TODO: needs Entity superclass
 class CategoryEntity extends Magic8BallEntityBase<Category> {
 
   constructor(client: Magic8BallSDK, entopts: any) {
